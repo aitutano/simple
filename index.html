@@ -672,12 +672,25 @@
 
       function setupTaskForm() {
         const form = document.getElementById("task-form");
+        let isSubmitting = false;
 
         // Form submission
         form.addEventListener("submit", async (e) => {
           e.preventDefault();
 
+          // Prevent duplicate submissions
+          if (isSubmitting) return;
+
           if (validation.validateForm(form)) {
+            isSubmitting = true;
+
+            // Update button to show loading state
+            const submitButton = form.querySelector('button[type="submit"]');
+            const originalText = submitButton.innerHTML;
+            submitButton.innerHTML =
+              '<i class="fas fa-spinner fa-spin me-1"></i>Salvando...';
+            submitButton.disabled = true;
+
             const formData = new FormData(form);
             const taskData = Object.fromEntries(formData.entries());
 
@@ -698,6 +711,11 @@
               updateTasksStats();
             } catch (error) {
               console.error("Error creating task:", error);
+            } finally {
+              // Reset button state
+              submitButton.innerHTML = originalText;
+              submitButton.disabled = false;
+              isSubmitting = false;
             }
           }
         });
