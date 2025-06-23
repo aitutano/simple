@@ -42,6 +42,7 @@
 
     <!-- Custom CSS -->
     <link href="assets/css/style.css" rel="stylesheet" />
+    <link href="assets/css/responsive.css" rel="stylesheet" />
   </head>
   <body>
     <!-- Navigation -->
@@ -92,25 +93,31 @@
               <i class="fas fa-plus me-1"></i>
               Nova Tarefa
             </button>
-            <a class="nav-link" href="#" data-bs-toggle="dropdown">
-              <i class="fas fa-user-circle fs-4"></i>
-            </a>
-            <ul class="dropdown-menu">
-              <li>
-                <a class="dropdown-item" href="pages/profile.html">Perfil</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#" onclick="app.toggleTheme()"
-                  >Alterar Tema</a
-                >
-              </li>
-              <li><hr class="dropdown-divider" /></li>
-              <li>
-                <a class="dropdown-item" href="#" onclick="app.logout()"
-                  >Sair</a
-                >
-              </li>
-            </ul>
+            <div class="dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                data-bs-toggle="dropdown"
+              >
+                <i class="fas fa-user-circle fs-4"></i>
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="pages/profile.html">Perfil</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#" onclick="app.toggleTheme()"
+                    >Alterar Tema</a
+                  >
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item" href="#" onclick="app.logout()"
+                    >Sair</a
+                  >
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -161,7 +168,7 @@
                   </div>
                 </div>
               </div>
-              <div class="hero-actions">
+              <div class="hero-actions button-stack">
                 <button
                   class="btn btn-primary-custom btn-lg me-3"
                   data-bs-toggle="modal"
@@ -303,9 +310,9 @@
     <!-- Main Dashboard Content -->
     <main class="dashboard-main py-5">
       <div class="container">
-        <div class="row">
+        <div class="dashboard-grid">
           <!-- Today's Tasks -->
-          <div class="col-lg-8">
+          <div class="main-content">
             <div
               class="section-header d-flex justify-content-between align-items-center mb-4"
             >
@@ -327,7 +334,7 @@
               </div>
             </div>
 
-            <!-- Tasks Container -->
+            <!-- Tasks Container using Web Components -->
             <div id="tasks-container" class="tasks-container">
               <div class="loading-state text-center py-5">
                 <div class="loading-spinner"></div>
@@ -337,7 +344,7 @@
           </div>
 
           <!-- Sidebar -->
-          <div class="col-lg-4">
+          <div class="sidebar-content">
             <!-- Progress Card -->
             <div
               class="card mb-4"
@@ -371,7 +378,7 @@
               </div>
             </div>
 
-            <!-- Projects Quick View -->
+            <!-- Projects Quick View using Web Components -->
             <div
               class="card mb-4"
               style="
@@ -696,6 +703,10 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 
+    <!-- Web Components -->
+    <script type="module" src="components/task-item.js"></script>
+    <script type="module" src="components/project-card.js"></script>
+
     <!-- Custom JavaScript -->
     <script src="assets/js/app.js"></script>
 
@@ -714,7 +725,53 @@
 
         // Update progress bar
         updateProgressBar();
+
+        // Setup Web Component event listeners
+        setupWebComponentListeners();
       });
+
+      function setupWebComponentListeners() {
+        // Listen for task events from Web Components
+        document.addEventListener("task-toggle", async (e) => {
+          const { taskId, newStatus, completedAt } = e.detail;
+          const task = appState.tasks.find((t) => t.id === taskId);
+          if (task) {
+            await taskManager.updateTask(taskId, {
+              ...task,
+              status: newStatus,
+              completedAt: completedAt,
+            });
+            updateDashboardStats();
+            updateProgressBar();
+          }
+        });
+
+        document.addEventListener("task-edit", (e) => {
+          const { taskId } = e.detail;
+          taskManager.editTask(taskId);
+        });
+
+        document.addEventListener("task-delete", async (e) => {
+          const { taskId } = e.detail;
+          if (confirm("Tem certeza que deseja excluir esta tarefa?")) {
+            await taskManager.deleteTask(taskId);
+            updateDashboardStats();
+            updateProgressBar();
+          }
+        });
+
+        // Listen for project events
+        document.addEventListener("project-view-tasks", (e) => {
+          const { projectId } = e.detail;
+          window.location.href = `pages/tasks.html?project=${projectId}`;
+        });
+
+        document.addEventListener("project-add-task", (e) => {
+          const { projectId } = e.detail;
+          localStorage.setItem("selectedProjectId", projectId);
+          window.location.href = "pages/tasks.html#new-task";
+        });
+      }
 
       async function updateDashboardStats() {
         try {
@@ -737,6 +794,24 @@
               : 0;
           document.getElementById("productivity-score").textContent =
             productivityScore + "%";
+
+          // Update weekly and monthly stats
+          const now = new Date();
+          const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+          const monthAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+
+          const weekCompleted = completedTasks.filter(
+            (task) => task.completedAt && new Date(task.completedAt) >= weekAgo,
+          ).length;
+
+          const monthCompleted = completedTasks.filter(
+            (task) =>
+              task.completedAt && new Date(task.completedAt) >= monthAgo,
+          ).length;
+
+          document.getElementById("week-completed").textContent = weekCompleted;
+          document.getElementById("month-completed").textContent =
+            monthCompleted;
         } catch (error) {
           console.error("Error updating dashboard stats:", error);
         }
@@ -754,19 +829,18 @@
 
         container.innerHTML = projects
           .slice(0, 3)
-          .map(
-            (project) => `
-                <div class="d-flex justify-content-between align-items-center mb-2">
-                    <div class="d-flex align-items-center">
-                        <div class="project-color me-2" 
-                             style="width: 12px; height: 12px; border-radius: 50%; background: ${project.color};">
-                        </div>
-                        <span class="fw-medium">${project.name}</span>
-                    </div>
-                    <span class="badge bg-light text-dark">${project.tasksCount || 0}</span>
-                </div>
-            `,
-          )
+          .map((project) => {
+            const projectTasks = appState.tasks.filter(
+              (t) => t.projectId === project.id,
+            );
+            return `
+                    <project-card 
+                        .project='${JSON.stringify(project)}'
+                        .tasks='${JSON.stringify(appState.tasks)}'
+                        compact="true">
+                    </project-card>
+                `;
+          })
           .join("");
       }
 
@@ -781,24 +855,63 @@
 
             if (title) {
               try {
-                await taskManager.createTask({
-                  title: title,
-                  description: "",
-                  priority: "medium",
-                  projectId: null,
-                  dueDate: null,
-                  tags: [],
-                });
+                // Parse quick task with natural language processing
+                const taskData = parseQuickTask(title);
+
+                await taskManager.createTask(taskData);
 
                 form.reset();
                 updateDashboardStats();
                 updateProgressBar();
+                renderTodayTasks();
               } catch (error) {
                 console.error("Error creating quick task:", error);
               }
             }
           });
         }
+      }
+
+      function parseQuickTask(title) {
+        // Basic natural language processing for quick tasks
+        let taskData = {
+          title: title,
+          description: "",
+          priority: "medium",
+          projectId: null,
+          dueDate: null,
+          tags: [],
+        };
+
+        // Extract tags (#tag)
+        const tagMatches = title.match(/#(\w+)/g);
+        if (tagMatches) {
+          taskData.tags = tagMatches.map((tag) => tag.substring(1));
+          taskData.title = title.replace(/#\w+/g, "").trim();
+        }
+
+        // Extract priority indicators
+        if (title.includes("!!") || title.toLowerCase().includes("urgente")) {
+          taskData.priority = "high";
+        } else if (title.includes("!")) {
+          taskData.priority = "medium";
+        }
+
+        // Extract time indicators
+        const timePattern = /às?\s(\d{1,2}):?(\d{2})?h?/i;
+        const timeMatch = title.match(timePattern);
+        if (timeMatch) {
+          const today = new Date();
+          today.setHours(
+            parseInt(timeMatch[1]),
+            parseInt(timeMatch[2] || "0"),
+            0,
+            0,
+          );
+          taskData.dueDate = today.toISOString().split("T")[0];
+        }
+
+        return taskData;
       }
 
       function updateProgressBar() {
@@ -828,6 +941,58 @@
         if (progressText) {
           progressText.textContent = `${completedToday.length} de ${todayTasks.length}`;
         }
+      }
+
+      function renderTodayTasks() {
+        const container = document.getElementById("tasks-container");
+        const tasks = appState.tasks || [];
+
+        // Filter today's tasks
+        const todayTasks = tasks.filter((task) => {
+          if (!task.dueDate) return false;
+          const today = new Date().toDateString();
+          const taskDate = new Date(task.dueDate).toDateString();
+          return today === taskDate;
+        });
+
+        if (todayTasks.length === 0) {
+          container.innerHTML = `
+                    <div class="text-center py-5">
+                        <i class="fas fa-calendar-check" style="font-size: 4rem; color: var(--border-color);"></i>
+                        <h3 class="text-muted mt-3">Nenhuma tarefa para hoje</h3>
+                        <p class="text-muted">Que tal criar uma nova tarefa?</p>
+                        <button class="btn btn-primary-custom" data-bs-toggle="modal" data-bs-target="#newTaskModal">
+                            <i class="fas fa-plus me-2"></i>
+                            Criar Tarefa
+                        </button>
+                    </div>
+                `;
+          return;
+        }
+
+        // Render tasks using Web Components
+        container.innerHTML = todayTasks
+          .map((task) => {
+            const project = appState.projects.find(
+              (p) => p.id === task.projectId,
+            );
+            return `
+                    <task-item 
+                        .task='${JSON.stringify(task)}'
+                        .project='${JSON.stringify(project)}'
+                        editable="true">
+                    </task-item>
+                `;
+          })
+          .join("");
+      }
+
+      // Override taskManager.renderTasks to use Web Components
+      if (window.TaskFlow && window.TaskFlow.taskManager) {
+        const originalRenderTasks = window.TaskFlow.taskManager.renderTasks;
+        window.TaskFlow.taskManager.renderTasks = function () {
+          renderTodayTasks();
+        };
       }
     </script>
   </body>
