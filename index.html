@@ -76,12 +76,6 @@
                 Tarefas
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="pages/projects.html">
-                <i class="fas fa-folder me-1"></i>
-                Projetos
-              </a>
-            </li>
           </ul>
 
           <div class="navbar-nav">
@@ -162,8 +156,8 @@
                   </div>
                   <div class="col-4">
                     <div class="stat-card">
-                      <h3 class="fw-bold mb-0" id="active-projects">0</h3>
-                      <small class="text-muted">Projetos</small>
+                      <h3 class="fw-bold mb-0" id="pending-tasks">0</h3>
+                      <small class="text-muted">Pendentes</small>
                     </div>
                   </div>
                 </div>
@@ -378,7 +372,7 @@
               </div>
             </div>
 
-            <!-- Projects Quick View using Web Components -->
+            <!-- Recent Activity -->
             <div
               class="card mb-4"
               style="
@@ -392,18 +386,18 @@
                 >
                   <h5 class="card-title mb-0">
                     <i
-                      class="fas fa-folder me-2"
+                      class="fas fa-clock me-2"
                       style="color: var(--info-blue)"
                     ></i>
-                    Projetos
+                    Atividade Recente
                   </h5>
                   <a
-                    href="pages/projects.html"
+                    href="pages/tasks.html"
                     class="btn btn-sm btn-outline-primary"
-                    >Ver todos</a
+                    >Ver todas</a
                   >
                 </div>
-                <div id="projects-preview">
+                <div id="recent-activity">
                   <div class="loading-state">
                     <div
                       class="skeleton"
@@ -540,34 +534,17 @@
                 ></textarea>
               </div>
 
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="task-project" class="form-label">Projeto</label>
-                    <select
-                      class="form-select"
-                      id="task-project"
-                      name="projectId"
-                    >
-                      <option value="">Selecione um projeto</option>
-                      <!-- Options will be loaded dynamically -->
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="task-due-date" class="form-label"
-                      >Data de Vencimento</label
-                    >
-                    <input
-                      type="date"
-                      class="form-control"
-                      id="task-due-date"
-                      name="dueDate"
-                      data-validation="date"
-                    />
-                  </div>
-                </div>
+              <div class="form-group">
+                <label for="task-due-date" class="form-label"
+                  >Data de Vencimento</label
+                >
+                <input
+                  type="date"
+                  class="form-control"
+                  id="task-due-date"
+                  name="dueDate"
+                  data-validation="date"
+                />
               </div>
 
               <div class="form-group">
@@ -642,10 +619,8 @@
                 >
               </li>
               <li>
-                <a
-                  href="pages/projects.html"
-                  class="text-muted text-decoration-none"
-                  >Projetos</a
+                <a href="landing.html" class="text-muted text-decoration-none"
+                  >Página Inicial</a
                 >
               </li>
               <li>
@@ -717,8 +692,8 @@
         // Update dashboard stats
         updateDashboardStats();
 
-        // Load projects preview
-        loadProjectsPreview();
+        // Load recent activity
+        loadRecentActivity();
 
         // Setup quick task form
         setupQuickTaskForm();
@@ -779,13 +754,15 @@
           const completedTasks = tasks.filter(
             (task) => task.status === "completed",
           );
-          const projects = appState.projects || [];
+          const pendingTasks = tasks.filter(
+            (task) => task.status === "pending",
+          );
 
           document.getElementById("total-tasks").textContent = tasks.length;
           document.getElementById("completed-tasks").textContent =
             completedTasks.length;
-          document.getElementById("active-projects").textContent =
-            projects.length;
+          document.getElementById("pending-tasks").textContent =
+            pendingTasks.length;
 
           // Calculate productivity score
           const productivityScore =
@@ -817,28 +794,40 @@
         }
       }
 
-      function loadProjectsPreview() {
-        const container = document.getElementById("projects-preview");
-        const projects = appState.projects || [];
+      function loadRecentActivity() {
+        const container = document.getElementById("recent-activity");
+        const tasks = appState.tasks || [];
 
-        if (projects.length === 0) {
+        // Get recently completed or modified tasks
+        const recentTasks = tasks
+          .filter((task) => task.completedAt || task.createdAt)
+          .sort((a, b) => {
+            const dateA = new Date(task.completedAt || task.createdAt);
+            const dateB = new Date(task.completedAt || task.createdAt);
+            return dateB - dateA;
+          })
+          .slice(0, 3);
+
+        if (recentTasks.length === 0) {
           container.innerHTML =
-            '<p class="text-muted text-center">Nenhum projeto criado</p>';
+            '<p class="text-muted text-center">Nenhuma atividade recente</p>';
           return;
         }
 
-        container.innerHTML = projects
-          .slice(0, 3)
-          .map((project) => {
-            const projectTasks = appState.tasks.filter(
-              (t) => t.projectId === project.id,
-            );
+        container.innerHTML = recentTasks
+          .map((task) => {
+            const isCompleted = task.status === "completed";
+            const actionDate = isCompleted ? task.completedAt : task.createdAt;
+            const actionText = isCompleted ? "Concluída" : "Criada";
+
             return `
-                    <project-card 
-                        .project='${JSON.stringify(project)}'
-                        .tasks='${JSON.stringify(appState.tasks)}'
-                        compact="true">
-                    </project-card>
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div class="d-flex align-items-center">
+                            <i class="fas ${isCompleted ? "fa-check-circle text-success" : "fa-plus-circle text-primary"} me-2"></i>
+                            <span class="fw-medium">${task.title}</span>
+                        </div>
+                        <small class="text-muted">${actionText}</small>
+                    </div>
                 `;
           })
           .join("");
@@ -977,7 +966,7 @@
               (p) => p.id === task.projectId,
             );
             return `
-                    <task-item 
+                    <task-item
                         .task='${JSON.stringify(task)}'
                         .project='${JSON.stringify(project)}'
                         editable="true">
