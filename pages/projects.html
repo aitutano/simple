@@ -1,0 +1,1238 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Projetos - TaskFlow</title>
+
+    <!-- CSS Dependencies -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Custom CSS -->
+    <link href="../assets/css/style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg main-navbar">
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="../index.html">
+          <i class="fas fa-tasks me-2"></i>
+          <span>TaskFlow</span>
+        </a>
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="../index.html">
+                <i class="fas fa-home me-1"></i>
+                Dashboard
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="tasks.html">
+                <i class="fas fa-list-check me-1"></i>
+                Tarefas
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="projects.html">
+                <i class="fas fa-folder me-1"></i>
+                Projetos
+              </a>
+            </li>
+          </ul>
+
+          <div class="navbar-nav">
+            <button
+              class="btn btn-primary-custom me-2"
+              data-bs-toggle="modal"
+              data-bs-target="#newProjectModal"
+            >
+              <i class="fas fa-plus me-1"></i>
+              Novo Projeto
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section
+      class="page-header py-4"
+      style="
+        background: var(--secondary-bg);
+        border-bottom: 1px solid var(--border-color);
+      "
+    >
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-8">
+            <h1 class="mb-0">
+              <i class="fas fa-folder me-2" style="color: var(--info-blue)"></i>
+              Meus Projetos
+            </h1>
+            <p class="text-muted mb-0">
+              Organize suas tarefas em projetos para melhor gestão
+            </p>
+          </div>
+          <div class="col-md-4">
+            <div class="d-flex justify-content-end align-items-center gap-2">
+              <div class="search-box">
+                <div class="input-group">
+                  <span class="input-group-text">
+                    <i class="fas fa-search"></i>
+                  </span>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Buscar projetos..."
+                    id="project-search"
+                  />
+                </div>
+              </div>
+              <div class="dropdown">
+                <button
+                  class="btn btn-outline-secondary dropdown-toggle"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                >
+                  <i class="fas fa-sort"></i>
+                </button>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="#"
+                      onclick="sortProjects('name')"
+                      >Nome</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="#"
+                      onclick="sortProjects('createdAt')"
+                      >Data de criação</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="#"
+                      onclick="sortProjects('tasksCount')"
+                      >Número de tarefas</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Stats -->
+    <section class="stats-section py-4" style="background: var(--primary-bg)">
+      <div class="container">
+        <div class="row text-center">
+          <div class="col-md-3">
+            <div class="stat-card">
+              <h3
+                class="fw-bold mb-0"
+                style="color: var(--info-blue)"
+                id="total-projects"
+              >
+                0
+              </h3>
+              <small class="text-muted">Total de Projetos</small>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="stat-card">
+              <h3
+                class="fw-bold mb-0"
+                style="color: var(--success-green)"
+                id="active-projects"
+              >
+                0
+              </h3>
+              <small class="text-muted">Projetos Ativos</small>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="stat-card">
+              <h3
+                class="fw-bold mb-0"
+                style="color: var(--warning-orange)"
+                id="total-project-tasks"
+              >
+                0
+              </h3>
+              <small class="text-muted">Tarefas em Projetos</small>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="stat-card">
+              <h3
+                class="fw-bold mb-0"
+                style="color: var(--primary-red)"
+                id="avg-tasks-per-project"
+              >
+                0
+              </h3>
+              <small class="text-muted">Média Tarefas/Projeto</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Content -->
+    <main class="projects-main py-4">
+      <div class="container">
+        <div class="row">
+          <!-- Projects Grid -->
+          <div class="col-lg-9">
+            <!-- View Toggle -->
+            <div class="view-controls mb-4">
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="view-toggle">
+                  <div class="btn-group btn-group-sm" role="group">
+                    <input
+                      type="radio"
+                      class="btn-check"
+                      name="projectView"
+                      id="view-grid"
+                      checked
+                    />
+                    <label class="btn btn-outline-secondary" for="view-grid">
+                      <i class="fas fa-th"></i> Grade
+                    </label>
+
+                    <input
+                      type="radio"
+                      class="btn-check"
+                      name="projectView"
+                      id="view-cards"
+                    />
+                    <label class="btn btn-outline-secondary" for="view-cards">
+                      <i class="fas fa-th-large"></i> Cards
+                    </label>
+                  </div>
+                </div>
+
+                <div class="project-actions">
+                  <button
+                    class="btn btn-sm btn-outline-primary"
+                    onclick="loadProjects()"
+                  >
+                    <i class="fas fa-sync-alt me-1"></i>
+                    Atualizar
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Projects Container -->
+            <div id="projects-container" class="projects-container">
+              <div class="loading-state text-center py-5">
+                <div class="loading-spinner"></div>
+                <p class="text-muted mt-3">Carregando projetos...</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sidebar -->
+          <div class="col-lg-3">
+            <!-- Quick Actions -->
+            <div class="card mb-4">
+              <div class="card-body">
+                <h5 class="card-title">
+                  <i class="fas fa-bolt me-2"></i>
+                  Ações Rápidas
+                </h5>
+                <div class="d-grid gap-2">
+                  <button
+                    class="btn btn-primary-custom btn-sm"
+                    data-bs-toggle="modal"
+                    data-bs-target="#newProjectModal"
+                  >
+                    <i class="fas fa-plus me-2"></i>
+                    Novo Projeto
+                  </button>
+                  <button
+                    class="btn btn-outline-secondary btn-sm"
+                    onclick="importProjects()"
+                  >
+                    <i class="fas fa-upload me-2"></i>
+                    Importar Projetos
+                  </button>
+                  <button
+                    class="btn btn-outline-info btn-sm"
+                    onclick="exportProjects()"
+                  >
+                    <i class="fas fa-download me-2"></i>
+                    Exportar Projetos
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project Templates -->
+            <div class="card mb-4">
+              <div class="card-body">
+                <h5 class="card-title">
+                  <i class="fas fa-clipboard-list me-2"></i>
+                  Templates
+                </h5>
+                <div class="templates-list">
+                  <div class="template-item mb-2">
+                    <button
+                      class="btn btn-outline-primary btn-sm w-100"
+                      onclick="createFromTemplate('work')"
+                    >
+                      <i class="fas fa-briefcase me-2"></i>
+                      Projeto de Trabalho
+                    </button>
+                  </div>
+                  <div class="template-item mb-2">
+                    <button
+                      class="btn btn-outline-success btn-sm w-100"
+                      onclick="createFromTemplate('personal')"
+                    >
+                      <i class="fas fa-home me-2"></i>
+                      Projeto Pessoal
+                    </button>
+                  </div>
+                  <div class="template-item mb-2">
+                    <button
+                      class="btn btn-outline-warning btn-sm w-100"
+                      onclick="createFromTemplate('study')"
+                    >
+                      <i class="fas fa-graduation-cap me-2"></i>
+                      Projeto de Estudos
+                    </button>
+                  </div>
+                  <div class="template-item">
+                    <button
+                      class="btn btn-outline-info btn-sm w-100"
+                      onclick="createFromTemplate('health')"
+                    >
+                      <i class="fas fa-heart me-2"></i>
+                      Projeto de Saúde
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Color Palette -->
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">
+                  <i class="fas fa-palette me-2"></i>
+                  Paleta de Cores
+                </h5>
+                <div class="color-palette">
+                  <div class="row g-2">
+                    <div class="col-3">
+                      <div
+                        class="color-option"
+                        style="
+                          background: #e74c3c;
+                          height: 30px;
+                          border-radius: 4px;
+                          cursor: pointer;
+                        "
+                        data-color="#e74c3c"
+                      ></div>
+                    </div>
+                    <div class="col-3">
+                      <div
+                        class="color-option"
+                        style="
+                          background: #3498db;
+                          height: 30px;
+                          border-radius: 4px;
+                          cursor: pointer;
+                        "
+                        data-color="#3498db"
+                      ></div>
+                    </div>
+                    <div class="col-3">
+                      <div
+                        class="color-option"
+                        style="
+                          background: #27ae60;
+                          height: 30px;
+                          border-radius: 4px;
+                          cursor: pointer;
+                        "
+                        data-color="#27ae60"
+                      ></div>
+                    </div>
+                    <div class="col-3">
+                      <div
+                        class="color-option"
+                        style="
+                          background: #f39c12;
+                          height: 30px;
+                          border-radius: 4px;
+                          cursor: pointer;
+                        "
+                        data-color="#f39c12"
+                      ></div>
+                    </div>
+                    <div class="col-3">
+                      <div
+                        class="color-option"
+                        style="
+                          background: #9b59b6;
+                          height: 30px;
+                          border-radius: 4px;
+                          cursor: pointer;
+                        "
+                        data-color="#9b59b6"
+                      ></div>
+                    </div>
+                    <div class="col-3">
+                      <div
+                        class="color-option"
+                        style="
+                          background: #34495e;
+                          height: 30px;
+                          border-radius: 4px;
+                          cursor: pointer;
+                        "
+                        data-color="#34495e"
+                      ></div>
+                    </div>
+                    <div class="col-3">
+                      <div
+                        class="color-option"
+                        style="
+                          background: #e67e22;
+                          height: 30px;
+                          border-radius: 4px;
+                          cursor: pointer;
+                        "
+                        data-color="#e67e22"
+                      ></div>
+                    </div>
+                    <div class="col-3">
+                      <div
+                        class="color-option"
+                        style="
+                          background: #1abc9c;
+                          height: 30px;
+                          border-radius: 4px;
+                          cursor: pointer;
+                        "
+                        data-color="#1abc9c"
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- New Project Modal -->
+    <div class="modal fade" id="newProjectModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">
+              <i class="fas fa-plus me-2"></i>
+              Novo Projeto
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="project-form" data-validate>
+              <div class="form-group">
+                <label for="project-name" class="form-label"
+                  >Nome do Projeto *</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="project-name"
+                  name="name"
+                  placeholder="Ex: Projeto de Trabalho"
+                  data-validation="required|maxLength:50"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="project-description" class="form-label"
+                  >Descrição</label
+                >
+                <textarea
+                  class="form-control"
+                  id="project-description"
+                  name="description"
+                  rows="3"
+                  placeholder="Descreva o objetivo do projeto..."
+                  data-validation="maxLength:200"
+                ></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="project-color" class="form-label"
+                  >Cor do Projeto</label
+                >
+                <div class="d-flex align-items-center gap-3">
+                  <input
+                    type="color"
+                    class="form-control form-control-color"
+                    id="project-color"
+                    name="color"
+                    value="#3498db"
+                    style="width: 60px; height: 40px"
+                  />
+                  <span
+                    class="color-preview"
+                    style="
+                      flex: 1;
+                      height: 40px;
+                      border-radius: 4px;
+                      background: #3498db;
+                      border: 1px solid var(--border-color);
+                    "
+                  ></span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="form-check">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="add-sample-tasks"
+                    checked
+                  />
+                  <label class="form-check-label" for="add-sample-tasks">
+                    Adicionar tarefas de exemplo
+                  </label>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              form="project-form"
+              class="btn btn-primary-custom"
+            >
+              <i class="fas fa-save me-1"></i>
+              Criar Projeto
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Edit Project Modal -->
+    <div class="modal fade" id="editProjectModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">
+              <i class="fas fa-edit me-2"></i>
+              Editar Projeto
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="edit-project-form" data-validate>
+              <input type="hidden" id="edit-project-id" name="id" />
+
+              <div class="form-group">
+                <label for="edit-project-name" class="form-label"
+                  >Nome do Projeto *</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="edit-project-name"
+                  name="name"
+                  data-validation="required|maxLength:50"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="edit-project-description" class="form-label"
+                  >Descrição</label
+                >
+                <textarea
+                  class="form-control"
+                  id="edit-project-description"
+                  name="description"
+                  rows="3"
+                  data-validation="maxLength:200"
+                ></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="edit-project-color" class="form-label"
+                  >Cor do Projeto</label
+                >
+                <div class="d-flex align-items-center gap-3">
+                  <input
+                    type="color"
+                    class="form-control form-control-color"
+                    id="edit-project-color"
+                    name="color"
+                    style="width: 60px; height: 40px"
+                  />
+                  <span
+                    class="edit-color-preview"
+                    style="
+                      flex: 1;
+                      height: 40px;
+                      border-radius: 4px;
+                      border: 1px solid var(--border-color);
+                    "
+                  ></span>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              form="edit-project-form"
+              class="btn btn-primary-custom"
+            >
+              <i class="fas fa-save me-1"></i>
+              Salvar Alterações
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript Dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script src="../assets/js/app.js"></script>
+
+    <!-- Page-specific JavaScript -->
+    <script>
+      // Projects page functionality
+      let currentEditingProject = null;
+
+      document.addEventListener("DOMContentLoaded", function () {
+        setupProjectsPage();
+        updateProjectsStats();
+        loadProjects();
+      });
+
+      function setupProjectsPage() {
+        setupProjectForm();
+        setupEditProjectForm();
+        setupColorPickers();
+        setupSearch();
+        setupViewToggles();
+      }
+
+      function setupProjectForm() {
+        const form = document.getElementById("project-form");
+
+        form.addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          if (validation.validateForm(form)) {
+            const formData = new FormData(form);
+            const projectData = Object.fromEntries(formData.entries());
+
+            try {
+              const newProject = await createProject(projectData);
+
+              // Add sample tasks if requested
+              if (formData.get("add-sample-tasks")) {
+                await addSampleTasks(newProject.id);
+              }
+
+              form.reset();
+              bootstrap.Modal.getInstance(
+                document.getElementById("newProjectModal"),
+              ).hide();
+              loadProjects();
+              updateProjectsStats();
+            } catch (error) {
+              console.error("Error creating project:", error);
+            }
+          }
+        });
+      }
+
+      function setupEditProjectForm() {
+        const form = document.getElementById("edit-project-form");
+
+        form.addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          if (validation.validateForm(form)) {
+            const formData = new FormData(form);
+            const projectData = Object.fromEntries(formData.entries());
+            const projectId = parseInt(projectData.id);
+
+            try {
+              await updateProject(projectId, projectData);
+
+              bootstrap.Modal.getInstance(
+                document.getElementById("editProjectModal"),
+              ).hide();
+              loadProjects();
+              updateProjectsStats();
+            } catch (error) {
+              console.error("Error updating project:", error);
+            }
+          }
+        });
+      }
+
+      function setupColorPickers() {
+        // New project color picker
+        const colorInput = document.getElementById("project-color");
+        const colorPreview = document.querySelector(".color-preview");
+
+        colorInput.addEventListener("change", function () {
+          colorPreview.style.background = this.value;
+        });
+
+        // Edit project color picker
+        const editColorInput = document.getElementById("edit-project-color");
+        const editColorPreview = document.querySelector(".edit-color-preview");
+
+        editColorInput.addEventListener("change", function () {
+          editColorPreview.style.background = this.value;
+        });
+
+        // Color palette clicks
+        document.querySelectorAll(".color-option").forEach((option) => {
+          option.addEventListener("click", function () {
+            const color = this.dataset.color;
+            if (
+              document
+                .getElementById("newProjectModal")
+                .classList.contains("show")
+            ) {
+              colorInput.value = color;
+              colorPreview.style.background = color;
+            } else if (
+              document
+                .getElementById("editProjectModal")
+                .classList.contains("show")
+            ) {
+              editColorInput.value = color;
+              editColorPreview.style.background = color;
+            }
+          });
+        });
+      }
+
+      function setupSearch() {
+        const searchInput = document.getElementById("project-search");
+
+        searchInput.addEventListener(
+          "input",
+          utils.debounce(function () {
+            const searchTerm = this.value.toLowerCase();
+            filterProjects(searchTerm);
+          }, 300),
+        );
+      }
+
+      function setupViewToggles() {
+        document
+          .querySelectorAll('input[name="projectView"]')
+          .forEach((radio) => {
+            radio.addEventListener("change", function () {
+              const container = document.getElementById("projects-container");
+              container.className = `projects-container view-${this.id.replace("view-", "")}`;
+              loadProjects();
+            });
+          });
+      }
+
+      async function createProject(projectData) {
+        try {
+          const newProject = {
+            ...projectData,
+            id: utils.generateId(),
+            createdAt: new Date().toISOString(),
+            tasksCount: 0,
+          };
+
+          const createdProject = await api.projects.create(newProject);
+          appState.projects.push(createdProject);
+
+          storage.set(APP_CONFIG.STORAGE_KEYS.PROJECTS, appState.projects);
+
+          utils.showNotification("Projeto criado com sucesso!", "success");
+          return createdProject;
+        } catch (error) {
+          console.error("Error creating project:", error);
+          utils.showNotification("Erro ao criar projeto", "danger");
+          throw error;
+        }
+      }
+
+      async function updateProject(projectId, updates) {
+        try {
+          const updatedProject = await api.projects.update(projectId, updates);
+          const projectIndex = appState.projects.findIndex(
+            (p) => p.id === projectId,
+          );
+
+          if (projectIndex !== -1) {
+            appState.projects[projectIndex] = updatedProject;
+            storage.set(APP_CONFIG.STORAGE_KEYS.PROJECTS, appState.projects);
+            utils.showNotification(
+              "Projeto atualizado com sucesso!",
+              "success",
+            );
+          }
+
+          return updatedProject;
+        } catch (error) {
+          console.error("Error updating project:", error);
+          utils.showNotification("Erro ao atualizar projeto", "danger");
+          throw error;
+        }
+      }
+
+      async function deleteProject(projectId) {
+        if (
+          !confirm(
+            "Tem certeza que deseja excluir este projeto? Todas as tarefas associadas também serão excluídas.",
+          )
+        ) {
+          return;
+        }
+
+        try {
+          await api.projects.delete(projectId);
+
+          // Remove project from state
+          appState.projects = appState.projects.filter(
+            (p) => p.id !== projectId,
+          );
+
+          // Remove associated tasks
+          appState.tasks = appState.tasks.filter(
+            (t) => t.projectId !== projectId,
+          );
+
+          storage.set(APP_CONFIG.STORAGE_KEYS.PROJECTS, appState.projects);
+          storage.set(APP_CONFIG.STORAGE_KEYS.TASKS, appState.tasks);
+
+          loadProjects();
+          updateProjectsStats();
+
+          utils.showNotification("Projeto excluído com sucesso!", "success");
+        } catch (error) {
+          console.error("Error deleting project:", error);
+          utils.showNotification("Erro ao excluir projeto", "danger");
+        }
+      }
+
+      function loadProjects() {
+        const container = document.getElementById("projects-container");
+        const projects = appState.projects || [];
+
+        if (projects.length === 0) {
+          container.innerHTML = `
+                    <div class="text-center py-5">
+                        <i class="fas fa-folder-open" style="font-size: 4rem; color: var(--border-color);"></i>
+                        <h3 class="text-muted mt-3">Nenhum projeto criado</h3>
+                        <p class="text-muted">Crie seu primeiro projeto para organizar suas tarefas!</p>
+                        <button class="btn btn-primary-custom" data-bs-toggle="modal" data-bs-target="#newProjectModal">
+                            <i class="fas fa-plus me-2"></i>
+                            Criar Primeiro Projeto
+                        </button>
+                    </div>
+                `;
+          return;
+        }
+
+        const isGridView = document.getElementById("view-grid").checked;
+        const containerClass = isGridView ? "row" : "project-cards-list";
+
+        container.innerHTML = `
+                <div class="${containerClass}">
+                    ${projects.map((project) => renderProjectCard(project, isGridView)).join("")}
+                </div>
+            `;
+      }
+
+      function renderProjectCard(project, isGridView) {
+        const taskCount = appState.tasks.filter(
+          (task) => task.projectId === project.id,
+        ).length;
+        const completedTasks = appState.tasks.filter(
+          (task) =>
+            task.projectId === project.id && task.status === "completed",
+        ).length;
+        const progress = taskCount > 0 ? (completedTasks / taskCount) * 100 : 0;
+
+        const cardClass = isGridView ? "col-md-6 col-lg-4 mb-4" : "mb-3";
+
+        return `
+                <div class="${cardClass}">
+                    <div class="card h-100 project-card animate__animated animate__fadeIn" style="border: 1px solid var(--border-color); border-radius: var(--radius-lg);">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <div class="d-flex align-items-center">
+                                    <div class="project-color-indicator me-3" 
+                                         style="width: 16px; height: 16px; border-radius: 50%; background: ${project.color};"></div>
+                                    <h5 class="card-title mb-0">${utils.sanitizeHTML(project.name)}</h5>
+                                </div>
+                                <div class="dropdown">
+                                    <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="dropdown">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#" onclick="editProject(${project.id})">
+                                            <i class="fas fa-edit me-2"></i>Editar
+                                        </a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="duplicateProject(${project.id})">
+                                            <i class="fas fa-copy me-2"></i>Duplicar
+                                        </a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item text-danger" href="#" onclick="deleteProject(${project.id})">
+                                            <i class="fas fa-trash me-2"></i>Excluir
+                                        </a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            ${
+                              project.description
+                                ? `
+                                <p class="text-muted mb-3">${utils.sanitizeHTML(project.description)}</p>
+                            `
+                                : ""
+                            }
+                            
+                            <div class="project-stats mb-3">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span class="small text-muted">Progresso</span>
+                                    <span class="small fw-bold">${completedTasks}/${taskCount} tarefas</span>
+                                </div>
+                                <div class="progress" style="height: 6px;">
+                                    <div class="progress-bar" 
+                                         style="width: ${progress}%; background: ${project.color};"
+                                         role="progressbar"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="project-actions d-flex gap-2">
+                                <button class="btn btn-sm btn-outline-primary flex-fill" onclick="viewProjectTasks(${project.id})">
+                                    <i class="fas fa-eye me-1"></i>
+                                    Ver Tarefas
+                                </button>
+                                <button class="btn btn-sm btn-outline-success" onclick="addTaskToProject(${project.id})">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+      }
+
+      function updateProjectsStats() {
+        const projects = appState.projects || [];
+        const tasks = appState.tasks || [];
+
+        const totalProjects = projects.length;
+        const activeProjects = projects.filter((p) => {
+          const projectTasks = tasks.filter((t) => t.projectId === p.id);
+          return projectTasks.some((t) => t.status !== "completed");
+        }).length;
+
+        const totalProjectTasks = tasks.filter((t) => t.projectId).length;
+        const avgTasksPerProject =
+          totalProjects > 0 ? Math.round(totalProjectTasks / totalProjects) : 0;
+
+        document.getElementById("total-projects").textContent = totalProjects;
+        document.getElementById("active-projects").textContent = activeProjects;
+        document.getElementById("total-project-tasks").textContent =
+          totalProjectTasks;
+        document.getElementById("avg-tasks-per-project").textContent =
+          avgTasksPerProject;
+      }
+
+      function filterProjects(searchTerm) {
+        const container = document.getElementById("projects-container");
+        const projects = appState.projects || [];
+
+        const filteredProjects = projects.filter(
+          (project) =>
+            project.name.toLowerCase().includes(searchTerm) ||
+            (project.description &&
+              project.description.toLowerCase().includes(searchTerm)),
+        );
+
+        const isGridView = document.getElementById("view-grid").checked;
+        const containerClass = isGridView ? "row" : "project-cards-list";
+
+        container.innerHTML = `
+                <div class="${containerClass}">
+                    ${filteredProjects.map((project) => renderProjectCard(project, isGridView)).join("")}
+                </div>
+            `;
+      }
+
+      function sortProjects(criteria) {
+        appState.projects.sort((a, b) => {
+          switch (criteria) {
+            case "name":
+              return a.name.localeCompare(b.name);
+            case "createdAt":
+              return new Date(b.createdAt) - new Date(a.createdAt);
+            case "tasksCount":
+              const aTaskCount = appState.tasks.filter(
+                (t) => t.projectId === a.id,
+              ).length;
+              const bTaskCount = appState.tasks.filter(
+                (t) => t.projectId === b.id,
+              ).length;
+              return bTaskCount - aTaskCount;
+            default:
+              return 0;
+          }
+        });
+
+        loadProjects();
+      }
+
+      function editProject(projectId) {
+        const project = appState.projects.find((p) => p.id === projectId);
+        if (!project) return;
+
+        currentEditingProject = project;
+
+        document.getElementById("edit-project-id").value = project.id;
+        document.getElementById("edit-project-name").value = project.name;
+        document.getElementById("edit-project-description").value =
+          project.description || "";
+        document.getElementById("edit-project-color").value = project.color;
+        document.querySelector(".edit-color-preview").style.background =
+          project.color;
+
+        new bootstrap.Modal(document.getElementById("editProjectModal")).show();
+      }
+
+      function duplicateProject(projectId) {
+        const project = appState.projects.find((p) => p.id === projectId);
+        if (!project) return;
+
+        const duplicatedProject = {
+          ...project,
+          id: utils.generateId(),
+          name: project.name + " (Cópia)",
+          createdAt: new Date().toISOString(),
+        };
+
+        createProject(duplicatedProject);
+      }
+
+      function viewProjectTasks(projectId) {
+        // Redirect to tasks page with project filter
+        window.location.href = `tasks.html?project=${projectId}`;
+      }
+
+      function addTaskToProject(projectId) {
+        // Pre-select project in new task modal
+        localStorage.setItem("selectedProjectId", projectId);
+        window.location.href = "tasks.html#new-task";
+      }
+
+      async function addSampleTasks(projectId) {
+        const sampleTasks = [
+          {
+            title: "Planejar objetivos do projeto",
+            description: "Definir metas e marcos importantes",
+            priority: "high",
+            projectId: projectId,
+          },
+          {
+            title: "Organizar recursos necessários",
+            description: "Listar materiais e ferramentas",
+            priority: "medium",
+            projectId: projectId,
+          },
+          {
+            title: "Acompanhar progresso",
+            description: "Revisar andamento regularmente",
+            priority: "low",
+            projectId: projectId,
+          },
+        ];
+
+        for (const task of sampleTasks) {
+          await taskManager.createTask(task);
+        }
+      }
+
+      function createFromTemplate(templateType) {
+        const templates = {
+          work: {
+            name: "Projeto de Trabalho",
+            description: "Organize suas tarefas profissionais",
+            color: "#3498db",
+          },
+          personal: {
+            name: "Projeto Pessoal",
+            description: "Gerencie atividades pessoais",
+            color: "#27ae60",
+          },
+          study: {
+            name: "Projeto de Estudos",
+            description: "Organize materiais e cronograma de estudos",
+            color: "#f39c12",
+          },
+          health: {
+            name: "Projeto de Saúde",
+            description: "Acompanhe metas de bem-estar",
+            color: "#e74c3c",
+          },
+        };
+
+        const template = templates[templateType];
+        if (template) {
+          document.getElementById("project-name").value = template.name;
+          document.getElementById("project-description").value =
+            template.description;
+          document.getElementById("project-color").value = template.color;
+          document.querySelector(".color-preview").style.background =
+            template.color;
+
+          new bootstrap.Modal(
+            document.getElementById("newProjectModal"),
+          ).show();
+        }
+      }
+
+      function exportProjects() {
+        const projects = appState.projects || [];
+        const dataStr = JSON.stringify(projects, null, 2);
+        const dataBlob = new Blob([dataStr], { type: "application/json" });
+
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(dataBlob);
+        link.download = `taskflow-projects-${new Date().toISOString().split("T")[0]}.json`;
+        link.click();
+
+        utils.showNotification("Backup dos projetos baixado!", "success");
+      }
+
+      function importProjects() {
+        const input = document.createElement("input");
+        input.type = "file";
+        input.accept = ".json";
+
+        input.onchange = function (e) {
+          const file = e.target.files[0];
+          if (!file) return;
+
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            try {
+              const importedProjects = JSON.parse(e.target.result);
+
+              if (Array.isArray(importedProjects)) {
+                importedProjects.forEach((project) => {
+                  project.id = utils.generateId();
+                  project.createdAt = new Date().toISOString();
+                  appState.projects.push(project);
+                });
+
+                storage.set(
+                  APP_CONFIG.STORAGE_KEYS.PROJECTS,
+                  appState.projects,
+                );
+                loadProjects();
+                updateProjectsStats();
+
+                utils.showNotification(
+                  `${importedProjects.length} projetos importados com sucesso!`,
+                  "success",
+                );
+              } else {
+                throw new Error("Formato inválido");
+              }
+            } catch (error) {
+              utils.showNotification(
+                "Erro ao importar projetos. Verifique o formato do arquivo.",
+                "danger",
+              );
+            }
+          };
+          reader.readAsText(file);
+        };
+
+        input.click();
+      }
+    </script>
+  </body>
+</html>
