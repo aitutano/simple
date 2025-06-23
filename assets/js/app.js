@@ -5,7 +5,6 @@ const APP_CONFIG = {
   API_BASE_URL: "http://localhost:3001",
   STORAGE_KEYS: {
     TASKS: "taskflow_tasks",
-    PROJECTS: "taskflow_projects",
     USER_PREFERENCES: "taskflow_preferences",
     THEME: "taskflow_theme",
   },
@@ -24,12 +23,10 @@ const APP_CONFIG = {
 // Global App State
 let appState = {
   tasks: [],
-  projects: [],
   currentUser: null,
   filters: {
     status: "all",
     priority: "all",
-    project: "all",
   },
   isOnline: navigator.onLine,
 };
@@ -194,17 +191,20 @@ const api = {
 
     switch (method) {
       case "GET":
-        return storage.get(APP_CONFIG.STORAGE_KEYS[resource.toUpperCase()], []);
+        if (resource === "tasks") {
+          return storage.get(APP_CONFIG.STORAGE_KEYS.TASKS, []);
+        }
+        return [];
       case "POST":
-        const data = JSON.parse(options.body);
-        data.id = utils.generateId();
-        const existing = storage.get(
-          APP_CONFIG.STORAGE_KEYS[resource.toUpperCase()],
-          [],
-        );
-        existing.push(data);
-        storage.set(APP_CONFIG.STORAGE_KEYS[resource.toUpperCase()], existing);
-        return data;
+        if (resource === "tasks") {
+          const data = JSON.parse(options.body);
+          data.id = utils.generateId();
+          const existing = storage.get(APP_CONFIG.STORAGE_KEYS.TASKS, []);
+          existing.push(data);
+          storage.set(APP_CONFIG.STORAGE_KEYS.TASKS, existing);
+          return data;
+        }
+        return null;
       default:
         return null;
     }
@@ -226,26 +226,6 @@ const api = {
       }),
     delete: (id) =>
       api.request(`/tasks/${id}`, {
-        method: "DELETE",
-      }),
-  },
-
-  // Projects API
-  projects: {
-    getAll: () => api.request("/projects"),
-    getById: (id) => api.request(`/projects/${id}`),
-    create: (project) =>
-      api.request("/projects", {
-        method: "POST",
-        body: JSON.stringify(project),
-      }),
-    update: (id, project) =>
-      api.request(`/projects/${id}`, {
-        method: "PUT",
-        body: JSON.stringify(project),
-      }),
-    delete: (id) =>
-      api.request(`/projects/${id}`, {
         method: "DELETE",
       }),
   },
@@ -421,11 +401,8 @@ const taskManager = {
       const priorityMatch =
         appState.filters.priority === "all" ||
         task.priority === appState.filters.priority;
-      const projectMatch =
-        appState.filters.project === "all" ||
-        task.projectId === parseInt(appState.filters.project);
 
-      return statusMatch && priorityMatch && projectMatch;
+      return statusMatch && priorityMatch;
     });
   },
 
@@ -452,9 +429,6 @@ const taskManager = {
   },
 
   renderTaskCard(task) {
-    const project = appState.projects.find((p) => p.id === task.projectId);
-    const projectName = project ? project.name : "Sem projeto";
-
     return `
       <div class="task-card fade-in" data-task-id="${task.id}">
         <div class="d-flex justify-content-between align-items-start mb-2">
@@ -468,16 +442,15 @@ const taskManager = {
             </button>
           </div>
         </div>
-        
+
         ${task.description ? `<p class="task-description">${utils.sanitizeHTML(task.description)}</p>` : ""}
-        
+
         <div class="task-meta">
           <div class="d-flex gap-2 flex-wrap">
             <span class="priority-badge priority-${task.priority}">${task.priority}</span>
             <span class="status-badge status-${task.status.replace("_", "-")}">${this.getStatusLabel(task.status)}</span>
-            <span class="badge bg-light text-dark">${projectName}</span>
           </div>
-          
+
           ${
             task.dueDate
               ? `
@@ -489,7 +462,7 @@ const taskManager = {
               : ""
           }
         </div>
-        
+
         ${
           task.tags && task.tags.length > 0
             ? `
@@ -499,9 +472,9 @@ const taskManager = {
         `
             : ""
         }
-        
+
         <div class="task-completion-toggle mt-3">
-          <button class="btn btn-sm ${task.status === "completed" ? "btn-success" : "btn-outline-success"}" 
+          <button class="btn btn-sm ${task.status === "completed" ? "btn-success" : "btn-outline-success"}"
                   onclick="taskManager.toggleTaskCompletion(${task.id})">
             <i class="fas ${task.status === "completed" ? "fa-check-circle" : "fa-circle"} me-1"></i>
             ${task.status === "completed" ? "Concluída" : "Marcar como concluída"}
@@ -572,10 +545,6 @@ const app = {
 
   async loadInitialData() {
     try {
-      // Load projects first
-      appState.projects = await api.projects.getAll();
-      storage.set(APP_CONFIG.STORAGE_KEYS.PROJECTS, appState.projects);
-
       // Load tasks
       await taskManager.loadTasks();
 
@@ -588,7 +557,6 @@ const app = {
     } catch (error) {
       console.error("Error loading initial data:", error);
       // Load from localStorage as fallback
-      appState.projects = storage.get(APP_CONFIG.STORAGE_KEYS.PROJECTS, []);
       appState.tasks = storage.get(APP_CONFIG.STORAGE_KEYS.TASKS, []);
       taskManager.renderTasks();
     }
