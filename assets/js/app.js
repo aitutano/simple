@@ -381,15 +381,22 @@ const taskManager = {
   async deleteTask(taskId) {
     try {
       await api.tasks.delete(taskId);
-      appState.tasks = appState.tasks.filter((task) => task.id !== taskId);
+      appState.tasks = appState.tasks.filter(
+        (task) => String(task.id) !== String(taskId),
+      );
 
       storage.set(APP_CONFIG.STORAGE_KEYS.TASKS, appState.tasks);
       this.renderTasks();
       utils.showNotification("Tarefa excluída com sucesso!", "success");
     } catch (error) {
       console.error("Error deleting task:", error);
-      utils.showNotification("Erro ao excluir tarefa", "danger");
-      throw error;
+      // Fallback: Try to delete from localStorage if API fails
+      appState.tasks = appState.tasks.filter(
+        (task) => String(task.id) !== String(taskId),
+      );
+      storage.set(APP_CONFIG.STORAGE_KEYS.TASKS, appState.tasks);
+      this.renderTasks();
+      utils.showNotification("Tarefa excluída (modo offline)!", "warning");
     }
   },
 
