@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tarefas - TaskFlow</title>
+    <title>Tarefas - Flow</title>
 
     <!-- CSS Dependencies -->
     <link
@@ -34,7 +34,7 @@
       <div class="container">
         <a class="navbar-brand d-flex align-items-center" href="../index.html">
           <i class="fas fa-tasks me-2"></i>
-          <span>TaskFlow</span>
+          <span>Flow</span>
         </a>
 
         <button
@@ -737,7 +737,7 @@
 
         const link = document.createElement("a");
         link.href = URL.createObjectURL(dataBlob);
-        link.download = `taskflow-backup-${new Date().toISOString().split("T")[0]}.json`;
+        link.download = `flow-backup-${new Date().toISOString().split("T")[0]}.json`;
         link.click();
 
         utils.showNotification("Backup das tarefas baixado!", "success");
