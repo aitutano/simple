@@ -530,7 +530,7 @@ const taskManager = {
   },
 
   async toggleTaskCompletion(taskId) {
-    const task = appState.tasks.find((t) => t.id === taskId);
+    const task = appState.tasks.find((t) => String(t.id) === String(taskId));
     if (!task) return;
 
     const newStatus = task.status === "completed" ? "pending" : "completed";
