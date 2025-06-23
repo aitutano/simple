@@ -187,6 +187,27 @@
           </div>
           <div class="col-lg-6">
             <div class="hero-image animate__animated animate__fadeInRight">
+              <!-- Responsive hero image with WebP optimization (ID 11) -->
+              <picture class="image-container image-container--landscape">
+                <source
+                  media="(max-width: 768px)"
+                  srcset="assets/images/hero-task-preview.svg"
+                  type="image/svg+xml"
+                />
+                <source
+                  media="(min-width: 769px)"
+                  srcset="assets/images/hero-task-preview.svg"
+                  type="image/svg+xml"
+                />
+                <img
+                  src="assets/images/hero-task-preview.svg"
+                  alt="Visualização do Flow em um smartphone mostrando tarefas organizadas por prioridade"
+                  class="responsive-image hero-image"
+                  loading="lazy"
+                  width="500"
+                  height="400"
+                />
+              </picture>
               <div
                 class="app-preview p-4"
                 style="
@@ -548,33 +569,40 @@
           </div>
           <div class="col-lg-6">
             <div class="demo-video text-center">
-              <div
-                class="video-placeholder p-5"
-                style="
-                  background: linear-gradient(
-                    45deg,
-                    var(--accent-bg),
-                    var(--primary-bg)
-                  );
-                  border-radius: var(--radius-xl);
-                  min-height: 300px;
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                "
-              >
-                <div>
-                  <i
-                    class="fas fa-play-circle"
-                    style="
-                      font-size: 4rem;
-                      color: var(--primary-red);
-                      margin-bottom: 1rem;
-                    "
-                  ></i>
-                  <h5 class="text-muted">Demonstração Interativa</h5>
-                  <p class="text-muted">Clique para ver o Flow funcionando</p>
-                </div>
+              <!-- Responsive demo image with optimization (ID 10, ID 11) -->
+              <picture class="image-container image-container--landscape">
+                <source
+                  media="(max-width: 576px)"
+                  srcset="assets/images/hero-task-preview.svg"
+                  type="image/svg+xml"
+                />
+                <source
+                  media="(min-width: 577px)"
+                  srcset="assets/images/hero-task-preview.svg"
+                  type="image/svg+xml"
+                />
+                <img
+                  src="assets/images/hero-task-preview.svg"
+                  alt="Demonstração da interface do Flow mostrando funcionalidades de gerenciamento de tarefas"
+                  class="responsive-image demo-screenshot"
+                  loading="lazy"
+                  width="500"
+                  height="400"
+                />
+              </picture>
+              <div class="mt-3">
+                <i
+                  class="fas fa-play-circle"
+                  style="
+                    font-size: 2rem;
+                    color: var(--primary-red);
+                    margin-bottom: 0.5rem;
+                  "
+                ></i>
+                <h6 class="text-muted">Demonstração Interativa</h6>
+                <p class="text-muted small">
+                  Clique para ver o Flow funcionando
+                </p>
               </div>
             </div>
           </div>
@@ -749,36 +777,41 @@
           </div>
           <div class="col-lg-6">
             <div class="about-image text-center">
-              <div
-                class="image-placeholder p-5"
-                style="
-                  background: linear-gradient(
-                    135deg,
-                    var(--accent-bg),
-                    var(--primary-bg)
-                  );
-                  border-radius: var(--radius-xl);
-                  min-height: 400px;
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
-                "
-              >
-                <div>
-                  <i
-                    class="fas fa-rocket"
-                    style="
-                      font-size: 5rem;
-                      color: var(--primary-red);
-                      margin-bottom: 1rem;
-                    "
-                  ></i>
-                  <h4 class="text-muted">Projeto Acadêmico</h4>
-                  <p class="text-muted">
-                    Desenvolvido para fins educacionais<br />Inspirado no
-                    Todoist
-                  </p>
-                </div>
+              <!-- Responsive about image with optimization (ID 10, ID 11) -->
+              <picture class="image-container image-container--square">
+                <source
+                  media="(max-width: 768px)"
+                  srcset="assets/images/hero-task-preview.svg"
+                  type="image/svg+xml"
+                />
+                <source
+                  media="(min-width: 769px)"
+                  srcset="assets/images/hero-task-preview.svg"
+                  type="image/svg+xml"
+                />
+                <img
+                  src="assets/images/hero-task-preview.svg"
+                  alt="Ilustração representando o Flow como projeto acadêmico inspirado no Todoist"
+                  class="responsive-image"
+                  loading="lazy"
+                  width="400"
+                  height="400"
+                  style="filter: grayscale(30%) opacity(0.8)"
+                />
+              </picture>
+              <div class="mt-4">
+                <i
+                  class="fas fa-rocket"
+                  style="
+                    font-size: 3rem;
+                    color: var(--primary-red);
+                    margin-bottom: 1rem;
+                  "
+                ></i>
+                <h4 class="text-muted">Projeto Acadêmico</h4>
+                <p class="text-muted">
+                  Desenvolvido para fins educacionais<br />Inspirado no Todoist
+                </p>
               </div>
             </div>
           </div>
