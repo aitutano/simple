@@ -48,7 +48,7 @@ Flow é uma aplicação web responsiva de gerenciamento de tarefas inspirada no 
 - [x] **ID 03** - Utiliza componentes CSS e JavaScript do Framework
 - [x] **ID 04** - Implementa layout fluido com unidades relativas
 - [x] **ID 05** - Implementa animações (fadeIn/fadeOut, slideIn/slideOut)
-- [ ] **ID 06** - Cria transições personalizadas entre estados
+- ⚪ **ID 06** - ~~Cria transições personalizadas entre estados~~ (Removido - não essencial)
 - [x] **ID 07** - Aplica Design System consistente
 - [ ] **ID 08** - Implementa pré-processadores CSS (Sass)
 - [x] **ID 09** - Aplica tipografia responsiva com media queries/clamp()
@@ -65,19 +65,19 @@ Flow é uma aplicação web responsiva de gerenciamento de tarefas inspirada no 
 ### RA3 - Aplicar ferramentas para otimização do desenvolvimento
 
 - [x] **ID 16** - Configura ambiente com Node.js e NPM
-- [ ] **ID 17** - Utiliza linters (ESLint/Stylelint)
+- ⚪ **ID 17** - ~~Utiliza linters (ESLint/Stylelint)~~ (Removido - não essencial)
 - [x] **ID 18** - Adota boas práticas de versionamento (Git/GitHub)
 - [x] **ID 19** - Organiza README.md conforme template
-- [ ] **ID 20** - Utiliza técnicas de minificação e otimização
+- ⚪ **ID 20** - ~~Utiliza técnicas de minificação e otimização~~ (Removido - não essencial)
 - [x] **ID 21** - Organiza arquivos em estrutura modular
-- [ ] **ID 22** - Utiliza metodologias BEM/SMACSS para CSS
+- ⚪ **ID 22** - ~~Utiliza metodologias BEM/SMACSS para CSS~~ (Removido - não essencial)
 
 ### RA4 - Aplicar bibliotecas JavaScript para interatividade
 
 - [x] **ID 23** - Utiliza jQuery para manipulação do DOM
 - [x] **ID 24** - Integra plugin jQuery (jQuery Mask Plugin)
-- [x] **ID 25** - Utiliza bibliotecas de web components (Lit)
-- [ ] **ID 26** - Utiliza biblioteca de componentes prontos
+- ⚪ **ID 25** - ~~Utiliza bibliotecas de web components (Lit)~~ (Implementado mas removido dos requisitos essenciais)
+- ⚪ **ID 26** - ~~Utiliza biblioteca de componentes prontos~~ (Removido - não essencial)
 
 ### RA5 - Efetuar requisições assíncronas para APIs
 
