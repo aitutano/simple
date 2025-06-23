@@ -450,10 +450,10 @@ const taskManager = {
         <div class="d-flex justify-content-between align-items-start mb-2">
           <h4 class="task-title mb-0">${utils.sanitizeHTML(task.title)}</h4>
           <div class="task-actions">
-            <button class="btn btn-sm btn-outline-primary me-1" onclick="taskManager.editTask(${task.id})">
+            <button class="btn btn-sm btn-outline-primary me-1" onclick="taskManager.editTask('${task.id}')">
               <i class="fas fa-edit"></i>
             </button>
-            <button class="btn btn-sm btn-outline-danger" onclick="taskManager.confirmDeleteTask(${task.id})">
+            <button class="btn btn-sm btn-outline-danger" onclick="taskManager.confirmDeleteTask('${task.id}')">
               <i class="fas fa-trash"></i>
             </button>
           </div>
