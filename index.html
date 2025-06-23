@@ -257,7 +257,7 @@
                   >
                     <option value="dueDate">Data de vencimento</option>
                     <option value="priority">Prioridade</option>
-                    <option value="createdAt">Data de criação</option>
+                    <option value="createdAt">Data de criaç��o</option>
                     <option value="title">Título</option>
                   </select>
                 </div>
@@ -762,13 +762,11 @@
       }
 
       function setupViewToggles() {
-        document.querySelectorAll('input[name="viewType"]').forEach((radio) => {
-          radio.addEventListener("change", function () {
-            const container = document.getElementById("tasks-container");
-            container.className = `tasks-container view-${this.id.replace("view-", "")}`;
-            taskManager.renderTasks();
-          });
-        });
+        // View is now fixed to cards only - no toggle needed
+        const container = document.getElementById("tasks-container");
+        if (container) {
+          container.className = "tasks-container view-cards";
+        }
       }
 
       function setupFilters() {
