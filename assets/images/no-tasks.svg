@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" style="background: transparent;">
+  <!-- Background circle -->
+  <circle cx="200" cy="150" r="80" fill="#f8f9fa" stroke="#e9ecef" stroke-width="2"/>
+  
+  <!-- Clipboard -->
+  <rect x="160" y="110" width="80" height="100" rx="8" fill="#ffffff" stroke="#dee2e6" stroke-width="2"/>
+  <rect x="175" y="100" width="50" height="20" rx="4" fill="#6c757d"/>
+  
+  <!-- Empty list lines -->
+  <line x1="175" y1="135" x2="225" y2="135" stroke="#e9ecef" stroke-width="3" stroke-linecap="round"/>
+  <line x1="175" y1="150" x2="225" y2="150" stroke="#e9ecef" stroke-width="3" stroke-linecap="round"/>
+  <line x1="175" y1="165" x2="215" y2="165" stroke="#e9ecef" stroke-width="3" stroke-linecap="round"/>
+  
+  <!-- Checkboxes (empty) -->
+  <rect x="175" y="130" width="8" height="8" fill="none" stroke="#dee2e6" stroke-width="1"/>
+  <rect x="175" y="145" width="8" height="8" fill="none" stroke="#dee2e6" stroke-width="1"/>
+  <rect x="175" y="160" width="8" height="8" fill="none" stroke="#dee2e6" stroke-width="1"/>
+  
+  <!-- Floating elements for decoration -->
+  <circle cx="120" cy="80" r="3" fill="#e9ecef" opacity="0.6"/>
+  <circle cx="290" cy="90" r="4" fill="#e9ecef" opacity="0.4"/>
+  <circle cx="110" cy="220" r="2" fill="#e9ecef" opacity="0.5"/>
+  <circle cx="300" cy="210" r="3" fill="#e9ecef" opacity="0.3"/>
+  
+  <!-- Text -->
+  <text x="200" y="250" text-anchor="middle" fill="#6c757d" font-family="Arial, sans-serif" font-size="14" opacity="0.8">Nenhuma tarefa encontrada</text>
+</svg>
