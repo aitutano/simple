@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "echo 'No dev server configured yet. Please add a framework like Next.js, Vite, or create-react-app'",
+    "dev": "http-server . -p 3000 -c-1",
     "build": "echo 'No build script configured'",
-    "start": "echo 'No start script configured'"
+    "start": "npm run dev"
   },
   "keywords": [],
   "author": "",
