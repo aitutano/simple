@@ -415,7 +415,23 @@ const taskManager = {
     if (filteredTasks.length === 0) {
       tasksContainer.innerHTML = `
         <div class="text-center py-5">
-          <img src="assets/images/no-tasks.svg" alt="Nenhuma tarefa" class="mb-3" style="width: 200px; opacity: 0.5;">
+          <picture class="image-container">
+            <source
+              media="(max-width: 576px)"
+              srcset="assets/images/no-tasks.svg"
+              type="image/svg+xml">
+            <source
+              media="(min-width: 577px)"
+              srcset="assets/images/no-tasks.svg"
+              type="image/svg+xml">
+            <img
+              src="assets/images/no-tasks.svg"
+              alt="Ilustração de uma prancheta vazia representando nenhuma tarefa encontrada"
+              class="task-illustration mb-3"
+              loading="lazy"
+              width="400"
+              height="300">
+          </picture>
           <h3 class="text-muted">Nenhuma tarefa encontrada</h3>
           <p class="text-muted">Crie sua primeira tarefa para começar!</p>
         </div>
