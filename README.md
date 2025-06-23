@@ -26,13 +26,13 @@ Flow é uma aplicação web responsiva de gerenciamento de tarefas inspirada no 
 ## 🛠️ Tecnologias Utilizadas
 
 - **Framework CSS:** Bootstrap 5.3
-- **Web Components:** Lit (para componentes reutilizáveis)
 - **Bibliotecas JavaScript:**
   - jQuery 3.7.1
   - jQuery Mask Plugin
   - Animate.css
 - **API Fake:** JSON Server
 - **Persistência:** Web Storage (localStorage/sessionStorage)
+- **Web Components:** Lit (implementado mas não mais requisito essencial)
 
 ## 🌐 Link para o Site em Produção
 
@@ -147,7 +147,7 @@ task-manager-app/
 │   │   ├── style.css        # Estilos principais
 │   │   └── responsive.css   # Estilos responsivos
 │   └── js/
-│       └── app.js           # JavaScript principal
+��       └── app.js           # JavaScript principal
 ├── components/
 │   └── task-item.js         # Web Component para tarefas
 ├── pages/
@@ -226,4 +226,4 @@ Este projeto foi desenvolvido para fins acadêmicos.
 
 **Inspiração:** [Todoist](https://todoist.com) - Design e funcionalidades
 **Desenvolvimento:** Projeto acadêmico individual
-**Tecnologias:** HTML5, CSS3, JavaScript ES6+, Bootstrap 5, Web Components
+**Tecnologias:** HTML5, CSS3, JavaScript ES6+, Bootstrap 5
