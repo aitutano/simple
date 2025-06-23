@@ -491,7 +491,7 @@ const taskManager = {
 
         <div class="task-completion-toggle mt-3">
           <button class="btn btn-sm ${task.status === "completed" ? "btn-success" : "btn-outline-success"}"
-                  onclick="taskManager.toggleTaskCompletion(${task.id})">
+                  onclick="taskManager.toggleTaskCompletion('${task.id}')">
             <i class="fas ${task.status === "completed" ? "fa-check-circle" : "fa-circle"} me-1"></i>
             ${task.status === "completed" ? "Concluída" : "Marcar como concluída"}
           </button>
