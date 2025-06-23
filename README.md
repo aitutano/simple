@@ -1,4 +1,4 @@
-# TaskFlow - Gerenciador de Tarefas
+# Flow - Gerenciador de Tarefas
 
 ## 👤 Identificação/Autor
 
@@ -9,7 +9,7 @@
 
 ## 📝 Descrição do Projeto
 
-TaskFlow é uma aplicação web responsiva de gerenciamento de tarefas inspirada no design e funcionalidades do Todoist. O projeto permite aos usuários organizar suas tarefas diárias, definir prioridades e acompanhar o progresso das atividades de forma intuitiva e eficiente.
+Flow é uma aplicação web responsiva de gerenciamento de tarefas inspirada no design e funcionalidades do Todoist. O projeto permite aos usuários organizar suas tarefas diárias, definir prioridades e acompanhar o progresso das atividades de forma intuitiva e eficiente.
 
 ### Tema e Escopo
 
@@ -129,7 +129,7 @@ npm run json-server
 
 ### Credenciais de Teste
 
-- **E-mail:** demo@taskflow.com
+- **E-mail:** demo@flow.com
 - **Senha:** demo123
 
 ## 📸 Telas da Aplicação
