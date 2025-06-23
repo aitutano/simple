@@ -233,35 +233,23 @@
         <div class="row">
           <!-- Tasks List -->
           <div class="col-lg-8">
-            <!-- View Toggle (without table option) -->
+            <!-- Sort Controls -->
             <div class="view-controls mb-4">
               <div class="d-flex justify-content-between align-items-center">
-                <div class="view-toggle">
-                  <div class="btn-group btn-group-sm" role="group">
-                    <input
-                      type="radio"
-                      class="btn-check"
-                      name="viewType"
-                      id="view-cards"
-                      checked
-                    />
-                    <label class="btn btn-outline-secondary" for="view-cards">
-                      <i class="fas fa-th-large"></i> Cards
-                    </label>
-
-                    <input
-                      type="radio"
-                      class="btn-check"
-                      name="viewType"
-                      id="view-list"
-                    />
-                    <label class="btn btn-outline-secondary" for="view-list">
-                      <i class="fas fa-list"></i> Lista
-                    </label>
-                  </div>
+                <div class="view-info">
+                  <h5 class="mb-0">
+                    <i class="fas fa-th-large me-2"></i>
+                    Visualização em Cards
+                  </h5>
+                  <small class="text-muted">Suas tarefas organizadas</small>
                 </div>
 
                 <div class="sort-controls">
+                  <label
+                    for="sort-tasks"
+                    class="form-label small text-muted mb-1"
+                    >Ordenar por:</label
+                  >
                   <select
                     class="form-select form-select-sm"
                     id="sort-tasks"
@@ -277,7 +265,7 @@
             </div>
 
             <!-- Tasks Container -->
-            <div id="tasks-container" class="tasks-container">
+            <div id="tasks-container" class="tasks-container view-cards">
               <div class="loading-state text-center py-5">
                 <div class="loading-spinner"></div>
                 <p class="text-muted mt-3">Carregando tarefas...</p>
@@ -684,12 +672,25 @@
 
       function setupTaskForm() {
         const form = document.getElementById("task-form");
+        let isSubmitting = false;
 
         // Form submission
         form.addEventListener("submit", async (e) => {
           e.preventDefault();
 
+          // Prevent duplicate submissions
+          if (isSubmitting) return;
+
           if (validation.validateForm(form)) {
+            isSubmitting = true;
+
+            // Update button to show loading state
+            const submitButton = form.querySelector('button[type="submit"]');
+            const originalText = submitButton.innerHTML;
+            submitButton.innerHTML =
+              '<i class="fas fa-spinner fa-spin me-1"></i>Salvando...';
+            submitButton.disabled = true;
+
             const formData = new FormData(form);
             const taskData = Object.fromEntries(formData.entries());
 
@@ -710,6 +711,11 @@
               updateTasksStats();
             } catch (error) {
               console.error("Error creating task:", error);
+            } finally {
+              // Reset button state
+              submitButton.innerHTML = originalText;
+              submitButton.disabled = false;
+              isSubmitting = false;
             }
           }
         });
@@ -756,13 +762,11 @@
       }
 
       function setupViewToggles() {
-        document.querySelectorAll('input[name="viewType"]').forEach((radio) => {
-          radio.addEventListener("change", function () {
-            const container = document.getElementById("tasks-container");
-            container.className = `tasks-container view-${this.id.replace("view-", "")}`;
-            taskManager.renderTasks();
-          });
-        });
+        // View is now fixed to cards only - no toggle needed
+        const container = document.getElementById("tasks-container");
+        if (container) {
+          container.className = "tasks-container view-cards";
+        }
       }
 
       function setupFilters() {

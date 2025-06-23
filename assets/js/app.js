@@ -361,7 +361,9 @@ const taskManager = {
   async updateTask(taskId, updates) {
     try {
       const updatedTask = await api.tasks.update(taskId, updates);
-      const taskIndex = appState.tasks.findIndex((task) => task.id === taskId);
+      const taskIndex = appState.tasks.findIndex(
+        (task) => String(task.id) === String(taskId),
+      );
 
       if (taskIndex !== -1) {
         appState.tasks[taskIndex] = updatedTask;
@@ -373,23 +375,41 @@ const taskManager = {
       return updatedTask;
     } catch (error) {
       console.error("Error updating task:", error);
-      utils.showNotification("Erro ao atualizar tarefa", "danger");
-      throw error;
+      // Fallback: Try to update in localStorage if API fails
+      const taskIndex = appState.tasks.findIndex(
+        (task) => String(task.id) === String(taskId),
+      );
+      if (taskIndex !== -1) {
+        appState.tasks[taskIndex] = {
+          ...appState.tasks[taskIndex],
+          ...updates,
+        };
+        storage.set(APP_CONFIG.STORAGE_KEYS.TASKS, appState.tasks);
+        this.renderTasks();
+        utils.showNotification("Tarefa atualizada (modo offline)!", "warning");
+      }
     }
   },
 
   async deleteTask(taskId) {
     try {
       await api.tasks.delete(taskId);
-      appState.tasks = appState.tasks.filter((task) => task.id !== taskId);
+      appState.tasks = appState.tasks.filter(
+        (task) => String(task.id) !== String(taskId),
+      );
 
       storage.set(APP_CONFIG.STORAGE_KEYS.TASKS, appState.tasks);
       this.renderTasks();
       utils.showNotification("Tarefa excluída com sucesso!", "success");
     } catch (error) {
       console.error("Error deleting task:", error);
-      utils.showNotification("Erro ao excluir tarefa", "danger");
-      throw error;
+      // Fallback: Try to delete from localStorage if API fails
+      appState.tasks = appState.tasks.filter(
+        (task) => String(task.id) !== String(taskId),
+      );
+      storage.set(APP_CONFIG.STORAGE_KEYS.TASKS, appState.tasks);
+      this.renderTasks();
+      utils.showNotification("Tarefa excluída (modo offline)!", "warning");
     }
   },
 
@@ -450,10 +470,10 @@ const taskManager = {
         <div class="d-flex justify-content-between align-items-start mb-2">
           <h4 class="task-title mb-0">${utils.sanitizeHTML(task.title)}</h4>
           <div class="task-actions">
-            <button class="btn btn-sm btn-outline-primary me-1" onclick="taskManager.editTask(${task.id})">
+            <button class="btn btn-sm btn-outline-primary me-1" onclick="taskManager.editTask('${task.id}')">
               <i class="fas fa-edit"></i>
             </button>
-            <button class="btn btn-sm btn-outline-danger" onclick="taskManager.confirmDeleteTask(${task.id})">
+            <button class="btn btn-sm btn-outline-danger" onclick="taskManager.confirmDeleteTask('${task.id}')">
               <i class="fas fa-trash"></i>
             </button>
           </div>
@@ -491,7 +511,7 @@ const taskManager = {
 
         <div class="task-completion-toggle mt-3">
           <button class="btn btn-sm ${task.status === "completed" ? "btn-success" : "btn-outline-success"}"
-                  onclick="taskManager.toggleTaskCompletion(${task.id})">
+                  onclick="taskManager.toggleTaskCompletion('${task.id}')">
             <i class="fas ${task.status === "completed" ? "fa-check-circle" : "fa-circle"} me-1"></i>
             ${task.status === "completed" ? "Concluída" : "Marcar como concluída"}
           </button>
@@ -510,7 +530,7 @@ const taskManager = {
   },
 
   async toggleTaskCompletion(taskId) {
-    const task = appState.tasks.find((t) => t.id === taskId);
+    const task = appState.tasks.find((t) => String(t.id) === String(taskId));
     if (!task) return;
 
     const newStatus = task.status === "completed" ? "pending" : "completed";
