@@ -361,7 +361,9 @@ const taskManager = {
   async updateTask(taskId, updates) {
     try {
       const updatedTask = await api.tasks.update(taskId, updates);
-      const taskIndex = appState.tasks.findIndex((task) => task.id === taskId);
+      const taskIndex = appState.tasks.findIndex(
+        (task) => String(task.id) === String(taskId),
+      );
 
       if (taskIndex !== -1) {
         appState.tasks[taskIndex] = updatedTask;
@@ -373,8 +375,19 @@ const taskManager = {
       return updatedTask;
     } catch (error) {
       console.error("Error updating task:", error);
-      utils.showNotification("Erro ao atualizar tarefa", "danger");
-      throw error;
+      // Fallback: Try to update in localStorage if API fails
+      const taskIndex = appState.tasks.findIndex(
+        (task) => String(task.id) === String(taskId),
+      );
+      if (taskIndex !== -1) {
+        appState.tasks[taskIndex] = {
+          ...appState.tasks[taskIndex],
+          ...updates,
+        };
+        storage.set(APP_CONFIG.STORAGE_KEYS.TASKS, appState.tasks);
+        this.renderTasks();
+        utils.showNotification("Tarefa atualizada (modo offline)!", "warning");
+      }
     }
   },
 
