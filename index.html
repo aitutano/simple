@@ -3,25 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Flow - Gerenciador de tarefas inspirado no Todoist"
-    />
-    <meta
-      name="keywords"
-      content="tarefas, produtividade, organização, todoist"
-    />
-    <meta name="author" content="Aluno UTFPR" />
-
-    <title>Flow - Organize suas tarefas com simplicidade</title>
-
-    <!-- Favicon - Optimized SVG format (ID 11) -->
-    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
-    <link
-      rel="alternate icon"
-      type="image/x-icon"
-      href="assets/images/favicon.ico"
-    />
+    <title>Flow - Minhas Tarefas</title>
 
     <!-- CSS Dependencies -->
     <link
@@ -38,8 +20,6 @@
     />
 
     <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
@@ -49,6 +29,9 @@
     <link href="assets/css/style.css" rel="stylesheet" />
     <link href="assets/css/responsive.css" rel="stylesheet" />
     <link href="assets/css/images.css" rel="stylesheet" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
   </head>
   <body>
     <!-- Navigation -->
@@ -72,14 +55,14 @@
           <ul class="navbar-nav me-auto">
             <li class="nav-item">
               <a class="nav-link active" href="index.html">
-                <i class="fas fa-home me-1"></i>
-                Início
+                <i class="fas fa-list-check me-1"></i>
+                Tarefas
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="pages/tasks.html">
-                <i class="fas fa-list-check me-1"></i>
-                Tarefas
+              <a class="nav-link" href="landing.html">
+                <i class="fas fa-home me-1"></i>
+                Início
               </a>
             </li>
           </ul>
@@ -123,183 +106,120 @@
       </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Page Header -->
     <section
-      class="hero-section py-5"
-      style="
-        background: linear-gradient(
-          135deg,
-          var(--accent-bg) 0%,
-          var(--secondary-bg) 100%
-        );
-      "
-    >
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-lg-6">
-            <div class="hero-content animate__animated animate__fadeInLeft">
-              <h1 class="display-4 fw-bold mb-4">
-                Organize sua vida com
-                <span style="color: var(--primary-red)">simplicidade</span>
-              </h1>
-              <p class="lead text-muted mb-4">
-                Flow traz clareza e organização para suas tarefas diárias.
-                Inspirado no Todoist, construído para você.
-              </p>
-              <div class="hero-features mb-4">
-                <div class="row">
-                  <div class="col-md-6 mb-3">
-                    <div class="d-flex align-items-center">
-                      <i
-                        class="fas fa-check-circle me-3"
-                        style="color: var(--success-green); font-size: 1.25rem"
-                      ></i>
-                      <span>Organize tarefas facilmente</span>
-                    </div>
-                  </div>
-                  <div class="col-md-6 mb-3">
-                    <div class="d-flex align-items-center">
-                      <i
-                        class="fas fa-mobile-alt me-3"
-                        style="color: var(--info-blue); font-size: 1.25rem"
-                      ></i>
-                      <span>Acesse de qualquer lugar</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="hero-actions button-stack">
-                <button
-                  class="btn btn-primary-custom btn-lg me-3"
-                  data-bs-toggle="modal"
-                  data-bs-target="#newTaskModal"
-                >
-                  <i class="fas fa-plus me-2"></i>
-                  Criar primeira tarefa
-                </button>
-                <a
-                  href="pages/tasks.html"
-                  class="btn btn-outline-custom btn-lg"
-                >
-                  Ver todas as tarefas
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-6">
-            <div class="hero-image animate__animated animate__fadeInRight">
-              <div
-                class="task-preview-card p-4"
-                style="
-                  background: var(--secondary-bg);
-                  border-radius: var(--radius-xl);
-                  box-shadow: var(--shadow-lg);
-                "
-              >
-                <h5 class="mb-3">
-                  <i
-                    class="fas fa-calendar-day me-2"
-                    style="color: var(--primary-red)"
-                  ></i>
-                  Hoje
-                </h5>
-                <div
-                  class="preview-task mb-3 p-3"
-                  style="
-                    border-left: 3px solid var(--priority-high);
-                    background: rgba(231, 76, 60, 0.05);
-                  "
-                >
-                  <div class="d-flex align-items-center">
-                    <i class="far fa-circle me-2"></i>
-                    <span>Finalizar projeto da faculdade</span>
-                    <span class="ms-auto badge bg-danger">Alta</span>
-                  </div>
-                </div>
-                <div
-                  class="preview-task mb-3 p-3"
-                  style="
-                    border-left: 3px solid var(--priority-medium);
-                    background: rgba(243, 156, 18, 0.05);
-                  "
-                >
-                  <div class="d-flex align-items-center">
-                    <i class="far fa-circle me-2"></i>
-                    <span>Fazer compras no supermercado</span>
-                    <span class="ms-auto badge bg-warning">Média</span>
-                  </div>
-                </div>
-                <div
-                  class="preview-task p-3"
-                  style="
-                    border-left: 3px solid var(--priority-low);
-                    background: rgba(39, 174, 96, 0.05);
-                  "
-                >
-                  <div class="d-flex align-items-center">
-                    <i class="fas fa-check-circle me-2 text-success"></i>
-                    <span class="text-decoration-line-through text-muted"
-                      >Ler 30 páginas do livro</span
-                    >
-                    <span class="ms-auto badge bg-success">Baixa</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Quick Actions -->
-    <section
-      class="quick-actions py-4"
+      class="page-header py-4"
       style="
         background: var(--secondary-bg);
         border-bottom: 1px solid var(--border-color);
       "
     >
       <div class="container">
-        <div class="row">
-          <div class="col-md-8">
-            <div class="quick-add-task">
-              <form id="quick-task-form" class="d-flex gap-2">
-                <div class="flex-grow-1">
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <h1 class="mb-0">
+              <i
+                class="fas fa-list-check me-2"
+                style="color: var(--primary-red)"
+              ></i>
+              Minhas Tarefas
+            </h1>
+            <p class="text-muted mb-0">
+              Gerencie todas as suas tarefas em um só lugar
+            </p>
+          </div>
+          <div class="col-md-6">
+            <div class="d-flex justify-content-end align-items-center gap-2">
+              <div class="search-box">
+                <div class="input-group">
+                  <span class="input-group-text">
+                    <i class="fas fa-search"></i>
+                  </span>
                   <input
                     type="text"
                     class="form-control"
-                    placeholder="Adicionar tarefa rápida... (Ex: Comprar leite às 18h #casa)"
-                    name="title"
-                    data-validation="required"
+                    placeholder="Buscar tarefas..."
+                    id="task-search"
                   />
                 </div>
-                <button type="submit" class="btn btn-primary-custom">
-                  <i class="fas fa-plus"></i>
-                </button>
-              </form>
+              </div>
+              <button
+                class="btn btn-outline-primary"
+                onclick="taskManager.loadTasks()"
+              >
+                <i class="fas fa-sync-alt"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Filters Section -->
+    <section class="filters-section py-3" style="background: var(--primary-bg)">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-8">
+            <div class="filter-tabs">
+              <div class="btn-group" role="group">
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="statusFilter"
+                  id="filter-all"
+                  value="all"
+                  checked
+                />
+                <label class="btn btn-outline-primary" for="filter-all">
+                  <i class="fas fa-list me-1"></i>
+                  Todas
+                </label>
+
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="statusFilter"
+                  id="filter-pending"
+                  value="pending"
+                />
+                <label class="btn btn-outline-primary" for="filter-pending">
+                  <i class="fas fa-clock me-1"></i>
+                  Pendentes
+                </label>
+
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="statusFilter"
+                  id="filter-progress"
+                  value="in_progress"
+                />
+                <label class="btn btn-outline-primary" for="filter-progress">
+                  <i class="fas fa-spinner me-1"></i>
+                  Em Andamento
+                </label>
+
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="statusFilter"
+                  id="filter-completed"
+                  value="completed"
+                />
+                <label class="btn btn-outline-primary" for="filter-completed">
+                  <i class="fas fa-check-circle me-1"></i>
+                  Concluídas
+                </label>
+              </div>
             </div>
           </div>
           <div class="col-md-4">
-            <div class="d-flex gap-2 justify-content-end">
-              <select
-                class="form-select form-select-sm"
-                data-filter="status"
-                style="width: auto"
-              >
-                <option value="all">Todos os status</option>
-                <option value="pending">Pendentes</option>
-                <option value="in_progress">Em andamento</option>
-                <option value="completed">Concluídas</option>
-              </select>
-              <select
-                class="form-select form-select-sm"
-                data-filter="priority"
-                style="width: auto"
-              >
+            <div class="filter-controls d-flex gap-2">
+              <select class="form-select form-select-sm" data-filter="priority">
                 <option value="all">Todas as prioridades</option>
-                <option value="high">Alta</option>
-                <option value="medium">Média</option>
-                <option value="low">Baixa</option>
+                <option value="high">Alta prioridade</option>
+                <option value="medium">Média prioridade</option>
+                <option value="low">Baixa prioridade</option>
               </select>
             </div>
           </div>
@@ -307,70 +227,212 @@
       </div>
     </section>
 
-    <!-- Main Content -->
-    <main class="main-content py-5">
+    <!-- Tasks Content -->
+    <main class="tasks-main py-4">
       <div class="container">
-        <div class="text-center">
-          <h2 class="display-6 fw-bold mb-4">Bem-vindo ao Flow</h2>
-          <p class="lead text-muted mb-4">
-            Gerencie suas tarefas de forma simples e eficiente. Comece criando
-            sua primeira tarefa ou explore suas tarefas existentes.
-          </p>
+        <div class="row">
+          <!-- Tasks List -->
+          <div class="col-lg-8">
+            <!-- View Toggle (without table option) -->
+            <div class="view-controls mb-4">
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="view-toggle">
+                  <div class="btn-group btn-group-sm" role="group">
+                    <input
+                      type="radio"
+                      class="btn-check"
+                      name="viewType"
+                      id="view-cards"
+                      checked
+                    />
+                    <label class="btn btn-outline-secondary" for="view-cards">
+                      <i class="fas fa-th-large"></i> Cards
+                    </label>
 
-          <div class="row justify-content-center">
-            <div class="col-md-8 col-lg-6">
-              <div class="action-cards">
-                <div class="row g-3">
-                  <div class="col-md-6">
-                    <div
-                      class="action-card text-center p-4"
-                      style="
-                        background: var(--secondary-bg);
-                        border-radius: var(--radius-lg);
-                        box-shadow: var(--shadow-sm);
-                      "
+                    <input
+                      type="radio"
+                      class="btn-check"
+                      name="viewType"
+                      id="view-list"
+                    />
+                    <label class="btn btn-outline-secondary" for="view-list">
+                      <i class="fas fa-list"></i> Lista
+                    </label>
+                  </div>
+                </div>
+
+                <div class="sort-controls">
+                  <select
+                    class="form-select form-select-sm"
+                    id="sort-tasks"
+                    style="width: auto"
+                  >
+                    <option value="dueDate">Data de vencimento</option>
+                    <option value="priority">Prioridade</option>
+                    <option value="createdAt">Data de criação</option>
+                    <option value="title">Título</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tasks Container -->
+            <div id="tasks-container" class="tasks-container">
+              <div class="loading-state text-center py-5">
+                <div class="loading-spinner"></div>
+                <p class="text-muted mt-3">Carregando tarefas...</p>
+              </div>
+            </div>
+
+            <!-- Pagination -->
+            <nav aria-label="Navegação de tarefas" class="mt-4">
+              <ul
+                class="pagination justify-content-center"
+                id="tasks-pagination"
+              >
+                <!-- Pagination will be loaded dynamically -->
+              </ul>
+            </nav>
+          </div>
+
+          <!-- Sidebar -->
+          <div class="col-lg-4">
+            <!-- Quick Stats -->
+            <div class="card mb-4">
+              <div class="card-body">
+                <h5 class="card-title">
+                  <i class="fas fa-chart-bar me-2"></i>
+                  Estatísticas
+                </h5>
+                <div class="stats-list">
+                  <div class="stat-item d-flex justify-content-between mb-2">
+                    <span class="text-muted">Total de tarefas</span>
+                    <span class="fw-bold" id="stat-total">0</span>
+                  </div>
+                  <div class="stat-item d-flex justify-content-between mb-2">
+                    <span class="text-muted">Pendentes</span>
+                    <span class="fw-bold text-warning" id="stat-pending"
+                      >0</span
                     >
-                      <i
-                        class="fas fa-plus-circle mb-3"
-                        style="font-size: 3rem; color: var(--primary-red)"
-                      ></i>
-                      <h5 class="fw-bold mb-3">Nova Tarefa</h5>
-                      <p class="text-muted mb-3">
-                        Adicione uma nova tarefa rapidamente
-                      </p>
-                      <button
-                        class="btn btn-primary-custom"
-                        data-bs-toggle="modal"
-                        data-bs-target="#newTaskModal"
+                  </div>
+                  <div class="stat-item d-flex justify-content-between mb-2">
+                    <span class="text-muted">Em andamento</span>
+                    <span class="fw-bold text-info" id="stat-progress">0</span>
+                  </div>
+                  <div class="stat-item d-flex justify-content-between">
+                    <span class="text-muted">Concluídas</span>
+                    <span class="fw-bold text-success" id="stat-completed"
+                      >0</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Priority Distribution -->
+            <div class="card mb-4">
+              <div class="card-body">
+                <h5 class="card-title">
+                  <i class="fas fa-exclamation-triangle me-2"></i>
+                  Por Prioridade
+                </h5>
+                <div class="priority-chart">
+                  <div class="priority-item mb-3">
+                    <div
+                      class="d-flex justify-content-between align-items-center mb-1"
+                    >
+                      <span class="fw-medium">Alta</span>
+                      <span class="text-danger fw-bold" id="priority-high-count"
+                        >0</span
                       >
-                        <i class="fas fa-plus me-2"></i>
-                        Criar Tarefa
-                      </button>
+                    </div>
+                    <div class="progress" style="height: 6px">
+                      <div
+                        class="progress-bar bg-danger"
+                        id="priority-high-bar"
+                        style="width: 0%"
+                      ></div>
                     </div>
                   </div>
-                  <div class="col-md-6">
+
+                  <div class="priority-item mb-3">
                     <div
-                      class="action-card text-center p-4"
-                      style="
-                        background: var(--secondary-bg);
-                        border-radius: var(--radius-lg);
-                        box-shadow: var(--shadow-sm);
-                      "
+                      class="d-flex justify-content-between align-items-center mb-1"
                     >
-                      <i
-                        class="fas fa-list-check mb-3"
-                        style="font-size: 3rem; color: var(--success-green)"
-                      ></i>
-                      <h5 class="fw-bold mb-3">Minhas Tarefas</h5>
-                      <p class="text-muted mb-3">
-                        Visualize e gerencie todas suas tarefas
-                      </p>
-                      <a href="pages/tasks.html" class="btn btn-outline-custom">
-                        <i class="fas fa-arrow-right me-2"></i>
-                        Ver Tarefas
-                      </a>
+                      <span class="fw-medium">Média</span>
+                      <span
+                        class="text-warning fw-bold"
+                        id="priority-medium-count"
+                        >0</span
+                      >
+                    </div>
+                    <div class="progress" style="height: 6px">
+                      <div
+                        class="progress-bar bg-warning"
+                        id="priority-medium-bar"
+                        style="width: 0%"
+                      ></div>
                     </div>
                   </div>
+
+                  <div class="priority-item">
+                    <div
+                      class="d-flex justify-content-between align-items-center mb-1"
+                    >
+                      <span class="fw-medium">Baixa</span>
+                      <span class="text-success fw-bold" id="priority-low-count"
+                        >0</span
+                      >
+                    </div>
+                    <div class="progress" style="height: 6px">
+                      <div
+                        class="progress-bar bg-success"
+                        id="priority-low-bar"
+                        style="width: 0%"
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">
+                  <i class="fas fa-bolt me-2"></i>
+                  Ações Rápidas
+                </h5>
+                <div class="d-grid gap-2">
+                  <button
+                    class="btn btn-primary-custom btn-sm"
+                    data-bs-toggle="modal"
+                    data-bs-target="#newTaskModal"
+                  >
+                    <i class="fas fa-plus me-2"></i>
+                    Nova Tarefa
+                  </button>
+                  <button
+                    class="btn btn-outline-secondary btn-sm"
+                    onclick="markAllCompleted()"
+                  >
+                    <i class="fas fa-check-double me-2"></i>
+                    Marcar Todas como Feitas
+                  </button>
+                  <button
+                    class="btn btn-outline-danger btn-sm"
+                    onclick="deleteCompleted()"
+                  >
+                    <i class="fas fa-trash me-2"></i>
+                    Excluir Concluídas
+                  </button>
+                  <button
+                    class="btn btn-outline-info btn-sm"
+                    onclick="exportTasks()"
+                  >
+                    <i class="fas fa-download me-2"></i>
+                    Exportar Tarefas
+                  </button>
                 </div>
               </div>
             </div>
@@ -524,14 +586,6 @@
             <ul class="list-unstyled">
               <li>
                 <a
-                  href="pages/tasks.html"
-                  class="text-decoration-none"
-                  style="color: #bdc3c7"
-                  >Tarefas</a
-                >
-              </li>
-              <li>
-                <a
                   href="landing.html"
                   class="text-decoration-none"
                   style="color: #bdc3c7"
@@ -604,13 +658,203 @@
 
     <!-- Page-specific JavaScript -->
     <script>
-      // Home page functionality - simplified
+      // Tasks page specific functionality
       document.addEventListener("DOMContentLoaded", function () {
-        // Load tasks for basic functionality
-        if (window.Flow && window.Flow.taskManager) {
-          window.Flow.taskManager.loadTasks();
-        }
+        setupTasksPage();
+        updateTasksStats();
+        setupViewToggles();
+        setupFilters();
       });
+
+      function setupTasksPage() {
+        // Setup form handlers
+        setupTaskForm();
+
+        // Setup status filter radio buttons
+        document
+          .querySelectorAll('input[name="statusFilter"]')
+          .forEach((radio) => {
+            radio.addEventListener("change", function () {
+              appState.filters.status = this.value;
+              taskManager.renderTasks();
+              updateTasksStats();
+            });
+          });
+      }
+
+      function setupTaskForm() {
+        const form = document.getElementById("task-form");
+
+        // Form submission
+        form.addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          if (validation.validateForm(form)) {
+            const formData = new FormData(form);
+            const taskData = Object.fromEntries(formData.entries());
+
+            // Process tags
+            if (taskData.tags) {
+              taskData.tags = taskData.tags
+                .split(",")
+                .map((tag) => tag.trim())
+                .filter((tag) => tag);
+            }
+
+            try {
+              await taskManager.createTask(taskData);
+              form.reset();
+              bootstrap.Modal.getInstance(
+                document.getElementById("newTaskModal"),
+              ).hide();
+              updateTasksStats();
+            } catch (error) {
+              console.error("Error creating task:", error);
+            }
+          }
+        });
+      }
+
+      function updateTasksStats() {
+        const tasks = taskManager.filterTasks();
+        const allTasks = appState.tasks || [];
+
+        // General stats
+        document.getElementById("stat-total").textContent = allTasks.length;
+        document.getElementById("stat-pending").textContent = allTasks.filter(
+          (t) => t.status === "pending",
+        ).length;
+        document.getElementById("stat-progress").textContent = allTasks.filter(
+          (t) => t.status === "in_progress",
+        ).length;
+        document.getElementById("stat-completed").textContent = allTasks.filter(
+          (t) => t.status === "completed",
+        ).length;
+
+        // Priority stats
+        const highPriority = allTasks.filter(
+          (t) => t.priority === "high",
+        ).length;
+        const mediumPriority = allTasks.filter(
+          (t) => t.priority === "medium",
+        ).length;
+        const lowPriority = allTasks.filter((t) => t.priority === "low").length;
+        const total = allTasks.length || 1; // Avoid division by zero
+
+        document.getElementById("priority-high-count").textContent =
+          highPriority;
+        document.getElementById("priority-medium-count").textContent =
+          mediumPriority;
+        document.getElementById("priority-low-count").textContent = lowPriority;
+
+        document.getElementById("priority-high-bar").style.width =
+          (highPriority / total) * 100 + "%";
+        document.getElementById("priority-medium-bar").style.width =
+          (mediumPriority / total) * 100 + "%";
+        document.getElementById("priority-low-bar").style.width =
+          (lowPriority / total) * 100 + "%";
+      }
+
+      function setupViewToggles() {
+        document.querySelectorAll('input[name="viewType"]').forEach((radio) => {
+          radio.addEventListener("change", function () {
+            const container = document.getElementById("tasks-container");
+            container.className = `tasks-container view-${this.id.replace("view-", "")}`;
+            taskManager.renderTasks();
+          });
+        });
+      }
+
+      function setupFilters() {
+        // Filter dropdowns
+        document.querySelectorAll("[data-filter]").forEach((select) => {
+          select.addEventListener("change", function () {
+            const filterType = this.dataset.filter;
+            appState.filters[filterType] = this.value;
+            taskManager.renderTasks();
+            updateTasksStats();
+          });
+        });
+
+        // Sort dropdown
+        document
+          .getElementById("sort-tasks")
+          .addEventListener("change", function () {
+            const sortBy = this.value;
+            appState.tasks.sort((a, b) => {
+              if (sortBy === "priority") {
+                const priorityOrder = { high: 3, medium: 2, low: 1 };
+                return priorityOrder[b.priority] - priorityOrder[a.priority];
+              } else if (sortBy === "dueDate") {
+                if (!a.dueDate) return 1;
+                if (!b.dueDate) return -1;
+                return new Date(a.dueDate) - new Date(b.dueDate);
+              } else if (sortBy === "createdAt") {
+                return new Date(b.createdAt) - new Date(a.createdAt);
+              } else if (sortBy === "title") {
+                return a.title.localeCompare(b.title);
+              }
+              return 0;
+            });
+            taskManager.renderTasks();
+          });
+      }
+
+      // Quick action functions
+      function markAllCompleted() {
+        if (confirm("Marcar todas as tarefas como concluídas?")) {
+          const pendingTasks = appState.tasks.filter(
+            (task) => task.status !== "completed",
+          );
+
+          pendingTasks.forEach(async (task) => {
+            await taskManager.updateTask(task.id, {
+              ...task,
+              status: "completed",
+              completedAt: new Date().toISOString(),
+            });
+          });
+
+          utils.showNotification(
+            "Todas as tarefas foram marcadas como concluídas!",
+            "success",
+          );
+        }
+      }
+
+      function deleteCompleted() {
+        if (
+          confirm(
+            "Excluir todas as tarefas concluídas? Esta ação não pode ser desfeita.",
+          )
+        ) {
+          const completedTasks = appState.tasks.filter(
+            (task) => task.status === "completed",
+          );
+
+          completedTasks.forEach(async (task) => {
+            await taskManager.deleteTask(task.id);
+          });
+
+          utils.showNotification(
+            "Tarefas concluídas foram excluídas!",
+            "success",
+          );
+        }
+      }
+
+      function exportTasks() {
+        const tasks = appState.tasks || [];
+        const dataStr = JSON.stringify(tasks, null, 2);
+        const dataBlob = new Blob([dataStr], { type: "application/json" });
+
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(dataBlob);
+        link.download = `flow-backup-${new Date().toISOString().split("T")[0]}.json`;
+        link.click();
+
+        utils.showNotification("Backup das tarefas baixado!", "success");
+      }
     </script>
   </body>
 </html>
