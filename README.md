@@ -94,7 +94,7 @@ TaskFlow é uma aplicação web responsiva de gerenciamento de tarefas inspirada
 4. **Login (pages/login.html)** - Autenticação de usuários
 5. **Cadastro (pages/register.html)** - Criação de novas contas
 
-## 🚀 Instruções de Execuç��o
+## 🚀 Instruções de Execução
 
 ### Pré-requisitos
 
@@ -122,9 +122,10 @@ npm run json-server
 
 ### Acesso
 
-- **Aplicação:** http://localhost:3000
+- **Aplicação Principal:** http://localhost:3000/index.html (Página inicial simplificada)
+- **Landing Page:** http://localhost:3000/landing.html (Página promocional)
+- **Gerenciador de Tarefas:** http://localhost:3000/pages/tasks.html
 - **API Fake:** http://localhost:3001
-- **Página Inicial:** http://localhost:3000/landing.html
 
 ### Credenciais de Teste
 
