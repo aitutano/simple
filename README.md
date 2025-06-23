@@ -88,9 +88,9 @@ Flow é uma aplicação web responsiva de gerenciamento de tarefas inspirada no 
 
 **Aplicação simplificada com foco nos requisitos essenciais:**
 
-1. **Página Inicial (landing.html)** - Landing page promocional com informações sobre o produto
-2. **Início/Home (index.html)** - Página principal simplificada com acesso rápido às funcionalidades
-3. **Gerenciador de Tarefas (pages/tasks.html)** - Lista completa de tarefas com CRUD completo
+1. **Gerenciador de Tarefas (index.html)** - Página principal com lista completa de tarefas e CRUD completo
+2. **Landing Page (landing.html)** - Página promocional com informações sobre o produto
+3. **Tarefas (pages/tasks.html)** - Redirecionamento para página principal
 4. **Login (pages/login.html)** - Autenticação de usuários
 5. **Cadastro (pages/register.html)** - Criação de novas contas
 
@@ -122,9 +122,8 @@ npm run json-server
 
 ### Acesso
 
-- **Aplicação Principal:** http://localhost:3000/index.html (Página inicial simplificada)
+- **Gerenciador de Tarefas:** http://localhost:3000/ (Página principal)
 - **Landing Page:** http://localhost:3000/landing.html (Página promocional)
-- **Gerenciador de Tarefas:** http://localhost:3000/pages/tasks.html
 - **API Fake:** http://localhost:3001
 
 ### Credenciais de Teste
