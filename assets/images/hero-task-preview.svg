@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 400" style="background: #ffffff;">
+  <!-- Phone mockup frame -->
+  <rect x="150" y="50" width="200" height="300" rx="20" fill="#f8f9fa" stroke="#dee2e6" stroke-width="2"/>
+  <rect x="160" y="70" width="180" height="260" rx="10" fill="#ffffff"/>
+  
+  <!-- Status bar -->
+  <rect x="170" y="80" width="160" height="20" fill="#ffffff"/>
+  <circle cx="180" cy="87" r="2" fill="#28a745"/>
+  <rect x="190" y="85" width="20" height="4" fill="#6c757d" rx="2"/>
+  <rect x="300" y="85" width="20" height="4" fill="#6c757d" rx="2"/>
+  
+  <!-- Header -->
+  <text x="175" y="115" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#e34432">Flow</text>
+  <text x="300" y="115" font-family="Arial, sans-serif" font-size="10" fill="#6c757d">Hoje</text>
+  
+  <!-- Task items -->
+  <!-- High priority task -->
+  <rect x="170" y="130" width="160" height="35" fill="#fff5f5" stroke="#e34432" stroke-width="1" rx="4"/>
+  <circle cx="180" cy="140" r="3" fill="none" stroke="#e34432" stroke-width="1.5"/>
+  <text x="190" y="143" font-family="Arial, sans-serif" font-size="8" fill="#212529">Finalizar projeto da faculdade</text>
+  <text x="190" y="153" font-family="Arial, sans-serif" font-size="6" fill="#6c757d">Entrega até 18:00</text>
+  <rect x="305" y="137" width="20" height="8" fill="#e34432" rx="4"/>
+  <text x="315" y="143" font-family="Arial, sans-serif" font-size="6" fill="white" text-anchor="middle">Alta</text>
+  
+  <!-- Medium priority task -->
+  <rect x="170" y="175" width="160" height="35" fill="#fff8e1" stroke="#f39c12" stroke-width="1" rx="4"/>
+  <circle cx="180" cy="185" r="3" fill="none" stroke="#f39c12" stroke-width="1.5"/>
+  <text x="190" y="188" font-family="Arial, sans-serif" font-size="8" fill="#212529">Fazer compras no supermercado</text>
+  <text x="190" y="198" font-family="Arial, sans-serif" font-size="6" fill="#6c757d">Lista: leite, pão, frutas</text>
+  <rect x="305" y="182" width="20" height="8" fill="#f39c12" rx="4"/>
+  <text x="315" y="188" font-family="Arial, sans-serif" font-size="6" fill="white" text-anchor="middle">Média</text>
+  
+  <!-- Completed task -->
+  <rect x="170" y="220" width="160" height="35" fill="#f8fff8" stroke="#28a745" stroke-width="1" rx="4"/>
+  <circle cx="180" cy="230" r="3" fill="#28a745"/>
+  <path d="M177 230 L179.5 232.5 L183 228" stroke="white" stroke-width="1" fill="none" stroke-linecap="round"/>
+  <text x="190" y="233" font-family="Arial, sans-serif" font-size="8" fill="#6c757d" text-decoration="line-through">Ler 30 páginas do livro</text>
+  <text x="190" y="243" font-family="Arial, sans-serif" font-size="6" fill="#28a745">Concluída às 14:30</text>
+  <rect x="305" y="227" width="20" height="8" fill="#28a745" rx="4"/>
+  <text x="315" y="233" font-family="Arial, sans-serif" font-size="6" fill="white" text-anchor="middle">Feita</text>
+  
+  <!-- Progress bar -->
+  <text x="175" y="275" font-family="Arial, sans-serif" font-size="8" fill="#6c757d">Progresso de hoje</text>
+  <text x="315" y="275" font-family="Arial, sans-serif" font-size="8" fill="#212529" text-anchor="end">1 de 3</text>
+  <rect x="170" y="280" width="160" height="6" fill="#e9ecef" rx="3"/>
+  <rect x="170" y="280" width="53" height="6" fill="#28a745" rx="3"/>
+  
+  <!-- Add button -->
+  <circle cx="300" cy="310" r="15" fill="#e34432"/>
+  <text x="300" y="316" font-family="Arial, sans-serif" font-size="16" fill="white" text-anchor="middle">+</text>
+  
+  <!-- Floating elements -->
+  <circle cx="50" cy="100" r="8" fill="#e34432" opacity="0.1"/>
+  <circle cx="400" cy="150" r="12" fill="#28a745" opacity="0.1"/>
+  <circle cx="80" cy="300" r="6" fill="#f39c12" opacity="0.1"/>
+  <circle cx="420" cy="300" r="10" fill="#e34432" opacity="0.1"/>
+</svg>

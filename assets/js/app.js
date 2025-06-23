@@ -1,12 +1,12 @@
-// ===== TASKFLOW APP - MAIN JAVASCRIPT =====
+// ===== FLOW APP - MAIN JAVASCRIPT =====
 
 // App Configuration
 const APP_CONFIG = {
   API_BASE_URL: "http://localhost:3001",
   STORAGE_KEYS: {
-    TASKS: "taskflow_tasks",
-    USER_PREFERENCES: "taskflow_preferences",
-    THEME: "taskflow_theme",
+    TASKS: "flow_tasks",
+    USER_PREFERENCES: "flow_preferences",
+    THEME: "flow_theme",
   },
   PRIORITY_LEVELS: {
     LOW: "low",
@@ -415,7 +415,23 @@ const taskManager = {
     if (filteredTasks.length === 0) {
       tasksContainer.innerHTML = `
         <div class="text-center py-5">
-          <img src="assets/images/no-tasks.svg" alt="Nenhuma tarefa" class="mb-3" style="width: 200px; opacity: 0.5;">
+          <picture class="image-container">
+            <source
+              media="(max-width: 576px)"
+              srcset="assets/images/no-tasks.svg"
+              type="image/svg+xml">
+            <source
+              media="(min-width: 577px)"
+              srcset="assets/images/no-tasks.svg"
+              type="image/svg+xml">
+            <img
+              src="assets/images/no-tasks.svg"
+              alt="Ilustração de uma prancheta vazia representando nenhuma tarefa encontrada"
+              class="task-illustration mb-3"
+              loading="lazy"
+              width="400"
+              height="300">
+          </picture>
           <h3 class="text-muted">Nenhuma tarefa encontrada</h3>
           <p class="text-muted">Crie sua primeira tarefa para começar!</p>
         </div>
@@ -523,7 +539,7 @@ const taskManager = {
 // ===== APP INITIALIZATION =====
 const app = {
   async init() {
-    console.log("Initializing TaskFlow App...");
+    console.log("Initializing Flow App...");
 
     // Check online status
     this.setupOnlineStatusHandlers();
@@ -540,7 +556,7 @@ const app = {
     // Setup jQuery plugins
     this.setupjQueryPlugins();
 
-    console.log("TaskFlow App initialized successfully!");
+    console.log("Flow App initialized successfully!");
   },
 
   async loadInitialData() {
@@ -739,7 +755,7 @@ window.addEventListener("unhandledrejection", (e) => {
 });
 
 // Export for use in other files
-window.TaskFlow = {
+window.Flow = {
   utils,
   storage,
   api,

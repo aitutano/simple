@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="TaskFlow - Gerenciador de tarefas inspirado no Todoist"
+      content="Flow - Gerenciador de tarefas inspirado no Todoist"
     />
     <meta
       name="keywords"
@@ -13,10 +13,15 @@
     />
     <meta name="author" content="Aluno UTFPR" />
 
-    <title>TaskFlow - Organize suas tarefas com simplicidade</title>
+    <title>Flow - Organize suas tarefas com simplicidade</title>
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico" />
+    <!-- Favicon - Optimized SVG format (ID 11) -->
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
+    <link
+      rel="alternate icon"
+      type="image/x-icon"
+      href="assets/images/favicon.ico"
+    />
 
     <!-- CSS Dependencies -->
     <link
@@ -43,6 +48,7 @@
     <!-- Custom CSS -->
     <link href="assets/css/style.css" rel="stylesheet" />
     <link href="assets/css/responsive.css" rel="stylesheet" />
+    <link href="assets/css/images.css" rel="stylesheet" />
   </head>
   <body>
     <!-- Navigation -->
@@ -67,7 +73,7 @@
             <li class="nav-item">
               <a class="nav-link active" href="index.html">
                 <i class="fas fa-home me-1"></i>
-                Dashboard
+                Início
               </a>
             </li>
             <li class="nav-item">
@@ -97,17 +103,17 @@
               </a>
               <ul class="dropdown-menu">
                 <li>
-                  <a class="dropdown-item" href="pages/profile.html">Perfil</a>
+                  <a class="dropdown-item" href="pages/login.html">Entrar</a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="#" onclick="app.toggleTheme()"
-                    >Alterar Tema</a
+                  <a class="dropdown-item" href="pages/register.html"
+                    >Cadastrar</a
                   >
                 </li>
                 <li><hr class="dropdown-divider" /></li>
                 <li>
-                  <a class="dropdown-item" href="#" onclick="app.logout()"
-                    >Sair</a
+                  <a class="dropdown-item" href="#" onclick="app.toggleTheme()"
+                    >Alterar Tema</a
                   >
                 </li>
               </ul>
@@ -140,24 +146,24 @@
                 Flow traz clareza e organização para suas tarefas diárias.
                 Inspirado no Todoist, construído para você.
               </p>
-              <div class="hero-stats mb-4">
-                <div class="row text-center">
-                  <div class="col-4">
-                    <div class="stat-card">
-                      <h3 class="fw-bold mb-0" id="total-tasks">0</h3>
-                      <small class="text-muted">Tarefas</small>
+              <div class="hero-features mb-4">
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <div class="d-flex align-items-center">
+                      <i
+                        class="fas fa-check-circle me-3"
+                        style="color: var(--success-green); font-size: 1.25rem"
+                      ></i>
+                      <span>Organize tarefas facilmente</span>
                     </div>
                   </div>
-                  <div class="col-4">
-                    <div class="stat-card">
-                      <h3 class="fw-bold mb-0" id="completed-tasks">0</h3>
-                      <small class="text-muted">Concluídas</small>
-                    </div>
-                  </div>
-                  <div class="col-4">
-                    <div class="stat-card">
-                      <h3 class="fw-bold mb-0" id="pending-tasks">0</h3>
-                      <small class="text-muted">Pendentes</small>
+                  <div class="col-md-6 mb-3">
+                    <div class="d-flex align-items-center">
+                      <i
+                        class="fas fa-mobile-alt me-3"
+                        style="color: var(--info-blue); font-size: 1.25rem"
+                      ></i>
+                      <span>Acesse de qualquer lugar</span>
                     </div>
                   </div>
                 </div>
@@ -301,164 +307,68 @@
       </div>
     </section>
 
-    <!-- Main Dashboard Content -->
-    <main class="dashboard-main py-5">
+    <!-- Main Content -->
+    <main class="main-content py-5">
       <div class="container">
-        <div class="dashboard-grid">
-          <!-- Today's Tasks -->
-          <div class="main-content">
-            <div
-              class="section-header d-flex justify-content-between align-items-center mb-4"
-            >
-              <h2>
-                <i
-                  class="fas fa-calendar-day me-2"
-                  style="color: var(--primary-red)"
-                ></i>
-                Hoje
-              </h2>
-              <div class="section-actions">
-                <button
-                  class="btn btn-sm btn-outline-primary"
-                  onclick="taskManager.loadTasks()"
-                >
-                  <i class="fas fa-sync-alt me-1"></i>
-                  Atualizar
-                </button>
-              </div>
-            </div>
+        <div class="text-center">
+          <h2 class="display-6 fw-bold mb-4">Bem-vindo ao Flow</h2>
+          <p class="lead text-muted mb-4">
+            Gerencie suas tarefas de forma simples e eficiente. Comece criando
+            sua primeira tarefa ou explore suas tarefas existentes.
+          </p>
 
-            <!-- Tasks Container using Web Components -->
-            <div id="tasks-container" class="tasks-container">
-              <div class="loading-state text-center py-5">
-                <div class="loading-spinner"></div>
-                <p class="text-muted mt-3">Carregando tarefas...</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Sidebar -->
-          <div class="sidebar-content">
-            <!-- Progress Card -->
-            <div
-              class="card mb-4"
-              style="
-                border: 1px solid var(--border-color);
-                border-radius: var(--radius-lg);
-              "
-            >
-              <div class="card-body">
-                <h5 class="card-title">
-                  <i
-                    class="fas fa-chart-line me-2"
-                    style="color: var(--success-green)"
-                  ></i>
-                  Progresso de Hoje
-                </h5>
-                <div class="progress mb-3" style="height: 10px">
-                  <div
-                    class="progress-bar"
-                    role="progressbar"
-                    style="width: 0%; background-color: var(--success-green)"
-                    id="daily-progress"
-                  ></div>
-                </div>
-                <div class="progress-stats">
-                  <div class="d-flex justify-content-between">
-                    <small class="text-muted">Concluídas</small>
-                    <small class="fw-bold" id="progress-text">0 de 0</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Recent Activity -->
-            <div
-              class="card mb-4"
-              style="
-                border: 1px solid var(--border-color);
-                border-radius: var(--radius-lg);
-              "
-            >
-              <div class="card-body">
-                <div
-                  class="d-flex justify-content-between align-items-center mb-3"
-                >
-                  <h5 class="card-title mb-0">
-                    <i
-                      class="fas fa-clock me-2"
-                      style="color: var(--info-blue)"
-                    ></i>
-                    Atividade Recente
-                  </h5>
-                  <a
-                    href="pages/tasks.html"
-                    class="btn btn-sm btn-outline-primary"
-                    >Ver todas</a
-                  >
-                </div>
-                <div id="recent-activity">
-                  <div class="loading-state">
+          <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+              <div class="action-cards">
+                <div class="row g-3">
+                  <div class="col-md-6">
                     <div
-                      class="skeleton"
+                      class="action-card text-center p-4"
                       style="
-                        height: 20px;
-                        border-radius: 4px;
-                        margin-bottom: 8px;
+                        background: var(--secondary-bg);
+                        border-radius: var(--radius-lg);
+                        box-shadow: var(--shadow-sm);
                       "
-                    ></div>
-                    <div
-                      class="skeleton"
-                      style="
-                        height: 20px;
-                        border-radius: 4px;
-                        margin-bottom: 8px;
-                      "
-                    ></div>
-                    <div
-                      class="skeleton"
-                      style="height: 20px; border-radius: 4px"
-                    ></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Quick Stats -->
-            <div
-              class="card"
-              style="
-                border: 1px solid var(--border-color);
-                border-radius: var(--radius-lg);
-              "
-            >
-              <div class="card-body">
-                <h5 class="card-title">
-                  <i
-                    class="fas fa-chart-pie me-2"
-                    style="color: var(--warning-orange)"
-                  ></i>
-                  Estatísticas
-                </h5>
-                <div class="stats-grid">
-                  <div class="stat-item mb-3">
-                    <div class="d-flex justify-content-between">
-                      <span class="text-muted">Esta semana</span>
-                      <span class="fw-bold" id="week-completed">0</span>
-                    </div>
-                  </div>
-                  <div class="stat-item mb-3">
-                    <div class="d-flex justify-content-between">
-                      <span class="text-muted">Este mês</span>
-                      <span class="fw-bold" id="month-completed">0</span>
-                    </div>
-                  </div>
-                  <div class="stat-item">
-                    <div class="d-flex justify-content-between">
-                      <span class="text-muted">Produtividade</span>
-                      <span class="fw-bold text-success" id="productivity-score"
-                        >0%</span
+                    >
+                      <i
+                        class="fas fa-plus-circle mb-3"
+                        style="font-size: 3rem; color: var(--primary-red)"
+                      ></i>
+                      <h5 class="fw-bold mb-3">Nova Tarefa</h5>
+                      <p class="text-muted mb-3">
+                        Adicione uma nova tarefa rapidamente
+                      </p>
+                      <button
+                        class="btn btn-primary-custom"
+                        data-bs-toggle="modal"
+                        data-bs-target="#newTaskModal"
                       >
+                        <i class="fas fa-plus me-2"></i>
+                        Criar Tarefa
+                      </button>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div
+                      class="action-card text-center p-4"
+                      style="
+                        background: var(--secondary-bg);
+                        border-radius: var(--radius-lg);
+                        box-shadow: var(--shadow-sm);
+                      "
+                    >
+                      <i
+                        class="fas fa-list-check mb-3"
+                        style="font-size: 3rem; color: var(--success-green)"
+                      ></i>
+                      <h5 class="fw-bold mb-3">Minhas Tarefas</h5>
+                      <p class="text-muted mb-3">
+                        Visualize e gerencie todas suas tarefas
+                      </p>
+                      <a href="pages/tasks.html" class="btn btn-outline-custom">
+                        <i class="fas fa-arrow-right me-2"></i>
+                        Ver Tarefas
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -587,8 +497,9 @@
     <footer
       class="footer py-4 mt-5"
       style="
-        background: var(--accent-bg);
+        background: #2c3e50;
         border-top: 1px solid var(--border-color);
+        color: #ffffff;
       "
     >
       <div class="container">
@@ -602,7 +513,7 @@
                 ></i>
                 Flow
               </h5>
-              <p class="text-muted">
+              <p style="color: #bdc3c7">
                 Organize suas tarefas com simplicidade e eficiência. Inspirado
                 no Todoist, desenvolvido para fins acadêmicos.
               </p>
@@ -614,34 +525,40 @@
               <li>
                 <a
                   href="pages/tasks.html"
-                  class="text-muted text-decoration-none"
+                  class="text-decoration-none"
+                  style="color: #bdc3c7"
                   >Tarefas</a
                 >
               </li>
               <li>
-                <a href="landing.html" class="text-muted text-decoration-none"
+                <a
+                  href="landing.html"
+                  class="text-decoration-none"
+                  style="color: #bdc3c7"
                   >Página Inicial</a
                 >
               </li>
               <li>
-                <a href="#" class="text-muted text-decoration-none">Ajuda</a>
+                <a href="#" class="text-decoration-none" style="color: #bdc3c7"
+                  >Ajuda</a
+                >
               </li>
             </ul>
           </div>
           <div class="col-md-3">
             <h6 class="fw-bold mb-3">Tecnologias</h6>
             <ul class="list-unstyled">
-              <li class="text-muted">Bootstrap 5</li>
-              <li class="text-muted">Lit Web Components</li>
-              <li class="text-muted">jQuery</li>
-              <li class="text-muted">JSON Server</li>
+              <li style="color: #bdc3c7">Bootstrap 5</li>
+              <li style="color: #bdc3c7">jQuery</li>
+              <li style="color: #bdc3c7">JSON Server</li>
+              <li style="color: #bdc3c7">Web Storage</li>
             </ul>
           </div>
         </div>
         <hr style="border-color: var(--border-color)" />
         <div class="row align-items-center">
           <div class="col-md-6">
-            <p class="text-muted mb-0">
+            <p class="mb-0" style="color: #bdc3c7">
               &copy; 2025 Flow. Projeto acadêmico - UTFPR.
             </p>
           </div>
@@ -680,309 +597,20 @@
 
     <!-- Web Components -->
     <script type="module" src="components/task-item.js"></script>
-    <script type="module" src="components/project-card.js"></script>
 
     <!-- Custom JavaScript -->
     <script src="assets/js/app.js"></script>
+    <script src="assets/js/image-optimization.js"></script>
 
     <!-- Page-specific JavaScript -->
     <script>
-      // Dashboard-specific functionality
+      // Home page functionality - simplified
       document.addEventListener("DOMContentLoaded", function () {
-        // Update dashboard stats
-        updateDashboardStats();
-
-        // Load recent activity
-        loadRecentActivity();
-
-        // Setup quick task form
-        setupQuickTaskForm();
-
-        // Update progress bar
-        updateProgressBar();
-
-        // Setup Web Component event listeners
-        setupWebComponentListeners();
+        // Load tasks for basic functionality
+        if (window.Flow && window.Flow.taskManager) {
+          window.Flow.taskManager.loadTasks();
+        }
       });
-
-      function setupWebComponentListeners() {
-        // Listen for task events from Web Components
-        document.addEventListener("task-toggle", async (e) => {
-          const { taskId, newStatus, completedAt } = e.detail;
-          const task = appState.tasks.find((t) => t.id === taskId);
-          if (task) {
-            await taskManager.updateTask(taskId, {
-              ...task,
-              status: newStatus,
-              completedAt: completedAt,
-            });
-            updateDashboardStats();
-            updateProgressBar();
-          }
-        });
-
-        document.addEventListener("task-edit", (e) => {
-          const { taskId } = e.detail;
-          taskManager.editTask(taskId);
-        });
-
-        document.addEventListener("task-delete", async (e) => {
-          const { taskId } = e.detail;
-          if (confirm("Tem certeza que deseja excluir esta tarefa?")) {
-            await taskManager.deleteTask(taskId);
-            updateDashboardStats();
-            updateProgressBar();
-          }
-        });
-
-        // Listen for project events
-        document.addEventListener("project-view-tasks", (e) => {
-          const { projectId } = e.detail;
-          window.location.href = `pages/tasks.html?project=${projectId}`;
-        });
-
-        document.addEventListener("project-add-task", (e) => {
-          const { projectId } = e.detail;
-          localStorage.setItem("selectedProjectId", projectId);
-          window.location.href = "pages/tasks.html#new-task";
-        });
-      }
-
-      async function updateDashboardStats() {
-        try {
-          const tasks = appState.tasks || [];
-          const completedTasks = tasks.filter(
-            (task) => task.status === "completed",
-          );
-          const pendingTasks = tasks.filter(
-            (task) => task.status === "pending",
-          );
-
-          document.getElementById("total-tasks").textContent = tasks.length;
-          document.getElementById("completed-tasks").textContent =
-            completedTasks.length;
-          document.getElementById("pending-tasks").textContent =
-            pendingTasks.length;
-
-          // Calculate productivity score
-          const productivityScore =
-            tasks.length > 0
-              ? Math.round((completedTasks.length / tasks.length) * 100)
-              : 0;
-          document.getElementById("productivity-score").textContent =
-            productivityScore + "%";
-
-          // Update weekly and monthly stats
-          const now = new Date();
-          const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
-          const monthAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
-
-          const weekCompleted = completedTasks.filter(
-            (task) => task.completedAt && new Date(task.completedAt) >= weekAgo,
-          ).length;
-
-          const monthCompleted = completedTasks.filter(
-            (task) =>
-              task.completedAt && new Date(task.completedAt) >= monthAgo,
-          ).length;
-
-          document.getElementById("week-completed").textContent = weekCompleted;
-          document.getElementById("month-completed").textContent =
-            monthCompleted;
-        } catch (error) {
-          console.error("Error updating dashboard stats:", error);
-        }
-      }
-
-      function loadRecentActivity() {
-        const container = document.getElementById("recent-activity");
-        const tasks = appState.tasks || [];
-
-        // Get recently completed or modified tasks
-        const recentTasks = tasks
-          .filter((task) => task.completedAt || task.createdAt)
-          .sort((a, b) => {
-            const dateA = new Date(task.completedAt || task.createdAt);
-            const dateB = new Date(task.completedAt || task.createdAt);
-            return dateB - dateA;
-          })
-          .slice(0, 3);
-
-        if (recentTasks.length === 0) {
-          container.innerHTML =
-            '<p class="text-muted text-center">Nenhuma atividade recente</p>';
-          return;
-        }
-
-        container.innerHTML = recentTasks
-          .map((task) => {
-            const isCompleted = task.status === "completed";
-            const actionDate = isCompleted ? task.completedAt : task.createdAt;
-            const actionText = isCompleted ? "Concluída" : "Criada";
-
-            return `
-                    <div class="d-flex justify-content-between align-items-center mb-2">
-                        <div class="d-flex align-items-center">
-                            <i class="fas ${isCompleted ? "fa-check-circle text-success" : "fa-plus-circle text-primary"} me-2"></i>
-                            <span class="fw-medium">${task.title}</span>
-                        </div>
-                        <small class="text-muted">${actionText}</small>
-                    </div>
-                `;
-          })
-          .join("");
-      }
-
-      function setupQuickTaskForm() {
-        const form = document.getElementById("quick-task-form");
-        if (form) {
-          form.addEventListener("submit", async (e) => {
-            e.preventDefault();
-
-            const formData = new FormData(form);
-            const title = formData.get("title").trim();
-
-            if (title) {
-              try {
-                // Parse quick task with natural language processing
-                const taskData = parseQuickTask(title);
-
-                await taskManager.createTask(taskData);
-
-                form.reset();
-                updateDashboardStats();
-                updateProgressBar();
-                renderTodayTasks();
-              } catch (error) {
-                console.error("Error creating quick task:", error);
-              }
-            }
-          });
-        }
-      }
-
-      function parseQuickTask(title) {
-        // Basic natural language processing for quick tasks
-        let taskData = {
-          title: title,
-          description: "",
-          priority: "medium",
-          projectId: null,
-          dueDate: null,
-          tags: [],
-        };
-
-        // Extract tags (#tag)
-        const tagMatches = title.match(/#(\w+)/g);
-        if (tagMatches) {
-          taskData.tags = tagMatches.map((tag) => tag.substring(1));
-          taskData.title = title.replace(/#\w+/g, "").trim();
-        }
-
-        // Extract priority indicators
-        if (title.includes("!!") || title.toLowerCase().includes("urgente")) {
-          taskData.priority = "high";
-        } else if (title.includes("!")) {
-          taskData.priority = "medium";
-        }
-
-        // Extract time indicators
-        const timePattern = /às?\s(\d{1,2}):?(\d{2})?h?/i;
-        const timeMatch = title.match(timePattern);
-        if (timeMatch) {
-          const today = new Date();
-          today.setHours(
-            parseInt(timeMatch[1]),
-            parseInt(timeMatch[2] || "0"),
-            0,
-            0,
-          );
-          taskData.dueDate = today.toISOString().split("T")[0];
-        }
-
-        return taskData;
-      }
-
-      function updateProgressBar() {
-        const tasks = appState.tasks || [];
-        const todayTasks = tasks.filter((task) => {
-          if (!task.dueDate) return false;
-          const today = new Date().toDateString();
-          const taskDate = new Date(task.dueDate).toDateString();
-          return today === taskDate;
-        });
-
-        const completedToday = todayTasks.filter(
-          (task) => task.status === "completed",
-        );
-        const progress =
-          todayTasks.length > 0
-            ? (completedToday.length / todayTasks.length) * 100
-            : 0;
-
-        const progressBar = document.getElementById("daily-progress");
-        const progressText = document.getElementById("progress-text");
-
-        if (progressBar) {
-          progressBar.style.width = progress + "%";
-        }
-
-        if (progressText) {
-          progressText.textContent = `${completedToday.length} de ${todayTasks.length}`;
-        }
-      }
-
-      function renderTodayTasks() {
-        const container = document.getElementById("tasks-container");
-        const tasks = appState.tasks || [];
-
-        // Filter today's tasks
-        const todayTasks = tasks.filter((task) => {
-          if (!task.dueDate) return false;
-          const today = new Date().toDateString();
-          const taskDate = new Date(task.dueDate).toDateString();
-          return today === taskDate;
-        });
-
-        if (todayTasks.length === 0) {
-          container.innerHTML = `
-                    <div class="text-center py-5">
-                        <i class="fas fa-calendar-check" style="font-size: 4rem; color: var(--border-color);"></i>
-                        <h3 class="text-muted mt-3">Nenhuma tarefa para hoje</h3>
-                        <p class="text-muted">Que tal criar uma nova tarefa?</p>
-                        <button class="btn btn-primary-custom" data-bs-toggle="modal" data-bs-target="#newTaskModal">
-                            <i class="fas fa-plus me-2"></i>
-                            Criar Tarefa
-                        </button>
-                    </div>
-                `;
-          return;
-        }
-
-        // Render tasks using Web Components
-        container.innerHTML = todayTasks
-          .map((task) => {
-            const project = appState.projects.find(
-              (p) => p.id === task.projectId,
-            );
-            return `
-                    <task-item
-                        .task='${JSON.stringify(task)}'
-                        .project='${JSON.stringify(project)}'
-                        editable="true">
-                    </task-item>
-                `;
-          })
-          .join("");
-      }
-
-      // Override taskManager.renderTasks to use Web Components
-      if (window.TaskFlow && window.TaskFlow.taskManager) {
-        const originalRenderTasks = window.TaskFlow.taskManager.renderTasks;
-        window.TaskFlow.taskManager.renderTasks = function () {
-          renderTodayTasks();
-        };
-      }
     </script>
   </body>
 </html>

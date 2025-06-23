@@ -1,4 +1,4 @@
-/* ===== DESIGN SYSTEM - TaskFlow ===== */
+/* ===== DESIGN SYSTEM - Flow ===== */
 :root {
   /* Colors - Inspired by Todoist */
   --primary-bg: rgb(254, 253, 252);
@@ -275,6 +275,89 @@ a:hover {
 .status-completed {
   background: rgba(76, 122, 69, 0.1);
   color: var(--success-green);
+}
+
+/* ===== RESPONSIVE IMAGES (ID 10) ===== */
+.responsive-image {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  transition: transform 0.3s ease;
+}
+
+.responsive-image:hover {
+  transform: scale(1.02);
+}
+
+.image-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.image-container--square {
+  aspect-ratio: 1;
+}
+
+.image-container--landscape {
+  aspect-ratio: 16/9;
+}
+
+.image-container--portrait {
+  aspect-ratio: 3/4;
+}
+
+.hero-image {
+  width: min(90vw, 500px);
+  height: auto;
+  max-height: 70vh;
+  object-fit: contain;
+  margin: 0 auto;
+  display: block;
+}
+
+.task-illustration {
+  width: clamp(200px, 40vw, 400px);
+  height: auto;
+  object-fit: contain;
+  opacity: 0.5;
+  filter: grayscale(20%);
+}
+
+.avatar-image {
+  width: clamp(2rem, 5vw, 3rem);
+  height: clamp(2rem, 5vw, 3rem);
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid var(--border-color);
+}
+
+.demo-screenshot {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  object-fit: cover;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Image loading states */
+.image-loading {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }
 
 /* ===== FORMS ===== */

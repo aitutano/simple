@@ -65,11 +65,8 @@ small {
 }
 
 /* ===== RESPONSIVE GRID LAYOUTS (ID 01, ID 02) ===== */
-/* CSS Grid for complex layouts */
-.dashboard-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: clamp(1rem, 3vw, 2rem);
+/* CSS Grid for complex layouts - simplified */
+.main-content {
   margin: clamp(1rem, 3vw, 2rem) 0;
 }
 
