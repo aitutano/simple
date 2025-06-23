@@ -307,7 +307,8 @@ img {
 
 /* ===== VIEW-SPECIFIC RESPONSIVE STYLES ===== */
 
-/* Cards view */
+/* Default cards view - list view removed */
+.tasks-container,
 .view-cards .tasks-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -315,26 +316,11 @@ img {
 }
 
 @media (max-width: 768px) {
+  .tasks-container,
   .view-cards .tasks-container {
     grid-template-columns: 1fr;
     gap: 1rem;
   }
-}
-
-/* List view */
-.view-list .task-card {
-  display: flex;
-  align-items: center;
-  padding: 1rem 1.5rem;
-}
-
-.view-list .task-content {
-  flex: 1;
-}
-
-.view-list .task-actions {
-  opacity: 1;
-  margin-left: 1rem;
 }
 
 /* Table view - REMOVED from interface */
