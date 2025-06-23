@@ -53,7 +53,7 @@ Flow é uma aplicação web responsiva de gerenciamento de tarefas inspirada no 
 - [ ] **ID 08** - Implementa pré-processadores CSS (Sass)
 - [x] **ID 09** - Aplica tipografia responsiva com media queries/clamp()
 - [x] **ID 10** - Aplica técnicas de responsividade de imagens
-- [ ] **ID 11** - Otimiza imagens com formatos modernos (WebP)
+- [x] **ID 11** - Otimiza imagens com formatos modernos (WebP)
 
 ### RA2 - Realizar tratamento de formulários e aplicar validações
 
@@ -147,7 +147,7 @@ task-manager-app/
 │   │   ├── style.css        # Estilos principais
 │   │   └── responsive.css   # Estilos responsivos
 │   └── js/
-��       └── app.js           # JavaScript principal
+│       └── app.js           # JavaScript principal
 ├── components/
 │   └── task-item.js         # Web Component para tarefas
 ├── pages/
