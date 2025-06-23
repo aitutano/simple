@@ -1,0 +1,80 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "title": "Revisar documentação do projeto",
+      "description": "Verificar se toda a documentação está atualizada e completa",
+      "priority": "high",
+      "status": "pending",
+      "projectId": 1,
+      "dueDate": "2024-01-15",
+      "createdAt": "2024-01-10T10:00:00Z",
+      "completedAt": null,
+      "tags": ["trabalho", "urgente"]
+    },
+    {
+      "id": 2,
+      "title": "Fazer compras no supermercado",
+      "description": "Leite, pão, frutas e verduras para a semana",
+      "priority": "medium",
+      "status": "completed",
+      "projectId": 2,
+      "dueDate": "2024-01-12",
+      "createdAt": "2024-01-11T14:30:00Z",
+      "completedAt": "2024-01-12T16:45:00Z",
+      "tags": ["pessoal", "casa"]
+    },
+    {
+      "id": 3,
+      "title": "Estudar para prova de matemática",
+      "description": "Revisar capítulos 5-8 do livro de cálculo",
+      "priority": "high",
+      "status": "in_progress",
+      "projectId": 3,
+      "dueDate": "2024-01-20",
+      "createdAt": "2024-01-13T09:15:00Z",
+      "completedAt": null,
+      "tags": ["estudos", "faculdade"]
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "name": "Projeto Trabalho",
+      "description": "Tarefas relacionadas ao trabalho e carreira",
+      "color": "#e74c3c",
+      "createdAt": "2024-01-01T00:00:00Z",
+      "tasksCount": 1
+    },
+    {
+      "id": 2,
+      "name": "Vida Pessoal",
+      "description": "Tarefas do dia a dia e cuidados pessoais",
+      "color": "#3498db",
+      "createdAt": "2024-01-01T00:00:00Z",
+      "tasksCount": 1
+    },
+    {
+      "id": 3,
+      "name": "Estudos",
+      "description": "Atividades acadêmicas e aprendizado",
+      "color": "#27ae60",
+      "createdAt": "2024-01-01T00:00:00Z",
+      "tasksCount": 1
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "Usuário Demo",
+      "email": "demo@taskflow.com",
+      "avatar": "https://via.placeholder.com/150",
+      "preferences": {
+        "theme": "light",
+        "notifications": true,
+        "language": "pt-BR"
+      },
+      "createdAt": "2024-01-01T00:00:00Z"
+    }
+  ]
+}
