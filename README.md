@@ -9,11 +9,11 @@
 
 ## 📝 Descrição do Projeto
 
-TaskFlow é uma aplicação web responsiva de gerenciamento de tarefas inspirada no design e funcionalidades do Todoist. O projeto permite aos usuários organizar suas tarefas diárias, criar projetos, definir prioridades e acompanhar o progresso das atividades de forma intuitiva e eficiente.
+TaskFlow é uma aplicação web responsiva de gerenciamento de tarefas inspirada no design e funcionalidades do Todoist. O projeto permite aos usuários organizar suas tarefas diárias, definir prioridades e acompanhar o progresso das atividades de forma intuitiva e eficiente.
 
 ### Tema e Escopo
 
-- **Tema:** Gerenciamento pessoal de tarefas e projetos
+- **Tema:** Gerenciamento pessoal de tarefas
 - **Escopo:** Aplicação para uso pessoal com cadastro, listagem, edição e exclusão de tarefas
 - **Inspiração:** [Todoist](https://todoist.com) - Design e experiência do usuário
 
@@ -31,7 +31,6 @@ TaskFlow é uma aplicação web responsiva de gerenciamento de tarefas inspirada
   - jQuery 3.7.1
   - jQuery Mask Plugin
   - Animate.css
-  - Chart.js (para dashboards)
 - **API Fake:** JSON Server
 - **Persistência:** Web Storage (localStorage/sessionStorage)
 
@@ -87,10 +86,11 @@ TaskFlow é uma aplicação web responsiva de gerenciamento de tarefas inspirada
 
 ## 📱 Páginas da Aplicação
 
-1. **Home/Dashboard** - Visão geral das tarefas e estatísticas
-2. **Tarefas** - Lista completa de tarefas com filtros
-3. **Projetos** - Gerenciamento de projetos e categorias
-4. **Configurações** - Perfil do usuário e preferências
+1. **Landing Page (landing.html)** - Página inicial promocional com informações sobre o produto
+2. **Login (pages/login.html)** - Autenticação de usuários
+3. **Registro (pages/register.html)** - Criação de novas contas
+4. **Dashboard (index.html)** - Visão geral das tarefas e estatísticas
+5. **Tarefas (pages/tasks.html)** - Lista completa de tarefas com filtros
 
 ## 🚀 Instruções de Execução
 
@@ -122,6 +122,12 @@ npm run json-server
 
 - **Aplicação:** http://localhost:3000
 - **API Fake:** http://localhost:3001
+- **Página Inicial:** http://localhost:3000/landing.html
+
+### Credenciais de Teste
+
+- **E-mail:** demo@taskflow.com
+- **Senha:** demo123
 
 ## 📸 Telas da Aplicação
 
@@ -132,18 +138,90 @@ npm run json-server
 ```
 task-manager-app/
 ├── api/
-│   └── db.json
+│   └── db.json              # Banco de dados fake (JSON Server)
 ├── assets/
 │   ├── css/
-│   ├── js/
-│   └── images/
+│   │   ├── style.css        # Estilos principais
+│   │   └── responsive.css   # Estilos responsivos
+│   └── js/
+│       └── app.js           # JavaScript principal
 ├── components/
+│   └── task-item.js         # Web Component para tarefas
 ├── pages/
-├── index.html
-├── package.json
-└── README.md
+│   ├── login.html           # Página de login
+│   ├── register.html        # Página de registro
+│   └── tasks.html           # Página de tarefas
+├── landing.html             # Landing page principal
+├── index.html               # Dashboard (app principal)
+├── package.json             # Dependências e scripts
+└── README.md                # Documentação
 ```
+
+## 🎯 Funcionalidades Principais
+
+### 🔐 Autenticação
+
+- Login com validação
+- Registro de usuários com formulário em etapas
+- Recuperação de senha
+- Sessão persistente
+
+### 📋 Gerenciamento de Tarefas
+
+- Criar, editar e excluir tarefas
+- Definir prioridades (Alta, Média, Baixa)
+- Status (Pendente, Em andamento, Concluída)
+- Datas de vencimento
+- Tags para organização
+- Filtros avançados
+- Busca em tempo real
+
+### 📊 Dashboard e Estatísticas
+
+- Visão geral do progresso
+- Estatísticas de produtividade
+- Atividade recente
+- Progresso diário
+
+### 🎨 Interface e UX
+
+- Design inspirado no Todoist
+- Totalmente responsivo
+- Animações suaves
+- Modo offline com sincronização
+- Tema claro/escuro
+- Acessibilidade (ARIA)
+
+## 🔧 Recursos Técnicos
+
+### Framework CSS
+
+- Bootstrap 5.3 para componentes base
+- CSS Grid e Flexbox para layouts
+- Variáveis CSS para consistência
+- Media queries para responsividade
+
+### JavaScript Moderno
+
+- ES6+ features
+- Web Components com Lit
+- Async/await para APIs
+- Local Storage para persistência
+- Validação em tempo real
+
+### Performance
+
+- Lazy loading de componentes
+- Debounce em buscas
+- Minificação de assets
+- Otimização de imagens
 
 ## 📄 Licença
 
 Este projeto foi desenvolvido para fins acadêmicos.
+
+---
+
+**Inspiração:** [Todoist](https://todoist.com) - Design e funcionalidades  
+**Desenvolvimento:** Projeto acadêmico individual  
+**Tecnologias:** HTML5, CSS3, JavaScript ES6+, Bootstrap 5, Web Components
