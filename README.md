@@ -145,9 +145,15 @@ task-manager-app/
 ├── assets/
 │   ├── css/
 │   │   ├── style.css        # Estilos principais
-│   │   └── responsive.css   # Estilos responsivos
+│   │   ├── responsive.css   # Estilos responsivos
+│   │   └── images.css       # Otimizações de imagem
+│   ├── images/
+│   │   ├── favicon.svg      # Favicon otimizado
+│   │   ├── hero-task-preview.svg  # Imagem hero responsiva
+│   │   └── no-tasks.svg     # Ilustração estado vazio
 │   └── js/
-│       └── app.js           # JavaScript principal
+│       ├── app.js           # JavaScript principal
+│       └── image-optimization.js  # Otimização de imagens
 ├── components/
 │   └── task-item.js         # Web Component para tarefas
 ├── pages/
@@ -155,7 +161,7 @@ task-manager-app/
 │   ├── register.html        # Página de registro
 │   └── tasks.html           # Página de tarefas
 ├── landing.html             # Landing page principal
-├── index.html               # Dashboard (app principal)
+├── index.html               # Página inicial (app principal)
 ├── package.json             # Dependências e scripts
 └── README.md                # Documentação
 ```
@@ -211,12 +217,16 @@ task-manager-app/
 - Local Storage para persistência
 - Validação em tempo real
 
-### Performance
+### Performance & Otimização de Imagens
 
-- Lazy loading de componentes
+- **Lazy loading** de imagens com Intersection Observer
+- **Imagens responsivas** com picture element e srcset
+- **Formatos otimizados** SVG com fallbacks
+- **Object-fit e containers** com unidades relativas
+- **Detecção de WebP** automática
+- **High DPI support** para displays Retina
 - Debounce em buscas
-- Minificação de assets
-- Otimização de imagens
+- Otimização de assets
 
 ## 📄 Licença
 
