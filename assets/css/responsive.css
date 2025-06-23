@@ -337,7 +337,8 @@ img {
   margin-left: 1rem;
 }
 
-/* Table view */
+/* Table view - REMOVED from interface */
+/*
 .view-table {
   overflow-x: auto;
 }
@@ -352,6 +353,7 @@ img {
     min-width: 600px;
   }
 }
+*/
 
 /* ===== RESPONSIVE UTILITIES ===== */
 
