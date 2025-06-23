@@ -2,15 +2,14 @@
   "tasks": [
     {
       "id": 1,
-      "title": "Revisar documentação do projeto",
-      "description": "Verificar se toda a documentação está atualizada e completa",
+      "title": "Revisar documentação do projeto acadêmico",
+      "description": "Verificar se toda a documentação está atualizada e completa para entrega",
       "priority": "high",
       "status": "pending",
-      "projectId": 1,
       "dueDate": "2024-01-15",
       "createdAt": "2024-01-10T10:00:00Z",
       "completedAt": null,
-      "tags": ["trabalho", "urgente"]
+      "tags": ["trabalho", "urgente", "faculdade"]
     },
     {
       "id": 2,
@@ -18,7 +17,6 @@
       "description": "Leite, pão, frutas e verduras para a semana",
       "priority": "medium",
       "status": "completed",
-      "projectId": 2,
       "dueDate": "2024-01-12",
       "createdAt": "2024-01-11T14:30:00Z",
       "completedAt": "2024-01-12T16:45:00Z",
@@ -27,40 +25,46 @@
     {
       "id": 3,
       "title": "Estudar para prova de matemática",
-      "description": "Revisar capítulos 5-8 do livro de cálculo",
+      "description": "Revisar capítulos 5-8 do livro de cálculo diferencial",
       "priority": "high",
       "status": "in_progress",
-      "projectId": 3,
       "dueDate": "2024-01-20",
       "createdAt": "2024-01-13T09:15:00Z",
       "completedAt": null,
-      "tags": ["estudos", "faculdade"]
-    }
-  ],
-  "projects": [
-    {
-      "id": 1,
-      "name": "Projeto Trabalho",
-      "description": "Tarefas relacionadas ao trabalho e carreira",
-      "color": "#e74c3c",
-      "createdAt": "2024-01-01T00:00:00Z",
-      "tasksCount": 1
+      "tags": ["estudos", "faculdade", "matematica"]
     },
     {
-      "id": 2,
-      "name": "Vida Pessoal",
-      "description": "Tarefas do dia a dia e cuidados pessoais",
-      "color": "#3498db",
-      "createdAt": "2024-01-01T00:00:00Z",
-      "tasksCount": 1
+      "id": 4,
+      "title": "Exercícios físicos - caminhada",
+      "description": "Caminhada de 30 minutos no parque",
+      "priority": "low",
+      "status": "pending",
+      "dueDate": "2024-01-14",
+      "createdAt": "2024-01-13T18:00:00Z",
+      "completedAt": null,
+      "tags": ["saude", "exercicio"]
     },
     {
-      "id": 3,
-      "name": "Estudos",
-      "description": "Atividades acadêmicas e aprendizado",
-      "color": "#27ae60",
-      "createdAt": "2024-01-01T00:00:00Z",
-      "tasksCount": 1
+      "id": 5,
+      "title": "Preparar apresentação para reunião",
+      "description": "Criar slides e ensaiar apresentação de 15 minutos",
+      "priority": "medium",
+      "status": "pending",
+      "dueDate": "2024-01-16",
+      "createdAt": "2024-01-13T20:30:00Z",
+      "completedAt": null,
+      "tags": ["trabalho", "apresentacao"]
+    },
+    {
+      "id": 6,
+      "title": "Ler capítulo do livro",
+      "description": "Ler capítulo 3 do livro 'Produtividade Pessoal'",
+      "priority": "low",
+      "status": "completed",
+      "dueDate": "2024-01-13",
+      "createdAt": "2024-01-12T19:00:00Z",
+      "completedAt": "2024-01-13T21:30:00Z",
+      "tags": ["leitura", "desenvolvimento"]
     }
   ],
   "users": [
