@@ -1,84 +1,78 @@
 {
   "tasks": [
     {
-      "id": 1,
-      "title": "Revisar documentação do projeto acadêmico",
-      "description": "Verificar se toda a documentação está atualizada e completa para entrega",
-      "priority": "high",
-      "status": "pending",
-      "dueDate": "2024-01-15",
-      "createdAt": "2024-01-10T10:00:00Z",
-      "completedAt": null,
-      "tags": ["trabalho", "urgente", "faculdade"]
+      "tarefaId": 1,
+      "titulo": "Revisar documentação do projeto acadêmico",
+      "descricao": "Verificar se toda a documentação está atualizada e completa para entrega",
+      "categoria": "Trabalho",
+      "dataCriacao": "2024-01-10T10:00:00Z",
+      "dataConclusao": null,
+      "prazo": "2024-01-15",
+      "prioridade": "Alta",
+      "status": "Pendente"
     },
     {
-      "id": 2,
-      "title": "Fazer compras no supermercado",
-      "description": "Leite, pão, frutas e verduras para a semana",
-      "priority": "medium",
-      "status": "completed",
-      "dueDate": "2024-01-12",
-      "createdAt": "2024-01-11T14:30:00Z",
-      "completedAt": "2024-01-12T16:45:00Z",
-      "tags": ["pessoal", "casa"]
+      "tarefaId": 2,
+      "titulo": "Fazer compras no supermercado",
+      "descricao": "Leite, pão, frutas e verduras para a semana",
+      "categoria": "Pessoal",
+      "dataCriacao": "2024-01-11T14:30:00Z",
+      "dataConclusao": "2024-01-12T16:45:00Z",
+      "prazo": "2024-01-12",
+      "prioridade": "Média",
+      "status": "Concluída"
     },
     {
-      "id": 3,
-      "title": "Estudar para prova de matemática",
-      "description": "Revisar capítulos 5-8 do livro de cálculo diferencial",
-      "priority": "high",
-      "status": "in_progress",
-      "dueDate": "2024-01-20",
-      "createdAt": "2024-01-13T09:15:00Z",
-      "completedAt": null,
-      "tags": ["estudos", "faculdade", "matematica"]
+      "tarefaId": 3,
+      "titulo": "Estudar para prova de matemática",
+      "descricao": "Revisar capítulos 5-8 do livro de cálculo diferencial",
+      "categoria": "Estudos",
+      "dataCriacao": "2024-01-13T09:15:00Z",
+      "dataConclusao": null,
+      "prazo": "2024-01-20",
+      "prioridade": "Alta",
+      "status": "Pendente"
     },
     {
-      "id": 4,
-      "title": "Exercícios físicos - caminhada",
-      "description": "Caminhada de 30 minutos no parque",
-      "priority": "low",
-      "status": "pending",
-      "dueDate": "2024-01-14",
-      "createdAt": "2024-01-13T18:00:00Z",
-      "completedAt": null,
-      "tags": ["saude", "exercicio"]
+      "tarefaId": 4,
+      "titulo": "Exercícios físicos - caminhada",
+      "descricao": "Caminhada de 30 minutos no parque",
+      "categoria": "Saúde",
+      "dataCriacao": "2024-01-13T18:00:00Z",
+      "dataConclusao": null,
+      "prazo": "2024-01-14",
+      "prioridade": "Baixa",
+      "status": "Pendente"
     },
     {
-      "id": 5,
-      "title": "Preparar apresentação para reunião",
-      "description": "Criar slides e ensaiar apresentação de 15 minutos",
-      "priority": "medium",
-      "status": "pending",
-      "dueDate": "2024-01-16",
-      "createdAt": "2024-01-13T20:30:00Z",
-      "completedAt": null,
-      "tags": ["trabalho", "apresentacao"]
+      "tarefaId": 5,
+      "titulo": "Preparar apresentação para reunião",
+      "descricao": "Criar slides e ensaiar apresentação de 15 minutos",
+      "categoria": "Trabalho",
+      "dataCriacao": "2024-01-13T20:30:00Z",
+      "dataConclusao": null,
+      "prazo": "2024-01-16",
+      "prioridade": "Média",
+      "status": "Pendente"
     },
     {
-      "id": 6,
-      "title": "Ler capítulo do livro",
-      "description": "Ler capítulo 3 do livro 'Produtividade Pessoal'",
-      "priority": "low",
-      "status": "completed",
-      "dueDate": "2024-01-13",
-      "createdAt": "2024-01-12T19:00:00Z",
-      "completedAt": "2024-01-13T21:30:00Z",
-      "tags": ["leitura", "desenvolvimento"]
+      "tarefaId": 6,
+      "titulo": "Ler capítulo do livro",
+      "descricao": "Ler capítulo 3 do livro 'Produtividade Pessoal'",
+      "categoria": "Desenvolvimento",
+      "dataCriacao": "2024-01-12T19:00:00Z",
+      "dataConclusao": "2024-01-13T21:30:00Z",
+      "prazo": "2024-01-13",
+      "prioridade": "Baixa",
+      "status": "Concluída"
     }
   ],
   "users": [
     {
-      "id": 1,
-      "name": "Usuário Demo",
-      "email": "demo@taskflow.com",
-      "avatar": "https://via.placeholder.com/150",
-      "preferences": {
-        "theme": "light",
-        "notifications": true,
-        "language": "pt-BR"
-      },
-      "createdAt": "2024-01-01T00:00:00Z"
+      "usuarioId": 1,
+      "nome": "Usuário Demo",
+      "email": "demo@flow.com",
+      "senha": "demo123"
     }
   ]
 }
