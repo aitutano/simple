@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Entrar - TaskFlow</title>
+    <title>Entrar - Flow</title>
 
     <!-- CSS Dependencies -->
     <link
@@ -61,7 +61,7 @@
                 class="fas fa-tasks"
                 style="font-size: 4rem; margin-bottom: 1rem"
               ></i>
-              <h1 class="display-4 fw-bold">TaskFlow</h1>
+              <h1 class="display-4 fw-bold">Flow</h1>
             </div>
             <p class="lead mb-4 opacity-90">
               Organize suas tarefas com simplicidade e elegância
@@ -105,9 +105,7 @@
                   margin-bottom: 0.5rem;
                 "
               ></i>
-              <h2 class="fw-bold" style="color: var(--primary-red)">
-                TaskFlow
-              </h2>
+              <h2 class="fw-bold" style="color: var(--primary-red)">Flow</h2>
               <p class="text-muted">Entre na sua conta</p>
             </div>
 
@@ -424,9 +422,9 @@
 
         // Demo credentials
         const validCredentials = [
-          { email: "demo@taskflow.com", password: "demo123" },
+          { email: "demo@flow.com", password: "demo123" },
           { email: "usuario@teste.com", password: "teste123" },
-          { email: "admin@taskflow.com", password: "admin123" },
+          { email: "admin@flow.com", password: "admin123" },
         ];
 
         const isValid = validCredentials.some(
@@ -448,14 +446,14 @@
           loginTime: new Date().toISOString(),
         };
 
-        storage.set("taskflow_user", user);
-        storage.set("taskflow_session", {
+        storage.set("flow_user", user);
+        storage.set("flow_session", {
           token: "demo-session-token",
           expires: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
         });
 
         if (loginData.remember) {
-          storage.set("taskflow_remember", true);
+          storage.set("flow_remember", true);
         }
       }
 
@@ -486,7 +484,7 @@
       // Auto-fill demo credentials
       document.addEventListener("keydown", function (e) {
         if (e.ctrlKey && e.shiftKey && e.key === "D") {
-          document.getElementById("email").value = "demo@taskflow.com";
+          document.getElementById("email").value = "demo@flow.com";
           document.getElementById("password").value = "demo123";
           utils.showNotification(
             "Credenciais demo preenchidas! (Ctrl+Shift+D)",
