@@ -763,7 +763,33 @@ const app = {
 
     try {
       if (form.id === "task-form") {
-        await taskManager.createTask(data);
+        const editingTaskId = form.dataset.editingTaskId;
+
+        // Process tags
+        if (data.tags) {
+          data.tags = data.tags
+            .split(",")
+            .map((tag) => tag.trim())
+            .filter((tag) => tag);
+        }
+
+        if (editingTaskId) {
+          // Update existing task
+          await taskManager.updateTask(editingTaskId, data);
+          delete form.dataset.editingTaskId;
+
+          // Reset modal to create mode
+          const modal = document.getElementById("newTaskModal");
+          const modalTitle = modal.querySelector(".modal-title");
+          const submitButton = modal.querySelector("button[type='submit']");
+          modalTitle.innerHTML = '<i class="fas fa-plus me-2"></i>Nova Tarefa';
+          submitButton.innerHTML =
+            '<i class="fas fa-save me-1"></i>Salvar Tarefa';
+        } else {
+          // Create new task
+          await taskManager.createTask(data);
+        }
+
         form.reset();
       } else if (form.id === "project-form") {
         // Handle project creation
