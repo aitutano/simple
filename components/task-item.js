@@ -353,7 +353,6 @@ class TaskItem extends LitElement {
   getStatusLabel(status) {
     const labels = {
       pending: "Pendente",
-      in_progress: "Em andamento",
       completed: "Concluída",
     };
     return labels[status] || status;
