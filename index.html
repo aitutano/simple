@@ -191,18 +191,6 @@
                   type="radio"
                   class="btn-check"
                   name="statusFilter"
-                  id="filter-progress"
-                  value="in_progress"
-                />
-                <label class="btn btn-outline-primary" for="filter-progress">
-                  <i class="fas fa-spinner me-1"></i>
-                  Em Andamento
-                </label>
-
-                <input
-                  type="radio"
-                  class="btn-check"
-                  name="statusFilter"
                   id="filter-completed"
                   value="completed"
                 />
@@ -303,10 +291,7 @@
                       >0</span
                     >
                   </div>
-                  <div class="stat-item d-flex justify-content-between mb-2">
-                    <span class="text-muted">Em andamento</span>
-                    <span class="fw-bold text-info" id="stat-progress">0</span>
-                  </div>
+
                   <div class="stat-item d-flex justify-content-between">
                     <span class="text-muted">Concluídas</span>
                     <span class="fw-bold text-success" id="stat-completed"
@@ -719,9 +704,6 @@
         document.getElementById("stat-pending").textContent = allTasks.filter(
           (t) => t.status === "pending",
         ).length;
-        document.getElementById("stat-progress").textContent = allTasks.filter(
-          (t) => t.status === "in_progress",
-        ).length;
         document.getElementById("stat-completed").textContent = allTasks.filter(
           (t) => t.status === "completed",
         ).length;
@@ -779,8 +761,11 @@
                 const priorityOrder = { high: 3, medium: 2, low: 1 };
                 return priorityOrder[b.priority] - priorityOrder[a.priority];
               } else if (sortBy === "dueDate") {
+                // Tarefas sem data de vencimento vão para o final
+                if (!a.dueDate && !b.dueDate) return 0;
                 if (!a.dueDate) return 1;
                 if (!b.dueDate) return -1;
+                // Tarefas que vão vencer primeiro aparecem primeiro
                 return new Date(a.dueDate) - new Date(b.dueDate);
               } else if (sortBy === "createdAt") {
                 return new Date(b.createdAt) - new Date(a.createdAt);

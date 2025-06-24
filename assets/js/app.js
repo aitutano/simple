@@ -15,7 +15,6 @@ const APP_CONFIG = {
   },
   TASK_STATUS: {
     PENDING: "pending",
-    IN_PROGRESS: "in_progress",
     COMPLETED: "completed",
   },
 };
@@ -497,7 +496,7 @@ const taskManager = {
 
         <div class="task-meta">
           <div class="d-flex gap-2 flex-wrap">
-            <span class="priority-badge priority-${task.priority}">${task.priority}</span>
+            <span class="priority-badge priority-${task.priority}">${this.getPriorityLabel(task.priority)}</span>
             <span class="status-badge status-${task.status.replace("_", "-")}">${this.getStatusLabel(task.status)}</span>
           </div>
 
@@ -534,10 +533,18 @@ const taskManager = {
     `;
   },
 
+  getPriorityLabel(priority) {
+    const labels = {
+      low: "Baixa",
+      medium: "Média",
+      high: "Alta",
+    };
+    return labels[priority] || priority;
+  },
+
   getStatusLabel(status) {
     const labels = {
       pending: "Pendente",
-      in_progress: "Em andamento",
       completed: "Concluída",
     };
     return labels[status] || status;
