@@ -1,0 +1,419 @@
+// ===== LAYOUT SCSS =====
+// ID 08 - Estilos de layout usando Grid, Flexbox e mixins Sass
+
+// ===== CONTAINER SYSTEM =====
+.container-fluid {
+  max-width: 100%;
+  @include padding(0, clamp($spacing-md, 4vw, $spacing-xl));
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  @include padding(0, $spacing-md);
+
+  @include large-desktop-up {
+    max-width: 1140px;
+  }
+
+  @include extra-large-up {
+    max-width: 1320px;
+  }
+}
+
+// ===== NAVIGATION =====
+.main-navbar {
+  background: $secondary-bg;
+  border-bottom: 1px solid $border-color;
+  @include padding($spacing-md, 0);
+  position: sticky;
+  top: 0;
+  z-index: $z-index-sticky;
+  backdrop-filter: blur(10px);
+
+  .navbar-brand {
+    font-family: $font-heading;
+    font-weight: $font-weight-bold;
+    @include font-size($font-size-2xl);
+    color: $primary-red !important;
+  }
+
+  .nav-link {
+    color: $text-primary !important;
+    font-weight: $font-weight-medium;
+    transition: color $transition-base;
+    @include margin(0, $spacing-sm);
+
+    &:hover,
+    &.active {
+      color: $primary-red !important;
+    }
+  }
+}
+
+// ===== HERO SECTION =====
+.hero-section {
+  @include padding(clamp($spacing-xl, 8vw, 5rem), 0);
+  background: linear-gradient(135deg, $accent-bg 0%, $primary-bg 100%);
+
+  .hero-content {
+    @include text-clamp($font-size-lg, 2.5vw, $font-size-xl);
+  }
+
+  .hero-actions {
+    @include flex-wrap;
+    @include margin($spacing-lg, 0, 0, 0);
+
+    .btn {
+      @include tablet-only {
+        width: 100%;
+        @include margin(0, 0, $spacing-sm, 0);
+      }
+    }
+  }
+}
+
+// ===== PAGE LAYOUTS =====
+.page-header {
+  background: $secondary-bg;
+  border-bottom: 1px solid $border-color;
+  @include padding($spacing-lg, 0);
+
+  h1 {
+    @include margin(0);
+    @include flex-center;
+
+    i {
+      color: $primary-red;
+      @include margin(0, $spacing-sm, 0, 0);
+    }
+  }
+}
+
+.section-padding {
+  @include padding(clamp($spacing-xl, 6vw, $spacing-xxl), 0);
+}
+
+// ===== GRID LAYOUTS =====
+.main-content {
+  @include margin(clamp($spacing-md, 3vw, $spacing-xl), 0);
+}
+
+.projects-grid {
+  @include grid-layout(
+    repeat(auto-fill, minmax(280px, 1fr)),
+    clamp($spacing-md, 2vw, $spacing-lg)
+  );
+
+  @include mobile-only {
+    @include grid-layout(1fr, $spacing-md);
+  }
+}
+
+.tasks-grid {
+  @include grid-layout(1fr, clamp($spacing-sm, 2vw, $spacing-md));
+}
+
+.dashboard-grid {
+  @include desktop-up {
+    @include grid-layout(2fr 1fr, $spacing-xl);
+    align-items: start;
+  }
+}
+
+// ===== FLEXBOX UTILITIES =====
+.flex-container {
+  @include flex-wrap;
+}
+
+.flex-center {
+  @include flex-center;
+}
+
+.flex-between {
+  @include flex-between;
+}
+
+.flex-column {
+  @include flex-column;
+}
+
+.flex-wrap {
+  @include flex-wrap;
+}
+
+// ===== SIDEBAR =====
+.sidebar {
+  @include desktop-up {
+    position: sticky;
+    top: calc(#{$spacing-xxl} + 60px); // navbar height + margin
+    max-height: calc(100vh - #{$spacing-xxl} - 80px);
+    overflow-y: auto;
+  }
+}
+
+// ===== MAIN CONTENT AREA =====
+.main-content-area {
+  min-height: calc(100vh - 200px); // Account for header and footer
+  @include flex-column;
+}
+
+// ===== FOOTER =====
+.footer {
+  background: #2c3e50;
+  border-top: 1px solid $border-color;
+  color: #ffffff;
+  @include padding($spacing-lg, 0);
+  @include margin($spacing-xxl, 0, 0, 0);
+
+  .footer-brand {
+    @include margin(0, 0, $spacing-md, 0);
+
+    h5 {
+      @include flex-center;
+      justify-content: flex-start;
+      @include margin(0, 0, $spacing-sm, 0);
+
+      i {
+        color: $primary-red;
+        @include margin(0, $spacing-sm, 0, 0);
+      }
+    }
+
+    p {
+      color: #bdc3c7;
+    }
+  }
+
+  .footer-links {
+    ul {
+      list-style: none;
+      @include margin(0);
+      @include padding(0);
+
+      li {
+        @include margin(0, 0, $spacing-xs, 0);
+
+        a {
+          color: #bdc3c7;
+          text-decoration: none;
+          transition: color $transition-base;
+
+          &:hover {
+            color: #ffffff;
+          }
+        }
+      }
+    }
+  }
+
+  .social-links {
+    @include flex-center;
+    justify-content: flex-end;
+    gap: $spacing-md;
+
+    a {
+      color: #bdc3c7;
+      @include font-size($font-size-lg);
+      transition: color $transition-base;
+
+      &:hover {
+        color: #ffffff;
+      }
+    }
+  }
+
+  hr {
+    border-color: $border-color;
+  }
+}
+
+// ===== RESPONSIVE LAYOUT ADJUSTMENTS =====
+@include tablet-only {
+  .hero-section .row {
+    flex-direction: column-reverse;
+  }
+
+  .hero-content {
+    text-align: center;
+    @include margin($spacing-xl, 0, 0, 0);
+  }
+
+  .tasks-grid {
+    @include grid-layout(repeat(auto-fit, minmax(400px, 1fr)));
+  }
+
+  .projects-grid {
+    @include grid-layout(repeat(auto-fit, minmax(320px, 1fr)));
+  }
+
+  .dashboard-grid {
+    @include grid-layout(repeat(auto-fit, minmax(350px, 1fr)));
+  }
+}
+
+@include mobile-only {
+  .container-fluid {
+    @include padding(0, $spacing-sm);
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    gap: $spacing-md;
+
+    .btn {
+      width: 100%;
+    }
+  }
+
+  .navbar-nav {
+    text-align: center;
+  }
+
+  .nav-link {
+    @include padding($spacing-sm, 0);
+  }
+
+  .sidebar {
+    @include margin($spacing-lg, 0);
+  }
+}
+
+// ===== SPACING UTILITIES =====
+@for $i from 0 through 5 {
+  .m-#{$i} {
+    margin: #{$i * 0.25}rem !important;
+  }
+
+  .mt-#{$i} {
+    margin-top: #{$i * 0.25}rem !important;
+  }
+
+  .mb-#{$i} {
+    margin-bottom: #{$i * 0.25}rem !important;
+  }
+
+  .ml-#{$i} {
+    margin-left: #{$i * 0.25}rem !important;
+  }
+
+  .mr-#{$i} {
+    margin-right: #{$i * 0.25}rem !important;
+  }
+
+  .p-#{$i} {
+    padding: #{$i * 0.25}rem !important;
+  }
+
+  .pt-#{$i} {
+    padding-top: #{$i * 0.25}rem !important;
+  }
+
+  .pb-#{$i} {
+    padding-bottom: #{$i * 0.25}rem !important;
+  }
+
+  .pl-#{$i} {
+    padding-left: #{$i * 0.25}rem !important;
+  }
+
+  .pr-#{$i} {
+    padding-right: #{$i * 0.25}rem !important;
+  }
+}
+
+// ===== TEXT ALIGNMENT UTILITIES =====
+.text-center {
+  text-align: center !important;
+}
+
+.text-left {
+  text-align: left !important;
+}
+
+.text-right {
+  text-align: right !important;
+}
+
+// Responsive text alignment
+@include tablet-only {
+  .text-md-center {
+    text-align: center !important;
+  }
+
+  .text-md-left {
+    text-align: left !important;
+  }
+
+  .text-md-right {
+    text-align: right !important;
+  }
+}
+
+@include mobile-only {
+  .text-sm-center {
+    text-align: center !important;
+  }
+
+  .text-sm-left {
+    text-align: left !important;
+  }
+
+  .text-sm-right {
+    text-align: right !important;
+  }
+}
+
+// ===== DISPLAY UTILITIES =====
+.d-none {
+  display: none !important;
+}
+
+.d-block {
+  display: block !important;
+}
+
+.d-flex {
+  display: flex !important;
+}
+
+.d-grid {
+  display: grid !important;
+}
+
+// Responsive display utilities
+@include mobile-only {
+  .d-xs-none {
+    display: none !important;
+  }
+  .d-xs-block {
+    display: block !important;
+  }
+  .d-xs-flex {
+    display: flex !important;
+  }
+}
+
+@include tablet-only {
+  .d-md-none {
+    display: none !important;
+  }
+  .d-md-block {
+    display: block !important;
+  }
+  .d-md-flex {
+    display: flex !important;
+  }
+}
+
+@include desktop-up {
+  .d-lg-none {
+    display: none !important;
+  }
+  .d-lg-block {
+    display: block !important;
+  }
+  .d-lg-flex {
+    display: flex !important;
+  }
+}

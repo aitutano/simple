@@ -50,7 +50,7 @@ Flow é uma aplicação web responsiva de gerenciamento de tarefas inspirada no 
 - [x] **ID 05** - Implementa animações (fadeIn/fadeOut, slideIn/slideOut)
 - ⚪ **ID 06** - ~~Cria transições personalizadas entre estados~~ (Removido - não essencial)
 - [x] **ID 07** - Aplica Design System consistente
-- [ ] **ID 08** - Implementa pré-processadores CSS (Sass)
+- [x] **ID 08** - Implementa pré-processadores CSS (Sass)
 - [x] **ID 09** - Aplica tipografia responsiva com media queries/clamp()
 - [x] **ID 10** - Aplica técnicas de responsividade de imagens
 - [x] **ID 11** - Otimiza imagens com formatos modernos (WebP)
