@@ -618,6 +618,9 @@ const app = {
     // Setup jQuery plugins
     this.setupjQueryPlugins();
 
+    // Setup modal reset
+    this.setupModalHandlers();
+
     console.log("Flow App initialized successfully!");
   },
 
