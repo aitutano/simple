@@ -519,6 +519,101 @@ a:hover {
   }
 }
 
+/* ===== FORM ENHANCEMENTS ===== */
+/* Consistent form field sizing across all devices */
+.form-control,
+.form-select {
+  min-height: 48px;
+  font-size: 1rem;
+  line-height: 1.5;
+  box-sizing: border-box;
+}
+
+.form-select {
+  padding: 0.75rem var(--spacing-md);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--secondary-bg);
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.form-select:focus {
+  border-color: var(--primary-red);
+  box-shadow: 0 0 0 3px rgba(227, 68, 50, 0.1);
+}
+
+/* Textarea consistent styling */
+textarea.form-control {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* Form validation states */
+.form-control.is-invalid {
+  border-color: var(--priority-high);
+  background-image: none;
+}
+
+.form-control.is-valid {
+  border-color: var(--success-green);
+  background-image: none;
+}
+
+/* Button groups in forms */
+.input-group .btn {
+  min-height: 48px;
+  border: 2px solid var(--border-color);
+  border-left: 0;
+}
+
+.input-group .btn:focus {
+  border-color: var(--primary-red);
+  z-index: 3;
+}
+
+/* Checkbox and radio consistent styling */
+.form-check-input {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: 0.125rem;
+  border: 2px solid var(--border-color);
+}
+
+.form-check-input:focus {
+  border-color: var(--primary-red);
+  box-shadow: 0 0 0 0.25rem rgba(227, 68, 50, 0.1);
+}
+
+.form-check-input:checked {
+  background-color: var(--primary-red);
+  border-color: var(--primary-red);
+}
+
+/* Switch styling */
+.form-check .form-check-input[type="checkbox"] {
+  border-radius: var(--radius-sm);
+}
+
+/* Form grid improvements */
+.row .form-group {
+  margin-bottom: var(--spacing-lg);
+}
+
+/* Required field indicator */
+.form-label:has(+ .form-control[data-validation*="required"])::after,
+.form-label[for*="email"]::after,
+.form-label[for*="password"]::after,
+.form-label[for*="confirm-password"]::after,
+.form-label[for*="first-name"]::after,
+.form-label[for*="last-name"]::after,
+.form-label[for*="terms"]::after {
+  content: " *";
+  color: var(--priority-high);
+  font-weight: bold;
+}
+
 /* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 768px) {
   .container-fluid {
@@ -544,6 +639,32 @@ a:hover {
   }
   h3 {
     font-size: 1.25rem;
+  }
+
+  /* Form adjustments for mobile */
+  .form-control,
+  .form-select {
+    min-height: 44px;
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+
+  .input-group-text {
+    min-height: 44px;
+    padding: 0 0.75rem;
+  }
+
+  .form-error,
+  .form-success {
+    position: static;
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+    white-space: normal;
+    max-width: none;
+  }
+
+  .form-group.has-error,
+  .form-group.has-success {
+    margin-bottom: var(--spacing-lg);
   }
 }
 
