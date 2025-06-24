@@ -734,6 +734,35 @@ const app = {
     }
   },
 
+  setupModalHandlers() {
+    const modal = document.getElementById("newTaskModal");
+    if (modal) {
+      modal.addEventListener("hidden.bs.modal", () => {
+        const form = document.getElementById("task-form");
+        const modalTitle = modal.querySelector(".modal-title");
+        const submitButton = modal.querySelector("button[type='submit']");
+
+        // Reset form
+        form.reset();
+
+        // Clear validation states
+        form.querySelectorAll(".is-invalid, .is-valid").forEach((field) => {
+          field.classList.remove("is-invalid", "is-valid");
+        });
+
+        form.querySelectorAll(".form-error").forEach((error) => {
+          error.remove();
+        });
+
+        // Reset to create mode
+        delete form.dataset.editingTaskId;
+        modalTitle.innerHTML = '<i class="fas fa-plus me-2"></i>Nova Tarefa';
+        submitButton.innerHTML =
+          '<i class="fas fa-save me-1"></i>Salvar Tarefa';
+      });
+    }
+  },
+
   handleNavigation(e) {
     e.preventDefault();
     const targetPage = e.target.getAttribute("href");
