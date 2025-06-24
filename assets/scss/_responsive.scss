@@ -1,0 +1,541 @@
+// ===== RESPONSIVE SCSS =====
+// ID 08, ID 02, ID 04, ID 09 - Estilos responsivos usando mixins e variáveis Sass
+
+// ===== RESPONSIVE IMAGES (ID 10) =====
+.responsive-image {
+  @include responsive-image;
+  border-radius: $radius-md;
+  transition: transform $transition-base;
+
+  &:hover {
+    transform: scale(1.02);
+  }
+}
+
+.image-container {
+  @include image-container;
+  box-shadow: $shadow-sm;
+
+  &--square {
+    @include image-container(1);
+  }
+
+  &--landscape {
+    @include image-container(16/9);
+  }
+
+  &--portrait {
+    @include image-container(3/4);
+  }
+}
+
+.hero-image {
+  width: min(90vw, 500px);
+  height: auto;
+  max-height: 70vh;
+  object-fit: contain;
+  @include margin(0, auto);
+  display: block;
+}
+
+.task-illustration {
+  width: clamp(200px, 40vw, 400px);
+  height: auto;
+  object-fit: contain;
+  opacity: 0.5;
+  filter: grayscale(20%);
+}
+
+.avatar-image {
+  @include avatar(clamp($spacing-xl, 5vw, $spacing-xxl));
+}
+
+.demo-screenshot {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  object-fit: cover;
+  border-radius: $radius-xl;
+  box-shadow: $shadow-lg;
+}
+
+// ===== RESPONSIVE TYPOGRAPHY (ID 09) =====
+// Fluid typography using clamp()
+.display-1 {
+  @include text-clamp(2rem, 5vw, 4rem);
+  font-weight: $font-weight-bold;
+}
+
+.display-2 {
+  @include text-clamp(1.75rem, 4.5vw, 3.5rem);
+  font-weight: $font-weight-bold;
+}
+
+.display-3 {
+  @include text-clamp(1.5rem, 4vw, 3rem);
+  font-weight: $font-weight-semibold;
+}
+
+.lead {
+  @include text-clamp($font-size-base, 2.5vw, $font-size-xl);
+  font-weight: $font-weight-light;
+  line-height: $line-height-relaxed;
+}
+
+.small {
+  @include text-clamp($font-size-xs, 1.5vw, $font-size-sm);
+}
+
+// ===== MOBILE FIRST RESPONSIVE BREAKPOINTS =====
+
+// ===== EXTRA SMALL DEVICES (< 576px) =====
+@include mobile-only {
+  // Typography adjustments
+  h1 {
+    @include font-size(1.75rem);
+  }
+
+  h2 {
+    @include font-size(1.5rem);
+  }
+
+  h3 {
+    @include font-size(1.25rem);
+  }
+
+  // Layout adjustments
+  .container-fluid {
+    @include padding(0, $spacing-sm);
+  }
+
+  // Navigation
+  .navbar-nav {
+    text-align: center;
+  }
+
+  .nav-link {
+    @include padding($spacing-sm, 0);
+  }
+
+  // Hero section
+  .hero-section {
+    @include padding($spacing-xl, 0);
+    text-align: center;
+  }
+
+  // Cards
+  .task-card,
+  .project-card {
+    @include padding($spacing-md);
+  }
+
+  .task-meta,
+  .project-meta {
+    @include flex-column;
+    align-items: flex-start;
+  }
+
+  // Buttons
+  .btn-primary-custom,
+  .btn-outline-custom {
+    width: 100%;
+    @include margin(0, 0, $spacing-sm, 0);
+  }
+
+  // Image adjustments
+  .hero-image {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .task-illustration {
+    width: 180px;
+    max-width: 80vw;
+  }
+
+  .image-container--landscape {
+    @include image-container(4/3);
+  }
+
+  .image-container--square {
+    max-width: 280px;
+    @include margin(0, auto);
+  }
+
+  // Forms
+  .form-control,
+  .form-select {
+    min-height: $button-height;
+    font-size: 16px; // Prevents zoom on iOS
+  }
+
+  .modal-dialog {
+    @include margin($spacing-sm);
+  }
+}
+
+// ===== SMALL DEVICES (576px - 767px) =====
+@include respond-to($breakpoint-xs) {
+  .hero-image {
+    max-width: 400px;
+  }
+
+  .task-illustration {
+    width: 240px;
+    max-width: 60vw;
+  }
+
+  .demo-screenshot {
+    max-width: 500px;
+  }
+}
+
+// ===== MEDIUM DEVICES (768px - 991px) =====
+@include tablet-only {
+  // Navigation responsive
+  .navbar-nav {
+    text-align: center;
+    @include margin($spacing-md, 0, 0, 0);
+  }
+
+  .navbar-nav .nav-link {
+    @include padding($spacing-sm, $spacing-md);
+    border-radius: $radius-md;
+    @include margin($spacing-xs, 0);
+
+    &:hover {
+      background: $accent-bg;
+    }
+  }
+
+  // Hero section
+  .hero-section .row {
+    flex-direction: column-reverse;
+  }
+
+  .hero-content {
+    text-align: center;
+    @include margin($spacing-xl, 0, 0, 0);
+  }
+
+  .hero-actions {
+    @include flex-column;
+    gap: $spacing-md;
+
+    .btn {
+      width: 100%;
+    }
+  }
+
+  // Grid layouts
+  .tasks-grid {
+    @include grid-layout(repeat(auto-fit, minmax(400px, 1fr)));
+  }
+
+  .projects-grid {
+    @include grid-layout(repeat(auto-fit, minmax(320px, 1fr)));
+  }
+
+  .dashboard-grid {
+    @include grid-layout(repeat(auto-fit, minmax(350px, 1fr)));
+  }
+
+  // Image adjustments
+  .hero-image {
+    max-width: 500px;
+  }
+
+  .task-illustration {
+    width: 300px;
+  }
+
+  .demo-screenshot {
+    max-width: 600px;
+  }
+
+  .image-container--landscape {
+    @include image-container(16/10);
+  }
+
+  .image-container--square {
+    max-width: 400px;
+  }
+}
+
+// ===== LARGE DEVICES (992px - 1199px) =====
+@include desktop-up {
+  // Grid layouts
+  .tasks-grid {
+    @include grid-layout(1fr);
+  }
+
+  .projects-grid {
+    @include grid-layout(repeat(auto-fit, minmax(300px, 1fr)));
+  }
+
+  .dashboard-main {
+    @include grid-layout(2fr 1fr, $spacing-xl);
+    align-items: start;
+  }
+
+  // Sidebar
+  .sidebar {
+    position: sticky;
+    top: calc(#{$spacing-xxl} + 60px);
+    max-height: calc(100vh - #{$spacing-xxl} - 80px);
+    overflow-y: auto;
+  }
+}
+
+// ===== EXTRA LARGE DEVICES (1200px+) =====
+@include large-desktop-up {
+  .container {
+    max-width: 1140px;
+  }
+
+  .projects-grid {
+    @include grid-layout(repeat(auto-fit, minmax(320px, 1fr)));
+  }
+
+  .hero-section {
+    @include padding(5rem, 0);
+  }
+}
+
+// ===== EXTRA EXTRA LARGE DEVICES (1400px+) =====
+@include extra-large-up {
+  .container {
+    max-width: 1320px;
+  }
+
+  .projects-grid {
+    @include grid-layout(repeat(auto-fit, minmax(350px, 1fr)));
+  }
+}
+
+// ===== VIEW-SPECIFIC RESPONSIVE STYLES =====
+.tasks-container,
+.view-cards .tasks-container {
+  @include grid-layout(repeat(auto-fill, minmax(300px, 1fr)), $spacing-lg);
+
+  @include tablet-only {
+    @include grid-layout(1fr, $spacing-md);
+  }
+}
+
+// ===== LANDSCAPE ORIENTATION =====
+@media screen and (orientation: landscape) and (max-height: 500px) {
+  .hero-section {
+    @include padding($spacing-xl, 0);
+  }
+
+  .modal-dialog {
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .navbar {
+    @include padding($spacing-sm, 0);
+  }
+}
+
+// ===== HIGH DPI DISPLAYS =====
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .responsive-image {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+// ===== TOUCH DEVICES =====
+@media (hover: none) and (pointer: coarse) {
+  .task-actions,
+  .project-actions {
+    opacity: 1;
+  }
+
+  .btn {
+    min-height: $button-height;
+    min-width: $button-height;
+  }
+
+  .form-control {
+    min-height: $button-height;
+  }
+
+  .nav-link {
+    min-height: $button-height;
+    @include flex-center;
+  }
+
+  // Increase touch targets
+  .priority-badge,
+  .status-badge {
+    min-height: 32px;
+    @include flex-center;
+  }
+}
+
+// ===== REDUCED MOTION =====
+@include reduced-motion {
+  .responsive-image:hover {
+    transform: none;
+  }
+
+  .task-card:hover,
+  .project-card:hover,
+  .card:hover {
+    transform: none;
+  }
+
+  .btn-primary-custom:hover,
+  .btn-outline-custom:hover {
+    transform: none;
+  }
+}
+
+// ===== HIGH CONTRAST MODE =====
+@include high-contrast {
+  .task-card,
+  .project-card,
+  .card {
+    border: 2px solid $text-primary;
+  }
+
+  .btn {
+    border: 2px solid currentColor;
+  }
+
+  .priority-badge,
+  .status-badge {
+    border: 1px solid currentColor;
+  }
+}
+
+// ===== PRINT OPTIMIZATIONS =====
+@media print {
+  // Hide interactive elements
+  .navbar,
+  .modal,
+  .btn,
+  .task-actions,
+  .project-actions,
+  .filter-controls,
+  .search-box {
+    @include print-hidden;
+  }
+
+  // Optimize cards for print
+  .task-card,
+  .project-card,
+  .card {
+    break-inside: avoid;
+    border: 1px solid #ccc !important;
+    box-shadow: none !important;
+    @include margin(0, 0, $spacing-md, 0);
+  }
+
+  // Typography for print
+  body {
+    @include font-size(12pt, $line-height-normal);
+    color: #000 !important;
+    background: #fff !important;
+  }
+
+  h1 {
+    @include font-size(18pt);
+  }
+  h2 {
+    @include font-size(16pt);
+  }
+  h3 {
+    @include font-size(14pt);
+  }
+  h4 {
+    @include font-size(13pt);
+  }
+  h5 {
+    @include font-size(12pt);
+  }
+  h6 {
+    @include font-size(11pt);
+  }
+
+  // Force black text for readability
+  * {
+    color: #000 !important;
+    background: transparent !important;
+  }
+}
+
+// ===== CONTAINER QUERIES (FUTURE-PROOF) =====
+// When container queries are widely supported
+/*
+@container (min-width: 400px) {
+  .task-card {
+    @include grid-layout(1fr auto, $spacing-md);
+    align-items: start;
+  }
+}
+
+@container (min-width: 600px) {
+  .tasks-container {
+    @include grid-layout(repeat(auto-fit, minmax(280px, 1fr)), $spacing-lg);
+  }
+}
+*/
+
+// ===== RESPONSIVE UTILITIES =====
+// Spacing responsive utilities
+@include tablet-only {
+  @for $i from 0 through 3 {
+    .p-md-#{$i} {
+      padding: #{$i * 0.25}rem !important;
+    }
+
+    .m-md-#{$i} {
+      margin: #{$i * 0.25}rem !important;
+    }
+  }
+}
+
+@include mobile-only {
+  @for $i from 0 through 3 {
+    .p-sm-#{$i} {
+      padding: #{$i * 0.25}rem !important;
+    }
+
+    .m-sm-#{$i} {
+      margin: #{$i * 0.25}rem !important;
+    }
+  }
+}
+
+// Responsive flex utilities
+@include mobile-only {
+  .flex-sm-column {
+    @include flex-column;
+  }
+
+  .flex-sm-row {
+    flex-direction: row !important;
+  }
+
+  .justify-content-sm-center {
+    justify-content: center !important;
+  }
+}
+
+@include tablet-only {
+  .flex-md-column {
+    @include flex-column;
+  }
+
+  .flex-md-row {
+    flex-direction: row !important;
+  }
+
+  .justify-content-md-center {
+    justify-content: center !important;
+  }
+}
