@@ -334,6 +334,20 @@ const taskManager = {
 
   async createTask(taskData) {
     try {
+      // Check for duplicate titles (simple protection)
+      const existingTask = appState.tasks.find(
+        (task) =>
+          task.title.toLowerCase() === taskData.title.toLowerCase().trim(),
+      );
+
+      if (existingTask) {
+        utils.showNotification(
+          "Já existe uma tarefa com este título",
+          "warning",
+        );
+        return;
+      }
+
       const newTask = {
         ...taskData,
         id: utils.generateId(),
@@ -544,9 +558,37 @@ const taskManager = {
   },
 
   editTask(taskId) {
-    // This would open a modal or redirect to edit page
-    console.log("Edit task:", taskId);
-    // Implementation depends on the UI framework
+    const task = appState.tasks.find((t) => String(t.id) === String(taskId));
+    if (!task) {
+      utils.showNotification("Tarefa não encontrada", "danger");
+      return;
+    }
+
+    // Fill the form with existing task data
+    document.getElementById("task-title").value = task.title || "";
+    document.getElementById("task-description").value = task.description || "";
+    document.getElementById("task-priority").value = task.priority || "medium";
+    document.getElementById("task-due-date").value = task.dueDate
+      ? task.dueDate.split("T")[0]
+      : "";
+    document.getElementById("task-tags").value = task.tags
+      ? task.tags.join(", ")
+      : "";
+
+    // Change modal title and form behavior
+    const modal = document.getElementById("newTaskModal");
+    const modalTitle = modal.querySelector(".modal-title");
+    const submitButton = modal.querySelector("button[type='submit']");
+    const form = document.getElementById("task-form");
+
+    modalTitle.innerHTML = '<i class="fas fa-edit me-2"></i>Editar Tarefa';
+    submitButton.innerHTML = '<i class="fas fa-save me-1"></i>Atualizar Tarefa';
+
+    // Store the task ID for updating
+    form.dataset.editingTaskId = taskId;
+
+    // Show the modal
+    new bootstrap.Modal(modal).show();
   },
 
   confirmDeleteTask(taskId) {
@@ -575,6 +617,9 @@ const app = {
 
     // Setup jQuery plugins
     this.setupjQueryPlugins();
+
+    // Setup modal reset
+    this.setupModalHandlers();
 
     console.log("Flow App initialized successfully!");
   },
@@ -689,6 +734,35 @@ const app = {
     }
   },
 
+  setupModalHandlers() {
+    const modal = document.getElementById("newTaskModal");
+    if (modal) {
+      modal.addEventListener("hidden.bs.modal", () => {
+        const form = document.getElementById("task-form");
+        const modalTitle = modal.querySelector(".modal-title");
+        const submitButton = modal.querySelector("button[type='submit']");
+
+        // Reset form
+        form.reset();
+
+        // Clear validation states
+        form.querySelectorAll(".is-invalid, .is-valid").forEach((field) => {
+          field.classList.remove("is-invalid", "is-valid");
+        });
+
+        form.querySelectorAll(".form-error").forEach((error) => {
+          error.remove();
+        });
+
+        // Reset to create mode
+        delete form.dataset.editingTaskId;
+        modalTitle.innerHTML = '<i class="fas fa-plus me-2"></i>Nova Tarefa';
+        submitButton.innerHTML =
+          '<i class="fas fa-save me-1"></i>Salvar Tarefa';
+      });
+    }
+  },
+
   handleNavigation(e) {
     e.preventDefault();
     const targetPage = e.target.getAttribute("href");
@@ -735,7 +809,33 @@ const app = {
 
     try {
       if (form.id === "task-form") {
-        await taskManager.createTask(data);
+        const editingTaskId = form.dataset.editingTaskId;
+
+        // Process tags
+        if (data.tags) {
+          data.tags = data.tags
+            .split(",")
+            .map((tag) => tag.trim())
+            .filter((tag) => tag);
+        }
+
+        if (editingTaskId) {
+          // Update existing task
+          await taskManager.updateTask(editingTaskId, data);
+          delete form.dataset.editingTaskId;
+
+          // Reset modal to create mode
+          const modal = document.getElementById("newTaskModal");
+          const modalTitle = modal.querySelector(".modal-title");
+          const submitButton = modal.querySelector("button[type='submit']");
+          modalTitle.innerHTML = '<i class="fas fa-plus me-2"></i>Nova Tarefa';
+          submitButton.innerHTML =
+            '<i class="fas fa-save me-1"></i>Salvar Tarefa';
+        } else {
+          // Create new task
+          await taskManager.createTask(data);
+        }
+
         form.reset();
       } else if (form.id === "project-form") {
         // Handle project creation
