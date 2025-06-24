@@ -544,9 +544,37 @@ const taskManager = {
   },
 
   editTask(taskId) {
-    // This would open a modal or redirect to edit page
-    console.log("Edit task:", taskId);
-    // Implementation depends on the UI framework
+    const task = appState.tasks.find((t) => String(t.id) === String(taskId));
+    if (!task) {
+      utils.showNotification("Tarefa não encontrada", "danger");
+      return;
+    }
+
+    // Fill the form with existing task data
+    document.getElementById("task-title").value = task.title || "";
+    document.getElementById("task-description").value = task.description || "";
+    document.getElementById("task-priority").value = task.priority || "medium";
+    document.getElementById("task-due-date").value = task.dueDate
+      ? task.dueDate.split("T")[0]
+      : "";
+    document.getElementById("task-tags").value = task.tags
+      ? task.tags.join(", ")
+      : "";
+
+    // Change modal title and form behavior
+    const modal = document.getElementById("newTaskModal");
+    const modalTitle = modal.querySelector(".modal-title");
+    const submitButton = modal.querySelector("button[type='submit']");
+    const form = document.getElementById("task-form");
+
+    modalTitle.innerHTML = '<i class="fas fa-edit me-2"></i>Editar Tarefa';
+    submitButton.innerHTML = '<i class="fas fa-save me-1"></i>Atualizar Tarefa';
+
+    // Store the task ID for updating
+    form.dataset.editingTaskId = taskId;
+
+    // Show the modal
+    new bootstrap.Modal(modal).show();
   },
 
   confirmDeleteTask(taskId) {
