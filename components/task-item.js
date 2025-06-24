@@ -356,7 +356,7 @@ class TaskItem extends LitElement {
       completed: "Concluída",
     };
     return labels[status] || status;
-  },
+  }
 
   formatDueDate() {
     if (!this.task.dueDate) return "";
