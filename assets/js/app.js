@@ -334,6 +334,20 @@ const taskManager = {
 
   async createTask(taskData) {
     try {
+      // Check for duplicate titles (simple protection)
+      const existingTask = appState.tasks.find(
+        (task) =>
+          task.title.toLowerCase() === taskData.title.toLowerCase().trim(),
+      );
+
+      if (existingTask) {
+        utils.showNotification(
+          "Já existe uma tarefa com este título",
+          "warning",
+        );
+        return;
+      }
+
       const newTask = {
         ...taskData,
         id: utils.generateId(),
