@@ -659,7 +659,6 @@ const app = {
     const userDropdown = document.getElementById("userDropdown");
     if (userDropdown) {
       userDropdown.innerHTML = `
-        <img src="${user.avatar}" alt="${user.name}" class="rounded-circle me-2" width="32" height="32">
         <i class="fas fa-user me-1"></i>
         <span>${user.name}</span>
       `;
