@@ -701,10 +701,6 @@
         e.preventDefault();
 
         if (!validateForm(this)) {
-          showNotification(
-            "Por favor, corrija os erros no formulário",
-            "warning",
-          );
           return;
         }
 
@@ -744,8 +740,6 @@
                 localStorage.setItem("flow_remember", "true");
               }
 
-              showNotification("Login realizado com sucesso!", "success");
-
               // Redirect to tasks page
               setTimeout(() => {
                 window.location.href = "tasks.html";
@@ -754,7 +748,6 @@
               throw new Error("Credenciais inválidas");
             }
           } catch (error) {
-            showNotification("Email ou senha incorretos", "danger");
             $submitBtn.html(originalText).prop("disabled", false);
           }
         }, 1500);
@@ -764,10 +757,6 @@
         e.preventDefault();
 
         if (!validateForm(this)) {
-          showNotification(
-            "Por favor, corrija os erros no formulário",
-            "warning",
-          );
           return;
         }
 
@@ -819,14 +808,11 @@
             localStorage.setItem("flow_users", JSON.stringify(users));
             localStorage.setItem("flow_user", JSON.stringify(userData));
 
-            showNotification("Conta criada com sucesso!", "success");
-
             // Redirect to tasks page
             setTimeout(() => {
               window.location.href = "tasks.html";
             }, 1500);
           } catch (error) {
-            showNotification(error.message || "Erro ao criar conta", "danger");
             $submitBtn.html(originalText).prop("disabled", false);
           }
         }, 2000);
