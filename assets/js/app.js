@@ -701,8 +701,10 @@ const app = {
 
     // Redirect to login
     setTimeout(() => {
-      window.location.href = "pages/login.html";
-    }, 1000);
+      const isInPagesFolder = window.location.pathname.includes("/pages/");
+      const loginPath = isInPagesFolder ? "login.html" : "pages/login.html";
+      window.location.href = loginPath;
+    }, 1500);
   },
 
   async loadInitialData() {
