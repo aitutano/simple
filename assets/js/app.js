@@ -483,9 +483,6 @@ const taskManager = {
         <div class="d-flex justify-content-between align-items-start mb-2">
           <h4 class="task-title mb-0">${utils.sanitizeHTML(task.title)}</h4>
           <div class="task-actions">
-            <button class="btn btn-sm btn-outline-primary me-1" onclick="taskManager.editTask('${task.id}')">
-              <i class="fas fa-edit"></i>
-            </button>
             <button class="btn btn-sm btn-outline-danger" onclick="taskManager.confirmDeleteTask('${task.id}')">
               <i class="fas fa-trash"></i>
             </button>
@@ -562,40 +559,6 @@ const taskManager = {
     };
 
     await this.updateTask(taskId, updates);
-  },
-
-  editTask(taskId) {
-    const task = appState.tasks.find((t) => String(t.id) === String(taskId));
-    if (!task) {
-      utils.showNotification("Tarefa não encontrada", "danger");
-      return;
-    }
-
-    // Fill the form with existing task data
-    document.getElementById("task-title").value = task.title || "";
-    document.getElementById("task-description").value = task.description || "";
-    document.getElementById("task-priority").value = task.priority || "medium";
-    document.getElementById("task-due-date").value = task.dueDate
-      ? task.dueDate.split("T")[0]
-      : "";
-    document.getElementById("task-tags").value = task.tags
-      ? task.tags.join(", ")
-      : "";
-
-    // Change modal title and form behavior
-    const modal = document.getElementById("newTaskModal");
-    const modalTitle = modal.querySelector(".modal-title");
-    const submitButton = modal.querySelector("button[type='submit']");
-    const form = document.getElementById("task-form");
-
-    modalTitle.innerHTML = '<i class="fas fa-edit me-2"></i>Editar Tarefa';
-    submitButton.innerHTML = '<i class="fas fa-save me-1"></i>Atualizar Tarefa';
-
-    // Store the task ID for updating
-    form.dataset.editingTaskId = taskId;
-
-    // Show the modal
-    new bootstrap.Modal(modal).show();
   },
 
   confirmDeleteTask(taskId) {
@@ -761,8 +724,7 @@ const app = {
           error.remove();
         });
 
-        // Reset to create mode
-        delete form.dataset.editingTaskId;
+        // Reset modal
         modalTitle.innerHTML = '<i class="fas fa-plus me-2"></i>Nova Tarefa';
         submitButton.innerHTML =
           '<i class="fas fa-save me-1"></i>Salvar Tarefa';
@@ -816,8 +778,6 @@ const app = {
 
     try {
       if (form.id === "task-form") {
-        const editingTaskId = form.dataset.editingTaskId;
-
         // Process tags
         if (data.tags) {
           data.tags = data.tags
@@ -826,23 +786,8 @@ const app = {
             .filter((tag) => tag);
         }
 
-        if (editingTaskId) {
-          // Update existing task
-          await taskManager.updateTask(editingTaskId, data);
-          delete form.dataset.editingTaskId;
-
-          // Reset modal to create mode
-          const modal = document.getElementById("newTaskModal");
-          const modalTitle = modal.querySelector(".modal-title");
-          const submitButton = modal.querySelector("button[type='submit']");
-          modalTitle.innerHTML = '<i class="fas fa-plus me-2"></i>Nova Tarefa';
-          submitButton.innerHTML =
-            '<i class="fas fa-save me-1"></i>Salvar Tarefa';
-        } else {
-          // Create new task
-          await taskManager.createTask(data);
-        }
-
+        // Create new task
+        await taskManager.createTask(data);
         form.reset();
       } else if (form.id === "project-form") {
         // Handle project creation

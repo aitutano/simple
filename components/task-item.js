@@ -327,9 +327,6 @@ class TaskItem extends LitElement {
   renderActions() {
     return html`
       <div class="task-actions">
-        <button class="action-btn" @click="${this.editTask}" title="Editar">
-          <i class="fas fa-edit"></i>
-        </button>
         <button
           class="action-btn danger"
           @click="${this.deleteTask}"
@@ -395,15 +392,6 @@ class TaskItem extends LitElement {
           completedAt:
             newStatus === "completed" ? new Date().toISOString() : null,
         },
-        bubbles: true,
-      }),
-    );
-  }
-
-  editTask() {
-    this.dispatchEvent(
-      new CustomEvent("task-edit", {
-        detail: { taskId: this.task.id },
         bubbles: true,
       }),
     );
