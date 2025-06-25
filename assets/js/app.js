@@ -660,6 +660,7 @@ const app = {
     if (userDropdown) {
       userDropdown.innerHTML = `
         <img src="${user.avatar}" alt="${user.name}" class="rounded-circle me-2" width="32" height="32">
+        <i class="fas fa-user me-1"></i>
         <span>${user.name}</span>
       `;
     }
@@ -673,17 +674,6 @@ const app = {
             <strong>${user.name}</strong>
             <br><small class="text-muted">${user.email}</small>
           </div>
-        </li>
-        <li><hr class="dropdown-divider" /></li>
-        <li>
-          <a class="dropdown-item" href="#" onclick="app.showProfile()">
-            <i class="fas fa-user me-2"></i>Meu Perfil
-          </a>
-        </li>
-        <li>
-          <a class="dropdown-item" href="#" onclick="app.showSettings()">
-            <i class="fas fa-cog me-2"></i>Configurações
-          </a>
         </li>
         <li><hr class="dropdown-divider" /></li>
         <li>
@@ -711,20 +701,6 @@ const app = {
     setTimeout(() => {
       window.location.href = "pages/login.html";
     }, 1000);
-  },
-
-  showProfile() {
-    utils.showNotification(
-      "Perfil do usuário será implementado em breve!",
-      "info",
-    );
-  },
-
-  showSettings() {
-    utils.showNotification(
-      "Configurações serão implementadas em breve!",
-      "info",
-    );
   },
 
   async loadInitialData() {
