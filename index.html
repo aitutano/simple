@@ -78,26 +78,23 @@
             </button>
             <div class="dropdown">
               <a
-                class="nav-link dropdown-toggle"
+                class="nav-link dropdown-toggle d-flex align-items-center"
                 href="#"
                 data-bs-toggle="dropdown"
+                id="userDropdown"
               >
                 <i class="fas fa-user-circle fs-4"></i>
               </a>
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu" id="userDropdownMenu">
                 <li>
-                  <a class="dropdown-item" href="pages/login.html">Entrar</a>
+                  <a class="dropdown-item" href="pages/login.html">
+                    <i class="fas fa-sign-in-alt me-2"></i>Entrar
+                  </a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="pages/register.html"
-                    >Cadastrar</a
-                  >
-                </li>
-                <li><hr class="dropdown-divider" /></li>
-                <li>
-                  <a class="dropdown-item" href="#" onclick="app.toggleTheme()"
-                    >Alterar Tema</a
-                  >
+                  <a class="dropdown-item" href="pages/register.html">
+                    <i class="fas fa-user-plus me-2"></i>Cadastrar
+                  </a>
                 </li>
               </ul>
             </div>

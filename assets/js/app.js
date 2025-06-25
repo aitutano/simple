@@ -6,7 +6,6 @@ const APP_CONFIG = {
   STORAGE_KEYS: {
     TASKS: "flow_tasks",
     USER_PREFERENCES: "flow_preferences",
-    THEME: "flow_theme",
   },
   PRIORITY_LEVELS: {
     LOW: "low",
@@ -573,6 +572,9 @@ const app = {
   async init() {
     console.log("Initializing Flow App...");
 
+    // Check user session
+    this.checkUserSession();
+
     // Check online status
     this.setupOnlineStatusHandlers();
 
@@ -592,6 +594,112 @@ const app = {
     this.setupModalHandlers();
 
     console.log("Flow App initialized successfully!");
+  },
+
+  checkUserSession() {
+    const user = storage.get("flow_user");
+    const session = storage.get("flow_session");
+    const isLoginPage =
+      window.location.pathname.includes("login.html") ||
+      window.location.pathname.includes("register.html") ||
+      window.location.pathname.includes("landing.html");
+
+    if (user && session) {
+      // Check if session is still valid
+      const sessionExpiry = new Date(session.expires);
+      const now = new Date();
+
+      if (sessionExpiry > now) {
+        appState.currentUser = user;
+        this.updateUserInterface(user);
+      } else {
+        // Session expired
+        this.sessionExpired();
+      }
+    } else if (!isLoginPage) {
+      // Not logged in and not on login/register/landing page - redirect to login
+      this.redirectToLogin();
+    }
+  },
+
+  sessionExpired() {
+    // Clear expired session
+    storage.remove("flow_user");
+    storage.remove("flow_session");
+    storage.remove("flow_remember");
+
+    // Reset app state
+    appState.currentUser = null;
+
+    // Show notification
+    utils.showNotification(
+      "Sua sessão expirou. Faça login novamente.",
+      "warning",
+    );
+
+    // Redirect to login
+    setTimeout(() => {
+      window.location.href = "pages/login.html";
+    }, 2000);
+  },
+
+  redirectToLogin() {
+    utils.showNotification(
+      "Você precisa fazer login para acessar esta página.",
+      "info",
+    );
+
+    setTimeout(() => {
+      window.location.href = "pages/login.html";
+    }, 1500);
+  },
+
+  updateUserInterface(user) {
+    // Update navigation to show logged-in user
+    const userDropdown = document.getElementById("userDropdown");
+    if (userDropdown) {
+      userDropdown.innerHTML = `
+        <i class="fas fa-user me-1"></i>
+        <span>${user.name}</span>
+      `;
+    }
+
+    // Update dropdown menu
+    const dropdownMenu = document.getElementById("userDropdownMenu");
+    if (dropdownMenu) {
+      dropdownMenu.innerHTML = `
+        <li>
+          <div class="dropdown-header">
+            <strong>${user.name}</strong>
+            <br><small class="text-muted">${user.email}</small>
+          </div>
+        </li>
+        <li><hr class="dropdown-divider" /></li>
+        <li>
+          <a class="dropdown-item" href="#" onclick="app.logout()">
+            <i class="fas fa-sign-out-alt me-2"></i>Sair
+          </a>
+        </li>
+      `;
+    }
+  },
+
+  logout() {
+    // Clear user session
+    storage.remove("flow_user");
+    storage.remove("flow_session");
+    storage.remove("flow_remember");
+
+    // Reset app state
+    appState.currentUser = null;
+
+    // Show notification
+    utils.showNotification("Logout realizado com sucesso!", "success");
+
+    // Redirect to login
+    setTimeout(() => {
+      window.location.href = "pages/login.html";
+    }, 1000);
   },
 
   async loadInitialData() {
@@ -799,12 +907,6 @@ const app = {
   },
 
   applyUserPreferences(preferences) {
-    // Apply theme
-    if (preferences.theme) {
-      document.body.className =
-        preferences.theme === "dark" ? "dark-theme" : "";
-    }
-
     // Apply other preferences
     console.log("Applied user preferences:", preferences);
   },
