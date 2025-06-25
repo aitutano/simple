@@ -3,7 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Flow - Minhas Tarefas</title>
+    <meta
+      name="description"
+      content="Flow - O melhor gerenciador de tarefas para organizar sua vida"
+    />
+    <meta
+      name="keywords"
+      content="tarefas, produtividade, organização, todoist, gerenciador"
+    />
+    <meta name="author" content="Flow Team" />
+
+    <title>Flow - Organize suas tarefas com simplicidade</title>
+
+    <!-- Favicon - Optimized SVG format (ID 11) -->
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
+    <link
+      rel="alternate icon"
+      type="image/x-icon"
+      href="assets/images/favicon.ico"
+    />
 
     <!-- CSS Dependencies -->
     <link
@@ -20,6 +38,8 @@
     />
 
     <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
@@ -29,13 +49,13 @@
     <link href="assets/css/style.css" rel="stylesheet" />
     <link href="assets/css/responsive.css" rel="stylesheet" />
     <link href="assets/css/images.css" rel="stylesheet" />
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
   </head>
   <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg main-navbar">
+    <!-- Landing Navigation -->
+    <nav
+      class="navbar navbar-expand-lg main-navbar fixed-top"
+      style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px)"
+    >
       <div class="container">
         <a class="navbar-brand d-flex align-items-center" href="index.html">
           <i class="fas fa-tasks me-2"></i>
@@ -54,541 +74,973 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav me-auto">
             <li class="nav-item">
-              <a class="nav-link" href="landing.html">
-                <i class="fas fa-home me-1"></i>
-                Início
-              </a>
+              <a class="nav-link" href="#features">Recursos</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="index.html">
-                <i class="fas fa-list-check me-1"></i>
-                Tarefas
-              </a>
+              <a class="nav-link" href="#about">Sobre</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#testimonials">Depoimentos</a>
             </li>
           </ul>
 
           <div class="navbar-nav">
-            <button
-              class="btn btn-primary-custom me-2"
-              data-bs-toggle="modal"
-              data-bs-target="#newTaskModal"
-            >
-              <i class="fas fa-plus me-1"></i>
-              Nova Tarefa
-            </button>
-            <div class="dropdown">
-              <a
-                class="nav-link dropdown-toggle d-flex align-items-center"
-                href="#"
-                data-bs-toggle="dropdown"
-                id="userDropdown"
-              >
-                <i class="fas fa-user-circle fs-4"></i>
-              </a>
-              <ul class="dropdown-menu" id="userDropdownMenu">
-                <li>
-                  <a class="dropdown-item" href="pages/login.html">
-                    <i class="fas fa-sign-in-alt me-2"></i>Entrar
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="pages/register.html">
-                    <i class="fas fa-user-plus me-2"></i>Cadastrar
-                  </a>
-                </li>
-              </ul>
-            </div>
+            <a href="pages/login.html" class="btn btn-outline-custom me-2">
+              <i class="fas fa-sign-in-alt me-1"></i>
+              Entrar
+            </a>
+            <a href="pages/register.html" class="btn btn-primary-custom">
+              <i class="fas fa-user-plus me-1"></i>
+              Criar Conta
+            </a>
           </div>
         </div>
       </div>
     </nav>
 
-    <!-- Page Header -->
+    <!-- Hero Section -->
     <section
-      class="page-header py-4"
+      class="hero-section"
       style="
-        background: var(--secondary-bg);
-        border-bottom: 1px solid var(--border-color);
+        background: linear-gradient(
+          135deg,
+          var(--accent-bg) 0%,
+          var(--secondary-bg) 100%
+        );
+        padding: 8rem 0 5rem 0;
       "
     >
       <div class="container">
-        <div class="row align-items-center">
-          <div class="col-md-6">
-            <h1 class="mb-0">
-              <i
-                class="fas fa-list-check me-2"
-                style="color: var(--primary-red)"
-              ></i>
-              Minhas Tarefas
-            </h1>
-            <p class="text-muted mb-0">
-              Gerencie todas as suas tarefas em um só lugar
-            </p>
-          </div>
-          <div class="col-md-6">
-            <div class="d-flex justify-content-end align-items-center gap-2">
-              <div class="search-box">
-                <div class="input-group">
-                  <span class="input-group-text">
-                    <i class="fas fa-search"></i>
-                  </span>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Buscar tarefas..."
-                    id="task-search"
-                  />
-                </div>
-              </div>
-              <button
-                class="btn btn-outline-primary"
-                onclick="taskManager.loadTasks()"
-              >
-                <i class="fas fa-sync-alt"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Filters Section -->
-    <section class="filters-section py-3" style="background: var(--primary-bg)">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-md-8">
-            <div class="filter-tabs">
-              <div class="btn-group" role="group">
-                <input
-                  type="radio"
-                  class="btn-check"
-                  name="statusFilter"
-                  id="filter-all"
-                  value="all"
-                  checked
-                />
-                <label class="btn btn-outline-primary" for="filter-all">
-                  <i class="fas fa-list me-1"></i>
-                  Todas
-                </label>
-
-                <input
-                  type="radio"
-                  class="btn-check"
-                  name="statusFilter"
-                  id="filter-pending"
-                  value="pending"
-                />
-                <label class="btn btn-outline-primary" for="filter-pending">
-                  <i class="fas fa-clock me-1"></i>
-                  Pendentes
-                </label>
-
-                <input
-                  type="radio"
-                  class="btn-check"
-                  name="statusFilter"
-                  id="filter-completed"
-                  value="completed"
-                />
-                <label class="btn btn-outline-primary" for="filter-completed">
-                  <i class="fas fa-check-circle me-1"></i>
-                  Concluídas
-                </label>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="filter-controls d-flex gap-2">
-              <select class="form-select form-select-sm" data-filter="priority">
-                <option value="all">Todas as prioridades</option>
-                <option value="high">Alta prioridade</option>
-                <option value="medium">Média prioridade</option>
-                <option value="low">Baixa prioridade</option>
-              </select>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Tasks Content -->
-    <main class="tasks-main py-4">
-      <div class="container">
-        <div class="row">
-          <!-- Tasks List -->
-          <div class="col-lg-8">
-            <!-- Sort Controls -->
-            <div class="view-controls mb-4">
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="view-info">
-                  <h5 class="mb-0">
-                    <i class="fas fa-th-large me-2"></i>
-                    Visualização em Cards
-                  </h5>
-                  <small class="text-muted">Suas tarefas organizadas</small>
-                </div>
-
-                <div class="sort-controls">
-                  <label
-                    for="sort-tasks"
-                    class="form-label small text-muted mb-1"
-                    >Ordenar por:</label
-                  >
-                  <select
-                    class="form-select form-select-sm"
-                    id="sort-tasks"
-                    style="width: auto"
-                  >
-                    <option value="dueDate">Data de vencimento</option>
-                    <option value="priority">Prioridade</option>
-                    <option value="createdAt">Data de criação</option>
-                    <option value="title">Título</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-
-            <!-- Tasks Container -->
-            <div id="tasks-container" class="tasks-container view-cards">
-              <div class="loading-state text-center py-5">
-                <div class="loading-spinner"></div>
-                <p class="text-muted mt-3">Carregando tarefas...</p>
-              </div>
-            </div>
-
-            <!-- Pagination -->
-            <nav aria-label="Navegação de tarefas" class="mt-4">
-              <ul
-                class="pagination justify-content-center"
-                id="tasks-pagination"
-              >
-                <!-- Pagination will be loaded dynamically -->
-              </ul>
-            </nav>
-          </div>
-
-          <!-- Sidebar -->
-          <div class="col-lg-4">
-            <!-- Quick Stats -->
-            <div class="card mb-4">
-              <div class="card-body">
-                <h5 class="card-title">
-                  <i class="fas fa-chart-bar me-2"></i>
-                  Estatísticas
-                </h5>
-                <div class="stats-list">
-                  <div class="stat-item d-flex justify-content-between mb-2">
-                    <span class="text-muted">Total de tarefas</span>
-                    <span class="fw-bold" id="stat-total">0</span>
-                  </div>
-                  <div class="stat-item d-flex justify-content-between mb-2">
-                    <span class="text-muted">Pendentes</span>
-                    <span class="fw-bold text-warning" id="stat-pending"
-                      >0</span
-                    >
-                  </div>
-
-                  <div class="stat-item d-flex justify-content-between">
-                    <span class="text-muted">Concluídas</span>
-                    <span class="fw-bold text-success" id="stat-completed"
-                      >0</span
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Priority Distribution -->
-            <div class="card mb-4">
-              <div class="card-body">
-                <h5 class="card-title">
-                  <i class="fas fa-exclamation-triangle me-2"></i>
-                  Por Prioridade
-                </h5>
-                <div class="priority-chart">
-                  <div class="priority-item mb-3">
-                    <div
-                      class="d-flex justify-content-between align-items-center mb-1"
-                    >
-                      <span class="fw-medium">Alta</span>
-                      <span class="text-danger fw-bold" id="priority-high-count"
-                        >0</span
-                      >
-                    </div>
-                    <div class="progress" style="height: 6px">
-                      <div
-                        class="progress-bar bg-danger"
-                        id="priority-high-bar"
-                        style="width: 0%"
-                      ></div>
+        <div class="row align-items-center min-vh-75">
+          <div class="col-lg-6">
+            <div class="hero-content animate__animated animate__fadeInLeft">
+              <h1 class="display-3 fw-bold mb-4">
+                Organize sua vida com
+                <span style="color: var(--primary-red)">simplicidade</span>
+              </h1>
+              <p class="lead text-muted mb-4 fs-5">
+                Flow é o gerenciador de tarefas que você sempre quis. Simples,
+                elegante e poderoso. Inspirado no Todoist, construído para você.
+              </p>
+              <div class="hero-features mb-4">
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <div class="d-flex align-items-center">
+                      <i
+                        class="fas fa-check-circle me-3"
+                        style="color: var(--success-green); font-size: 1.25rem"
+                      ></i>
+                      <span>Organize tarefas facilmente</span>
                     </div>
                   </div>
+                  <div class="col-md-6 mb-3">
+                    <div class="d-flex align-items-center">
+                      <i
+                        class="fas fa-mobile-alt me-3"
+                        style="color: var(--info-blue); font-size: 1.25rem"
+                      ></i>
+                      <span>Acesse de qualquer lugar</span>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <div class="d-flex align-items-center">
+                      <i
+                        class="fas fa-chart-line me-3"
+                        style="color: var(--warning-orange); font-size: 1.25rem"
+                      ></i>
+                      <span>Acompanhe seu progresso</span>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <div class="d-flex align-items-center">
+                      <i
+                        class="fas fa-clock me-3"
+                        style="color: var(--primary-red); font-size: 1.25rem"
+                      ></i>
+                      <span>Nunca perca um prazo</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="hero-actions">
+                <a
+                  href="pages/register.html"
+                  class="btn btn-primary-custom btn-lg me-3"
+                >
+                  <i class="fas fa-rocket me-2"></i>
+                  Começar Gratuitamente
+                </a>
+                <a href="#features" class="btn btn-outline-custom btn-lg">
+                  <i class="fas fa-arrow-down me-2"></i>
+                  Conhecer Recursos
+                </a>
+              </div>
+              <div class="hero-social-proof mt-4">
+                <div class="d-flex align-items-center text-muted">
+                  <div class="stars me-3">
+                    <i class="fas fa-star" style="color: #ffc107"></i>
+                    <i class="fas fa-star" style="color: #ffc107"></i>
+                    <i class="fas fa-star" style="color: #ffc107"></i>
+                    <i class="fas fa-star" style="color: #ffc107"></i>
+                    <i class="fas fa-star" style="color: #ffc107"></i>
+                  </div>
+                  <span class="small"
+                    >Avaliado com 5 estrelas por milhares de usuários</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="hero-image animate__animated animate__fadeInRight">
+              <div
+                class="app-preview p-4"
+                style="
+                  background: var(--secondary-bg);
+                  border-radius: var(--radius-xl);
+                  box-shadow: var(--shadow-lg);
+                  max-width: 500px;
+                  margin: 0 auto;
+                "
+              >
+                <!-- App Preview Header -->
+                <div class="app-header mb-4">
+                  <div
+                    class="d-flex align-items-center justify-content-between"
+                  >
+                    <h5 class="mb-0">
+                      <i
+                        class="fas fa-calendar-day me-2"
+                        style="color: var(--primary-red)"
+                      ></i>
+                      Hoje - 23 Dec
+                    </h5>
+                    <span class="badge bg-light text-dark">3 tarefas</span>
+                  </div>
+                </div>
 
-                  <div class="priority-item mb-3">
-                    <div
-                      class="d-flex justify-content-between align-items-center mb-1"
-                    >
-                      <span class="fw-medium">Média</span>
+                <!-- Sample Tasks -->
+                <div class="sample-tasks">
+                  <div
+                    class="sample-task mb-3 p-3 animate__animated animate__fadeInUp"
+                    style="
+                      border-left: 3px solid var(--priority-high);
+                      background: rgba(231, 76, 60, 0.05);
+                      border-radius: var(--radius-md);
+                    "
+                  >
+                    <div class="d-flex align-items-center">
+                      <i
+                        class="far fa-circle me-3"
+                        style="color: var(--priority-high)"
+                      ></i>
+                      <div class="flex-grow-1">
+                        <span class="fw-medium"
+                          >Finalizar projeto da faculdade</span
+                        >
+                        <div class="small text-muted">Entrega até 18:00</div>
+                      </div>
                       <span
-                        class="text-warning fw-bold"
-                        id="priority-medium-count"
-                        >0</span
+                        class="badge"
+                        style="background: var(--priority-high); color: white"
+                        >Alta</span
                       >
-                    </div>
-                    <div class="progress" style="height: 6px">
-                      <div
-                        class="progress-bar bg-warning"
-                        id="priority-medium-bar"
-                        style="width: 0%"
-                      ></div>
                     </div>
                   </div>
 
-                  <div class="priority-item">
+                  <div
+                    class="sample-task mb-3 p-3 animate__animated animate__fadeInUp animate__delay-1s"
+                    style="
+                      border-left: 3px solid var(--priority-medium);
+                      background: rgba(243, 156, 18, 0.05);
+                      border-radius: var(--radius-md);
+                    "
+                  >
+                    <div class="d-flex align-items-center">
+                      <i
+                        class="far fa-circle me-3"
+                        style="color: var(--priority-medium)"
+                      ></i>
+                      <div class="flex-grow-1">
+                        <span class="fw-medium"
+                          >Fazer compras no supermercado</span
+                        >
+                        <div class="small text-muted">
+                          Lista: leite, pão, frutas
+                        </div>
+                      </div>
+                      <span
+                        class="badge"
+                        style="background: var(--priority-medium); color: white"
+                        >Média</span
+                      >
+                    </div>
+                  </div>
+
+                  <div
+                    class="sample-task p-3 animate__animated animate__fadeInUp animate__delay-2s"
+                    style="
+                      border-left: 3px solid var(--success-green);
+                      background: rgba(76, 122, 69, 0.05);
+                      border-radius: var(--radius-md);
+                    "
+                  >
+                    <div class="d-flex align-items-center">
+                      <i
+                        class="fas fa-check-circle me-3"
+                        style="color: var(--success-green)"
+                      ></i>
+                      <div class="flex-grow-1">
+                        <span
+                          class="fw-medium text-decoration-line-through text-muted"
+                          >Ler 30 páginas do livro</span
+                        >
+                        <div class="small text-success">Concluída às 14:30</div>
+                      </div>
+                      <span class="badge bg-success">Concluída</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="progress-section mt-4">
+                  <div
+                    class="d-flex justify-content-between align-items-center mb-2"
+                  >
+                    <span class="small text-muted">Progresso de hoje</span>
+                    <span class="small fw-bold">1 de 3 concluídas</span>
+                  </div>
+                  <div class="progress" style="height: 8px; border-radius: 4px">
                     <div
-                      class="d-flex justify-content-between align-items-center mb-1"
-                    >
-                      <span class="fw-medium">Baixa</span>
-                      <span class="text-success fw-bold" id="priority-low-count"
-                        >0</span
-                      >
-                    </div>
-                    <div class="progress" style="height: 6px">
-                      <div
-                        class="progress-bar bg-success"
-                        id="priority-low-bar"
-                        style="width: 0%"
-                      ></div>
-                    </div>
+                      class="progress-bar"
+                      style="width: 33%; background: var(--success-green)"
+                    ></div>
                   </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Quick Actions -->
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">
-                  <i class="fas fa-bolt me-2"></i>
-                  Ações Rápidas
-                </h5>
-                <div class="d-grid gap-2">
-                  <button
-                    class="btn btn-primary-custom btn-sm"
-                    data-bs-toggle="modal"
-                    data-bs-target="#newTaskModal"
-                  >
-                    <i class="fas fa-plus me-2"></i>
-                    Nova Tarefa
-                  </button>
-                  <button
-                    class="btn btn-outline-secondary btn-sm"
-                    onclick="markAllCompleted()"
-                  >
-                    <i class="fas fa-check-double me-2"></i>
-                    Marcar Todas como Feitas
-                  </button>
-                  <button
-                    class="btn btn-outline-danger btn-sm"
-                    onclick="deleteCompleted()"
-                  >
-                    <i class="fas fa-trash me-2"></i>
-                    Excluir Concluídas
-                  </button>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </main>
+    </section>
 
-    <!-- New Task Modal -->
-    <div class="modal fade" id="newTaskModal" tabindex="-1">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">
-              <i class="fas fa-plus me-2"></i>
-              Nova Tarefa
-            </h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <form id="task-form" data-validate>
-              <div class="row">
-                <div class="col-md-8">
-                  <div class="form-group">
-                    <label for="task-title" class="form-label"
-                      >Título da Tarefa *</label
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="task-title"
-                      name="title"
-                      placeholder="Ex: Finalizar relatório mensal"
-                      data-validation="required|maxLength:100"
-                    />
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="form-group">
-                    <label for="task-priority" class="form-label"
-                      >Prioridade</label
-                    >
-                    <select
-                      class="form-select"
-                      id="task-priority"
-                      name="priority"
-                    >
-                      <option value="low">Baixa</option>
-                      <option value="medium" selected>Média</option>
-                      <option value="high">Alta</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
+    <!-- Features Section -->
+    <section
+      id="features"
+      class="features-section py-5"
+      style="background: var(--primary-bg)"
+    >
+      <div class="container">
+        <div class="text-center mb-5">
+          <h2 class="display-5 fw-bold mb-3">Por que escolher o Flow?</h2>
+          <p class="lead text-muted">
+            Recursos poderosos para organizar sua vida de forma simples
+          </p>
+        </div>
 
-              <div class="form-group">
-                <label for="task-description" class="form-label"
-                  >Descrição</label
-                >
-                <textarea
-                  class="form-control"
-                  id="task-description"
-                  name="description"
-                  rows="3"
-                  placeholder="Descreva os detalhes da tarefa..."
-                  data-validation="maxLength:500"
-                ></textarea>
-              </div>
-
-              <div class="form-group">
-                <label for="task-due-date" class="form-label"
-                  >Data de Vencimento</label
-                >
-                <input
-                  type="date"
-                  class="form-control"
-                  id="task-due-date"
-                  name="dueDate"
-                  data-validation="date"
-                />
-              </div>
-
-              <div class="form-group">
-                <label for="task-tags" class="form-label">Tags</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="task-tags"
-                  name="tags"
-                  placeholder="trabalho, urgente, pessoal (separadas por vírgula)"
-                />
-                <small class="form-text text-muted"
-                  >Separe as tags por vírgula</small
-                >
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-outline-secondary"
-              data-bs-dismiss="modal"
+        <div class="row g-4">
+          <div class="col-md-6 col-lg-4">
+            <div
+              class="feature-card text-center p-4 h-100"
+              style="
+                background: var(--secondary-bg);
+                border-radius: var(--radius-lg);
+                box-shadow: var(--shadow-sm);
+              "
             >
-              Cancelar
-            </button>
-            <button
-              type="submit"
-              form="task-form"
-              class="btn btn-primary-custom"
+              <div class="feature-icon mb-3">
+                <i
+                  class="fas fa-list-check"
+                  style="font-size: 3rem; color: var(--primary-red)"
+                ></i>
+              </div>
+              <h4 class="fw-bold mb-3">Gest��o Intuitiva</h4>
+              <p class="text-muted">
+                Interface limpa e moderna que facilita a organização de todas as
+                suas tarefas sem complicação.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <div
+              class="feature-card text-center p-4 h-100"
+              style="
+                background: var(--secondary-bg);
+                border-radius: var(--radius-lg);
+                box-shadow: var(--shadow-sm);
+              "
             >
-              <i class="fas fa-save me-1"></i>
-              Salvar Tarefa
-            </button>
+              <div class="feature-icon mb-3">
+                <i
+                  class="fas fa-mobile-alt"
+                  style="font-size: 3rem; color: var(--info-blue)"
+                ></i>
+              </div>
+              <h4 class="fw-bold mb-3">100% Responsivo</h4>
+              <p class="text-muted">
+                Acesse suas tarefas de qualquer dispositivo. Funciona
+                perfeitamente no computador, tablet e celular.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <div
+              class="feature-card text-center p-4 h-100"
+              style="
+                background: var(--secondary-bg);
+                border-radius: var(--radius-lg);
+                box-shadow: var(--shadow-sm);
+              "
+            >
+              <div class="feature-icon mb-3">
+                <i
+                  class="fas fa-chart-line"
+                  style="font-size: 3rem; color: var(--success-green)"
+                ></i>
+              </div>
+              <h4 class="fw-bold mb-3">Acompanhe Progresso</h4>
+              <p class="text-muted">
+                Visualize seu progresso com gráficos e estatísticas que motivam
+                você a ser mais produtivo.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <div
+              class="feature-card text-center p-4 h-100"
+              style="
+                background: var(--secondary-bg);
+                border-radius: var(--radius-lg);
+                box-shadow: var(--shadow-sm);
+              "
+            >
+              <div class="feature-icon mb-3">
+                <i
+                  class="fas fa-bell"
+                  style="font-size: 3rem; color: var(--warning-orange)"
+                ></i>
+              </div>
+              <h4 class="fw-bold mb-3">Lembretes Inteligentes</h4>
+              <p class="text-muted">
+                Nunca mais esqueça uma tarefa importante com nosso sistema de
+                notificações personalizáveis.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <div
+              class="feature-card text-center p-4 h-100"
+              style="
+                background: var(--secondary-bg);
+                border-radius: var(--radius-lg);
+                box-shadow: var(--shadow-sm);
+              "
+            >
+              <div class="feature-icon mb-3">
+                <i
+                  class="fas fa-tags"
+                  style="font-size: 3rem; color: var(--primary-red)"
+                ></i>
+              </div>
+              <h4 class="fw-bold mb-3">Organização por Tags</h4>
+              <p class="text-muted">
+                Use tags e prioridades para categorizar suas tarefas e encontrar
+                o que precisa rapidamente.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <div
+              class="feature-card text-center p-4 h-100"
+              style="
+                background: var(--secondary-bg);
+                border-radius: var(--radius-lg);
+                box-shadow: var(--shadow-sm);
+              "
+            >
+              <div class="feature-icon mb-3">
+                <i
+                  class="fas fa-sync-alt"
+                  style="font-size: 3rem; color: var(--info-blue)"
+                ></i>
+              </div>
+              <h4 class="fw-bold mb-3">Sincronização Automática</h4>
+              <p class="text-muted">
+                Seus dados sempre seguros e sincronizados em tempo real, mesmo
+                quando estiver offline.
+              </p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
+
+    <!-- Features Highlight Section -->
+    <section
+      id="demo"
+      class="features-highlight-section py-5"
+      style="background: var(--secondary-bg)"
+    >
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <h2 class="display-5 fw-bold mb-4">Simplicidade e Eficiência</h2>
+            <p class="lead text-muted mb-4">
+              Descubra como é fácil organizar suas tarefas e aumentar sua
+              produtividade com uma interface limpa e intuitiva.
+            </p>
+
+            <div class="highlight-features">
+              <div class="highlight-feature mb-3">
+                <div class="d-flex align-items-start">
+                  <i
+                    class="fas fa-lightning-bolt me-3 mt-1"
+                    style="color: var(--primary-red)"
+                  ></i>
+                  <div>
+                    <h5 class="fw-bold mb-1">Interface Rápida</h5>
+                    <p class="text-muted mb-0">
+                      Adicione e gerencie tarefas de forma instantânea e
+                      intuitiva
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="highlight-feature mb-3">
+                <div class="d-flex align-items-start">
+                  <i
+                    class="fas fa-sort-amount-down me-3 mt-1"
+                    style="color: var(--info-blue)"
+                  ></i>
+                  <div>
+                    <h5 class="fw-bold mb-1">Organização Inteligente</h5>
+                    <p class="text-muted mb-0">
+                      Prioridades, categorias e filtros para manter tudo
+                      organizado
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="highlight-feature">
+                <div class="d-flex align-items-start">
+                  <i
+                    class="fas fa-check-double me-3 mt-1"
+                    style="color: var(--success-green)"
+                  ></i>
+                  <div>
+                    <h5 class="fw-bold mb-1">Controle Total</h5>
+                    <p class="text-muted mb-0">
+                      Acompanhe seu progresso e conquiste seus objetivos diários
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-4">
+              <a
+                href="pages/register.html"
+                class="btn btn-primary-custom btn-lg"
+              >
+                <i class="fas fa-rocket me-2"></i>
+                Começar Agora
+              </a>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="features-showcase">
+              <div
+                class="showcase-card p-4"
+                style="
+                  background: linear-gradient(
+                    135deg,
+                    var(--accent-bg),
+                    var(--primary-bg)
+                  );
+                  border-radius: var(--radius-xl);
+                  box-shadow: var(--shadow-lg);
+                  text-align: center;
+                "
+              >
+                <div class="showcase-icons mb-4">
+                  <i
+                    class="fas fa-tasks"
+                    style="
+                      font-size: 3rem;
+                      color: var(--primary-red);
+                      margin: 0 1rem;
+                    "
+                  ></i>
+                  <i
+                    class="fas fa-arrow-right"
+                    style="
+                      font-size: 2rem;
+                      color: var(--text-secondary);
+                      margin: 0 0.5rem;
+                    "
+                  ></i>
+                  <i
+                    class="fas fa-check-circle"
+                    style="
+                      font-size: 3rem;
+                      color: var(--success-green);
+                      margin: 0 1rem;
+                    "
+                  ></i>
+                </div>
+                <h4 class="fw-bold mb-3">Transforme Caos em Ordem</h4>
+                <p class="text-muted mb-4">
+                  De tarefas espalhadas para uma organização perfeita em minutos
+                </p>
+                <div class="benefit-list">
+                  <div class="benefit-item mb-2">
+                    <i class="fas fa-check text-success me-2"></i>
+                    <span class="small">Interface limpa e intuitiva</span>
+                  </div>
+                  <div class="benefit-item mb-2">
+                    <i class="fas fa-check text-success me-2"></i>
+                    <span class="small">Sincronização automática</span>
+                  </div>
+                  <div class="benefit-item">
+                    <i class="fas fa-check text-success me-2"></i>
+                    <span class="small">Acesso de qualquer dispositivo</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section
+      id="testimonials"
+      class="testimonials-section py-5"
+      style="background: var(--accent-bg)"
+    >
+      <div class="container">
+        <div class="text-center mb-5">
+          <h2 class="display-5 fw-bold mb-3">O que nossos usuários dizem</h2>
+          <p class="lead text-muted">
+            Milhares de pessoas já transformaram sua produtividade
+          </p>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-md-6 col-lg-4">
+            <div
+              class="testimonial-card p-4 h-100"
+              style="
+                background: var(--secondary-bg);
+                border-radius: var(--radius-lg);
+                box-shadow: var(--shadow-sm);
+              "
+            >
+              <div class="testimonial-stars mb-3">
+                <i class="fas fa-star" style="color: #ffc107"></i>
+                <i class="fas fa-star" style="color: #ffc107"></i>
+                <i class="fas fa-star" style="color: #ffc107"></i>
+                <i class="fas fa-star" style="color: #ffc107"></i>
+                <i class="fas fa-star" style="color: #ffc107"></i>
+              </div>
+              <blockquote class="mb-3">
+                "O Flow revolucionou minha organização. Nunca mais perdi prazos
+                importantes e minha produtividade aumentou 200%!"
+              </blockquote>
+              <div class="testimonial-author">
+                <strong>Maria Silva</strong>
+                <div class="text-muted small">Estudante de Engenharia</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <div
+              class="testimonial-card p-4 h-100"
+              style="
+                background: var(--secondary-bg);
+                border-radius: var(--radius-lg);
+                box-shadow: var(--shadow-sm);
+              "
+            >
+              <div class="testimonial-stars mb-3">
+                <i class="fas fa-star" style="color: #ffc107"></i>
+                <i class="fas fa-star" style="color: #ffc107"></i>
+                <i class="fas fa-star" style="color: #ffc107"></i>
+                <i class="fas fa-star" style="color: #ffc107"></i>
+                <i class="fas fa-star" style="color: #ffc107"></i>
+              </div>
+              <blockquote class="mb-3">
+                "Interface limpa e intuitiva. Consegui organizar toda minha
+                rotina de estudos e trabalho em poucos minutos."
+              </blockquote>
+              <div class="testimonial-author">
+                <strong>João Santos</strong>
+                <div class="text-muted small">Designer Freelancer</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <div
+              class="testimonial-card p-4 h-100"
+              style="
+                background: var(--secondary-bg);
+                border-radius: var(--radius-lg);
+                box-shadow: var(--shadow-sm);
+              "
+            >
+              <div class="testimonial-stars mb-3">
+                <i class="fas fa-star" style="color: #ffc107"></i>
+                <i class="fas fa-star" style="color: #ffc107"></i>
+                <i class="fas fa-star" style="color: #ffc107"></i>
+                <i class="fas fa-star" style="color: #ffc107"></i>
+                <i class="fas fa-star" style="color: #ffc107"></i>
+              </div>
+              <blockquote class="mb-3">
+                "O melhor gerenciador de tarefas que já usei. Simples, rápido e
+                funciona perfeitamente no celular."
+              </blockquote>
+              <div class="testimonial-author">
+                <strong>Ana Costa</strong>
+                <div class="text-muted small">Analista de Sistemas</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section
+      id="about"
+      class="about-section py-5"
+      style="background: var(--secondary-bg)"
+    >
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <h2 class="display-5 fw-bold mb-4">Sobre o Flow</h2>
+            <p class="lead text-muted mb-4">
+              Desenvolvido com paixão por produtividade e inspirado nas melhores
+              práticas de gerenciamento de tarefas, o Flow é a ferramenta que
+              você precisa para organizar sua vida.
+            </p>
+
+            <div class="about-stats mb-4">
+              <div class="row text-center">
+                <div class="col-6 col-md-3 mb-3">
+                  <h3 class="fw-bold mb-0" style="color: var(--primary-red)">
+                    10K+
+                  </h3>
+                  <small class="text-muted">Usuários ativos</small>
+                </div>
+                <div class="col-6 col-md-3 mb-3">
+                  <h3 class="fw-bold mb-0" style="color: var(--success-green)">
+                    1M+
+                  </h3>
+                  <small class="text-muted">Tarefas concluídas</small>
+                </div>
+                <div class="col-6 col-md-3 mb-3">
+                  <h3 class="fw-bold mb-0" style="color: var(--info-blue)">
+                    99.9%
+                  </h3>
+                  <small class="text-muted">Uptime</small>
+                </div>
+                <div class="col-6 col-md-3 mb-3">
+                  <h3 class="fw-bold mb-0" style="color: var(--warning-orange)">
+                    4.9
+                  </h3>
+                  <small class="text-muted">Avaliação média</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="about-tech">
+              <h5 class="fw-bold mb-3">Tecnologias Utilizadas</h5>
+              <div class="tech-badges">
+                <span class="badge bg-light text-dark me-2 mb-2"
+                  >Bootstrap 5</span
+                >
+                <span class="badge bg-light text-dark me-2 mb-2"
+                  >Web Storage</span
+                >
+                <span class="badge bg-light text-dark me-2 mb-2"
+                  >JavaScript ES6+</span
+                >
+                <span class="badge bg-light text-dark me-2 mb-2"
+                  >CSS Grid & Flexbox</span
+                >
+                <span class="badge bg-light text-dark me-2 mb-2"
+                  >Responsive Design</span
+                >
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="about-image text-center">
+              <!-- Responsive about image with optimization (ID 10, ID 11) -->
+              <picture class="image-container image-container--square">
+                <source
+                  media="(max-width: 768px)"
+                  srcset="assets/images/hero-task-preview.svg"
+                  type="image/svg+xml"
+                />
+                <source
+                  media="(min-width: 769px)"
+                  srcset="assets/images/hero-task-preview.svg"
+                  type="image/svg+xml"
+                />
+                <img
+                  src="assets/images/hero-task-preview.svg"
+                  alt="Ilustração representando o Flow como projeto acadêmico inspirado no Todoist"
+                  class="responsive-image"
+                  loading="lazy"
+                  width="400"
+                  height="400"
+                  style="filter: grayscale(30%) opacity(0.8)"
+                />
+              </picture>
+              <div class="mt-4">
+                <i
+                  class="fas fa-rocket"
+                  style="
+                    font-size: 3rem;
+                    color: var(--primary-red);
+                    margin-bottom: 1rem;
+                  "
+                ></i>
+                <h4 class="text-muted">Projeto Acadêmico</h4>
+                <p class="text-muted">
+                  Desenvolvido para fins educacionais<br />Inspirado no Todoist
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section
+      class="cta-section py-5"
+      style="
+        background: linear-gradient(
+          135deg,
+          var(--primary-red) 0%,
+          #c0392b 100%
+        );
+        color: white;
+      "
+    >
+      <div class="container text-center">
+        <h2 class="display-5 fw-bold mb-3">Pronto para organizar sua vida?</h2>
+        <p class="lead mb-4 opacity-90">
+          Junte-se a milhares de usuários que já transformaram sua produtividade
+          com o Flow
+        </p>
+        <div class="cta-actions">
+          <a href="pages/register.html" class="btn btn-light btn-lg me-3">
+            <i class="fas fa-rocket me-2"></i>
+            Começar Gratuitamente
+          </a>
+          <a href="pages/login.html" class="btn btn-outline-light btn-lg">
+            <i class="fas fa-sign-in-alt me-2"></i>
+            Já tenho conta
+          </a>
+        </div>
+        <div class="mt-4">
+          <small class="opacity-75"
+            >✓ Gratuito para sempre ✓ Sem cartão de crédito ✓ Configuração em 2
+            minutos</small
+          >
+        </div>
+      </div>
+    </section>
 
     <!-- Footer -->
-    <footer
-      class="footer py-4 mt-5"
-      style="
-        background: #2c3e50;
-        border-top: 1px solid var(--border-color);
-        color: #ffffff;
-      "
-    >
+    <footer class="footer py-5" style="background: #2c3e50; color: #ffffff">
       <div class="container">
         <div class="row">
-          <div class="col-md-6">
-            <div class="footer-brand mb-3">
-              <h5>
+          <div class="col-md-6 col-lg-3 mb-4">
+            <div class="footer-brand">
+              <h5 class="fw-bold mb-3">
                 <i
                   class="fas fa-tasks me-2"
                   style="color: var(--primary-red)"
                 ></i>
                 Flow
               </h5>
-              <p style="color: #bdc3c7">
-                Organize suas tarefas com simplicidade e eficiência. Inspirado
-                no Todoist, desenvolvido para fins acadêmicos.
+              <p class="text-muted mb-3">
+                O gerenciador de tarefas que organiza sua vida com simplicidade
+                e elegância.
               </p>
+              <div class="social-links">
+                <a href="#" class="text-muted me-3"
+                  ><i class="fab fa-github fs-5"></i
+                ></a>
+                <a href="#" class="text-muted me-3"
+                  ><i class="fab fa-linkedin fs-5"></i
+                ></a>
+                <a href="#" class="text-muted me-3"
+                  ><i class="fab fa-twitter fs-5"></i
+                ></a>
+                <a href="#" class="text-muted"
+                  ><i class="fab fa-instagram fs-5"></i
+                ></a>
+              </div>
             </div>
           </div>
-          <div class="col-md-3">
-            <h6 class="fw-bold mb-3">Links Úteis</h6>
+
+          <div class="col-md-6 col-lg-2 mb-4">
+            <h6 class="fw-bold mb-3">Produto</h6>
             <ul class="list-unstyled">
-              <li>
+              <li class="mb-2">
                 <a
-                  href="landing.html"
+                  href="#features"
                   class="text-decoration-none"
                   style="color: #bdc3c7"
-                  >Página Inicial</a
+                  >Recursos</a
                 >
               </li>
-              <li>
+              <li class="mb-2">
+                <a
+                  href="#demo"
+                  class="text-decoration-none"
+                  style="color: #bdc3c7"
+                  >Recursos</a
+                >
+              </li>
+              <li class="mb-2">
+                <a
+                  href="pages/register.html"
+                  class="text-decoration-none"
+                  style="color: #bdc3c7"
+                  >Cadastro</a
+                >
+              </li>
+              <li class="mb-2">
+                <a href="#" class="text-decoration-none" style="color: #bdc3c7"
+                  >Novidades</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-md-6 col-lg-2 mb-4">
+            <h6 class="fw-bold mb-3">Empresa</h6>
+            <ul class="list-unstyled">
+              <li class="mb-2">
+                <a
+                  href="#about"
+                  class="text-decoration-none"
+                  style="color: #bdc3c7"
+                  >Sobre</a
+                >
+              </li>
+              <li class="mb-2">
+                <a href="#" class="text-decoration-none" style="color: #bdc3c7"
+                  >Blog</a
+                >
+              </li>
+              <li class="mb-2">
+                <a href="#" class="text-decoration-none" style="color: #bdc3c7"
+                  >Carreiras</a
+                >
+              </li>
+              <li class="mb-2">
+                <a href="#" class="text-decoration-none" style="color: #bdc3c7"
+                  >Contato</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-md-6 col-lg-2 mb-4">
+            <h6 class="fw-bold mb-3">Suporte</h6>
+            <ul class="list-unstyled">
+              <li class="mb-2">
                 <a href="#" class="text-decoration-none" style="color: #bdc3c7"
                   >Ajuda</a
                 >
               </li>
+              <li class="mb-2">
+                <a href="#" class="text-decoration-none" style="color: #bdc3c7"
+                  >Documentação</a
+                >
+              </li>
+              <li class="mb-2">
+                <a href="#" class="text-decoration-none" style="color: #bdc3c7"
+                  >Status</a
+                >
+              </li>
+              <li class="mb-2">
+                <a href="#" class="text-decoration-none" style="color: #bdc3c7"
+                  >API</a
+                >
+              </li>
             </ul>
           </div>
-          <div class="col-md-3">
-            <h6 class="fw-bold mb-3">Tecnologias</h6>
-            <ul class="list-unstyled">
-              <li style="color: #bdc3c7">Bootstrap 5</li>
-              <li style="color: #bdc3c7">jQuery</li>
-              <li style="color: #bdc3c7">JSON Server</li>
-              <li style="color: #bdc3c7">Web Storage</li>
-            </ul>
+
+          <div class="col-md-6 col-lg-3 mb-4">
+            <h6 class="fw-bold mb-3">Newsletter</h6>
+            <p class="mb-3" style="color: #bdc3c7">
+              Receba dicas de produtividade e novidades do Flow
+            </p>
+            <form class="newsletter-form">
+              <div class="input-group">
+                <input
+                  type="email"
+                  class="form-control"
+                  placeholder="Seu e-mail"
+                />
+                <button class="btn btn-primary-custom" type="submit">
+                  <i class="fas fa-paper-plane"></i>
+                </button>
+              </div>
+            </form>
           </div>
         </div>
-        <hr style="border-color: var(--border-color)" />
+
+        <hr style="border-color: rgba(255, 255, 255, 0.1); margin: 2rem 0" />
+
         <div class="row align-items-center">
           <div class="col-md-6">
             <p class="mb-0" style="color: #bdc3c7">
-              &copy; 2025 Flow. Projeto acadêmico - UTFPR.
+              &copy; 2025 Flow. Projeto acadêmico - Todos os direitos
+              reservados.
             </p>
           </div>
           <div class="col-md-6 text-end">
-            <div class="social-links">
-              <a href="#" class="text-muted me-3"
-                ><i class="fab fa-github"></i
-              ></a>
-              <a href="#" class="text-muted me-3"
-                ><i class="fab fa-linkedin"></i
-              ></a>
-              <a href="https://todoist.com" target="_blank" class="text-muted">
-                <i class="fas fa-external-link-alt"></i> Inspiração: Todoist
+            <div class="footer-links">
+              <a
+                href="#"
+                class="text-decoration-none me-3"
+                style="color: #bdc3c7"
+                >Privacidade</a
+              >
+              <a
+                href="#"
+                class="text-decoration-none me-3"
+                style="color: #bdc3c7"
+                >Termos</a
+              >
+              <a
+                href="https://todoist.com"
+                target="_blank"
+                class="text-decoration-none"
+                style="color: #bdc3c7"
+              >
+                <i class="fas fa-external-link-alt me-1"></i>
+                Inspiração: Todoist
               </a>
             </div>
           </div>
@@ -596,219 +1048,90 @@
       </div>
     </footer>
 
-    <!-- Offline Indicator -->
-    <div
-      id="offline-indicator"
-      class="alert alert-warning position-fixed d-none"
-      style="bottom: 20px; left: 20px; z-index: 9999"
-    >
-      <i class="fas fa-wifi-slash me-2"></i>
-      Você está offline. Os dados serão sincronizados quando a conexão for
-      restaurada.
-    </div>
-
     <!-- JavaScript Dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 
-    <!-- Web Components -->
-    <script type="module" src="components/task-item.js"></script>
-
-    <!-- Custom JavaScript -->
-    <script src="assets/js/app.js"></script>
+    <!-- Image Optimization -->
     <script src="assets/js/image-optimization.js"></script>
 
-    <!-- Page-specific JavaScript -->
+    <!-- Landing Page Scripts -->
     <script>
-      // Tasks page specific functionality
-      document.addEventListener("DOMContentLoaded", function () {
-        setupTasksPage();
-        updateTasksStats();
-        setupViewToggles();
-        setupFilters();
-      });
-
-      function setupTasksPage() {
-        // Setup form handlers
-        setupTaskForm();
-
-        // Setup status filter radio buttons
-        document
-          .querySelectorAll('input[name="statusFilter"]')
-          .forEach((radio) => {
-            radio.addEventListener("change", function () {
-              appState.filters.status = this.value;
-              taskManager.renderTasks();
-              updateTasksStats();
-            });
-          });
-      }
-
-      function setupTaskForm() {
-        const form = document.getElementById("task-form");
-        let isSubmitting = false;
-
-        // Form submission
-        form.addEventListener("submit", async (e) => {
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
           e.preventDefault();
-
-          // Prevent duplicate submissions
-          if (isSubmitting) return;
-
-          if (validation.validateForm(form)) {
-            isSubmitting = true;
-
-            // Update button to show loading state
-            const submitButton = form.querySelector('button[type="submit"]');
-            const originalText = submitButton.innerHTML;
-            submitButton.innerHTML =
-              '<i class="fas fa-spinner fa-spin me-1"></i>Salvando...';
-            submitButton.disabled = true;
-
-            try {
-              await app.handleFormSubmission(form);
-
-              bootstrap.Modal.getInstance(
-                document.getElementById("newTaskModal"),
-              ).hide();
-              updateTasksStats();
-            } catch (error) {
-              console.error("Error handling form:", error);
-            } finally {
-              // Reset button state
-              submitButton.innerHTML = originalText;
-              submitButton.disabled = false;
-              isSubmitting = false;
-            }
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
           }
         });
-      }
+      });
 
-      function updateTasksStats() {
-        const tasks = taskManager.filterTasks();
-        const allTasks = appState.tasks || [];
-
-        // General stats
-        document.getElementById("stat-total").textContent = allTasks.length;
-        document.getElementById("stat-pending").textContent = allTasks.filter(
-          (t) => t.status === "pending",
-        ).length;
-        document.getElementById("stat-completed").textContent = allTasks.filter(
-          (t) => t.status === "completed",
-        ).length;
-
-        // Priority stats
-        const highPriority = allTasks.filter(
-          (t) => t.priority === "high",
-        ).length;
-        const mediumPriority = allTasks.filter(
-          (t) => t.priority === "medium",
-        ).length;
-        const lowPriority = allTasks.filter((t) => t.priority === "low").length;
-        const total = allTasks.length || 1; // Avoid division by zero
-
-        document.getElementById("priority-high-count").textContent =
-          highPriority;
-        document.getElementById("priority-medium-count").textContent =
-          mediumPriority;
-        document.getElementById("priority-low-count").textContent = lowPriority;
-
-        document.getElementById("priority-high-bar").style.width =
-          (highPriority / total) * 100 + "%";
-        document.getElementById("priority-medium-bar").style.width =
-          (mediumPriority / total) * 100 + "%";
-        document.getElementById("priority-low-bar").style.width =
-          (lowPriority / total) * 100 + "%";
-      }
-
-      function setupViewToggles() {
-        // View is now fixed to cards only - no toggle needed
-        const container = document.getElementById("tasks-container");
-        if (container) {
-          container.className = "tasks-container view-cards";
+      // Navbar background on scroll
+      window.addEventListener("scroll", function () {
+        const navbar = document.querySelector(".navbar");
+        if (window.scrollY > 50) {
+          navbar.style.background = "rgba(255, 255, 255, 0.98)";
+          navbar.style.boxShadow = "0 2px 10px rgba(0, 0, 0, 0.1)";
+        } else {
+          navbar.style.background = "rgba(255, 255, 255, 0.95)";
+          navbar.style.boxShadow = "none";
         }
-      }
+      });
 
-      function setupFilters() {
-        // Filter dropdowns
-        document.querySelectorAll("[data-filter]").forEach((select) => {
-          select.addEventListener("change", function () {
-            const filterType = this.dataset.filter;
-            appState.filters[filterType] = this.value;
-            taskManager.renderTasks();
-            updateTasksStats();
-          });
+      // Newsletter form
+      document
+        .querySelector(".newsletter-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const email = this.querySelector('input[type="email"]').value;
+          if (email) {
+            alert(
+              "Obrigado por se inscrever! Em breve você receberá nossas novidades.",
+            );
+            this.reset();
+          }
         });
 
-        // Sort dropdown
-        document
-          .getElementById("sort-tasks")
-          .addEventListener("change", function () {
-            const sortBy = this.value;
-            appState.tasks.sort((a, b) => {
-              if (sortBy === "priority") {
-                const priorityOrder = { high: 3, medium: 2, low: 1 };
-                return priorityOrder[b.priority] - priorityOrder[a.priority];
-              } else if (sortBy === "dueDate") {
-                // Tarefas sem data de vencimento vão para o final
-                if (!a.dueDate && !b.dueDate) return 0;
-                if (!a.dueDate) return 1;
-                if (!b.dueDate) return -1;
-                // Tarefas que vão vencer primeiro aparecem primeiro
-                return new Date(a.dueDate) - new Date(b.dueDate);
-              } else if (sortBy === "createdAt") {
-                return new Date(b.createdAt) - new Date(a.createdAt);
-              } else if (sortBy === "title") {
-                return a.title.localeCompare(b.title);
-              }
-              return 0;
+      // Animate counters when in view
+      const observerOptions = {
+        threshold: 0.5,
+        rootMargin: "0px 0px -100px 0px",
+      };
+
+      const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const counters = entry.target.querySelectorAll(".about-stats h3");
+            counters.forEach((counter) => {
+              const target = counter.textContent;
+              const number = parseInt(target.replace(/\D/g, ""));
+              const suffix = target.replace(/\d/g, "");
+
+              let current = 0;
+              const increment = number / 50;
+              const timer = setInterval(() => {
+                current += increment;
+                if (current >= number) {
+                  counter.textContent = target;
+                  clearInterval(timer);
+                } else {
+                  counter.textContent = Math.floor(current) + suffix;
+                }
+              }, 30);
             });
-            taskManager.renderTasks();
-          });
-      }
+            counterObserver.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
 
-      // Quick action functions
-      function markAllCompleted() {
-        if (confirm("Marcar todas as tarefas como concluídas?")) {
-          const pendingTasks = appState.tasks.filter(
-            (task) => task.status !== "completed",
-          );
-
-          pendingTasks.forEach(async (task) => {
-            await taskManager.updateTask(task.id, {
-              ...task,
-              status: "completed",
-              completedAt: new Date().toISOString(),
-            });
-          });
-
-          utils.showNotification(
-            "Todas as tarefas foram marcadas como concluídas!",
-            "success",
-          );
-        }
-      }
-
-      function deleteCompleted() {
-        if (
-          confirm(
-            "Excluir todas as tarefas concluídas? Esta ação não pode ser desfeita.",
-          )
-        ) {
-          const completedTasks = appState.tasks.filter(
-            (task) => task.status === "completed",
-          );
-
-          completedTasks.forEach(async (task) => {
-            await taskManager.deleteTask(task.id);
-          });
-
-          utils.showNotification(
-            "Tarefas concluídas foram excluídas!",
-            "success",
-          );
-        }
+      const aboutSection = document.querySelector(".about-stats");
+      if (aboutSection) {
+        counterObserver.observe(aboutSection);
       }
     </script>
   </body>
