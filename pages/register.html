@@ -983,32 +983,91 @@
         // Simulate API call delay
         await new Promise((resolve) => setTimeout(resolve, 2000));
 
-        // Check if email already exists (simulate)
-        const existingEmails = ["admin@flow.com", "test@example.com"];
-        if (existingEmails.includes(registerData.email)) {
-          throw new Error("Email already exists");
+        try {
+          // Check if email already exists via API
+          const response = await fetch("http://localhost:3001/users");
+          const users = await response.json();
+
+          const emailExists = users.some(
+            (user) => user.email === registerData.email,
+          );
+          if (emailExists) {
+            throw new Error("Email already exists");
+          }
+
+          // Create new user
+          const userData = {
+            id: Date.now().toString(),
+            name: `${registerData.firstName} ${registerData.lastName}`,
+            email: registerData.email,
+            password: registerData.password,
+            firstName: registerData.firstName,
+            lastName: registerData.lastName,
+            phone: registerData.phone,
+            birthDate: registerData.birthDate,
+            usage: registerData.usage,
+            preferences: {
+              notificationsEmail: registerData.notificationsEmail === "on",
+              notificationsBrowser: registerData.notificationsBrowser === "on",
+              notificationsNewsletter:
+                registerData.notificationsNewsletter === "on",
+              marketing: registerData.marketing === "on",
+            },
+            createdAt: new Date().toISOString(),
+          };
+
+          // Try to save to API
+          const createResponse = await fetch("http://localhost:3001/users", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(userData),
+          });
+
+          if (!createResponse.ok) {
+            throw new Error("Failed to create user");
+          }
+
+          console.log("User registered successfully:", userData);
+        } catch (error) {
+          // Fallback: save to localStorage if API is unavailable
+          const existingUsers = JSON.parse(
+            localStorage.getItem("flow_users") || "[]",
+          );
+
+          const emailExists = existingUsers.some(
+            (user) => user.email === registerData.email,
+          );
+          if (emailExists) {
+            throw new Error("Email already exists");
+          }
+
+          const userData = {
+            id: Date.now().toString(),
+            name: `${registerData.firstName} ${registerData.lastName}`,
+            email: registerData.email,
+            password: registerData.password,
+            firstName: registerData.firstName,
+            lastName: registerData.lastName,
+            phone: registerData.phone,
+            birthDate: registerData.birthDate,
+            usage: registerData.usage,
+            preferences: {
+              notificationsEmail: registerData.notificationsEmail === "on",
+              notificationsBrowser: registerData.notificationsBrowser === "on",
+              notificationsNewsletter:
+                registerData.notificationsNewsletter === "on",
+              marketing: registerData.marketing === "on",
+            },
+            createdAt: new Date().toISOString(),
+          };
+
+          existingUsers.push(userData);
+          localStorage.setItem("flow_users", JSON.stringify(existingUsers));
+
+          console.log("User registered offline:", userData);
         }
-
-        // Store user data (in real app, this would be sent to backend)
-        const userData = {
-          id: Date.now(),
-          firstName: registerData.firstName,
-          lastName: registerData.lastName,
-          email: registerData.email,
-          phone: registerData.phone,
-          birthDate: registerData.birthDate,
-          usage: registerData.usage,
-          preferences: {
-            notificationsEmail: registerData.notificationsEmail === "on",
-            notificationsBrowser: registerData.notificationsBrowser === "on",
-            notificationsNewsletter:
-              registerData.notificationsNewsletter === "on",
-            marketing: registerData.marketing === "on",
-          },
-          createdAt: new Date().toISOString(),
-        };
-
-        console.log("User registered:", userData);
       }
 
       function registerWithGoogle() {

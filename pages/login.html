@@ -420,40 +420,90 @@
         // Simulate API call delay
         await new Promise((resolve) => setTimeout(resolve, 1500));
 
-        // Demo credentials
-        const validCredentials = [
-          { email: "demo@flow.com", password: "demo123" },
-          { email: "usuario@teste.com", password: "teste123" },
-          { email: "admin@flow.com", password: "admin123" },
-        ];
+        try {
+          // Try to authenticate with API
+          const response = await fetch("http://localhost:3001/users");
+          const users = await response.json();
 
-        const isValid = validCredentials.some(
-          (cred) =>
-            cred.email === loginData.email &&
-            cred.password === loginData.password,
-        );
+          const validUser = users.find(
+            (user) =>
+              user.email === loginData.email &&
+              user.password === loginData.password,
+          );
 
-        if (!isValid) {
-          throw new Error("Invalid credentials");
-        }
+          if (!validUser) {
+            throw new Error("Invalid credentials");
+          }
 
-        // Store user session
-        const user = {
-          id: 1,
-          name: "Usuário Demo",
-          email: loginData.email,
-          avatar: "https://via.placeholder.com/150",
-          loginTime: new Date().toISOString(),
-        };
+          // Store user session
+          const user = {
+            id: validUser.id,
+            name: validUser.name,
+            email: validUser.email,
+            avatar: "https://via.placeholder.com/150",
+            loginTime: new Date().toISOString(),
+          };
 
-        storage.set("flow_user", user);
-        storage.set("flow_session", {
-          token: "demo-session-token",
-          expires: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
-        });
+          storage.set("flow_user", user);
+          storage.set("flow_session", {
+            token: "session-token-" + validUser.id,
+            expires: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
+          });
 
-        if (loginData.remember) {
-          storage.set("flow_remember", true);
+          if (loginData.remember) {
+            storage.set("flow_remember", true);
+          }
+        } catch (error) {
+          // Fallback to demo credentials if API is unavailable
+          const validCredentials = [
+            {
+              id: "demo1",
+              name: "Usuário Demo",
+              email: "demo@flow.com",
+              password: "demo123",
+            },
+            {
+              id: "demo2",
+              name: "Usuário Teste",
+              email: "usuario@teste.com",
+              password: "teste123",
+            },
+            {
+              id: "demo3",
+              name: "Admin Flow",
+              email: "admin@flow.com",
+              password: "admin123",
+            },
+          ];
+
+          const validUser = validCredentials.find(
+            (cred) =>
+              cred.email === loginData.email &&
+              cred.password === loginData.password,
+          );
+
+          if (!validUser) {
+            throw new Error("Invalid credentials");
+          }
+
+          // Store user session
+          const user = {
+            id: validUser.id,
+            name: validUser.name,
+            email: validUser.email,
+            avatar: "https://via.placeholder.com/150",
+            loginTime: new Date().toISOString(),
+          };
+
+          storage.set("flow_user", user);
+          storage.set("flow_session", {
+            token: "demo-session-token",
+            expires: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
+          });
+
+          if (loginData.remember) {
+            storage.set("flow_remember", true);
+          }
         }
       }
 

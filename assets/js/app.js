@@ -6,7 +6,6 @@ const APP_CONFIG = {
   STORAGE_KEYS: {
     TASKS: "flow_tasks",
     USER_PREFERENCES: "flow_preferences",
-    THEME: "flow_theme",
   },
   PRIORITY_LEVELS: {
     LOW: "low",
@@ -799,12 +798,6 @@ const app = {
   },
 
   applyUserPreferences(preferences) {
-    // Apply theme
-    if (preferences.theme) {
-      document.body.className =
-        preferences.theme === "dark" ? "dark-theme" : "";
-    }
-
     // Apply other preferences
     console.log("Applied user preferences:", preferences);
   },
