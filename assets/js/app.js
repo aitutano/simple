@@ -602,7 +602,8 @@ const app = {
     const isLoginPage =
       window.location.pathname.includes("login.html") ||
       window.location.pathname.includes("register.html") ||
-      window.location.pathname.includes("landing.html");
+      window.location.pathname.endsWith("index.html") ||
+      window.location.pathname === "/";
 
     if (user && session) {
       // Check if session is still valid
@@ -639,7 +640,9 @@ const app = {
 
     // Redirect to login
     setTimeout(() => {
-      window.location.href = "pages/login.html";
+      const isInPagesFolder = window.location.pathname.includes("/pages/");
+      const loginPath = isInPagesFolder ? "login.html" : "pages/login.html";
+      window.location.href = loginPath;
     }, 2000);
   },
 
@@ -698,8 +701,10 @@ const app = {
 
     // Redirect to login
     setTimeout(() => {
-      window.location.href = "pages/login.html";
-    }, 1000);
+      const isInPagesFolder = window.location.pathname.includes("/pages/");
+      const loginPath = isInPagesFolder ? "login.html" : "pages/login.html";
+      window.location.href = loginPath;
+    }, 1500);
   },
 
   async loadInitialData() {
