@@ -367,7 +367,7 @@ const taskManager = {
       return newTask;
     } catch (error) {
       console.error("Error creating task:", error);
-      utils.showNotification("Erro ao criar tarefa", "danger");
+
       throw error;
     }
   },
@@ -400,7 +400,7 @@ const taskManager = {
       return updatedTask;
     } catch (error) {
       console.error("Error updating task:", error);
-      utils.showNotification("Erro ao atualizar tarefa", "danger");
+
       throw error;
     }
   },
@@ -427,7 +427,7 @@ const taskManager = {
       this.updateStats();
     } catch (error) {
       console.error("Error deleting task:", error);
-      utils.showNotification("Erro ao excluir tarefa", "danger");
+
       throw error;
     }
   },
@@ -671,12 +671,7 @@ function markAllCompleted() {
         }),
       ),
     )
-      .then(() => {
-        utils.showNotification(
-          `${pendingTasks.length} tarefa(s) marcada(s) como concluída(s)!`,
-          "success",
-        );
-      })
+      .then(() => {})
       .catch(() => {
         utils.showNotification("Erro ao atualizar tarefas", "danger");
       });
@@ -699,12 +694,7 @@ function deleteCompleted() {
     )
   ) {
     Promise.all(completedTasks.map((task) => taskManager.deleteTask(task.id)))
-      .then(() => {
-        utils.showNotification(
-          `${completedTasks.length} tarefa(s) excluída(s)!`,
-          "success",
-        );
-      })
+      .then(() => {})
       .catch(() => {
         utils.showNotification("Erro ao excluir tarefas", "danger");
       });
@@ -739,10 +729,6 @@ $(document).ready(function () {
     e.preventDefault();
 
     if (!validation.validateForm(this)) {
-      utils.showNotification(
-        "Por favor, corrija os erros no formulário",
-        "warning",
-      );
       return;
     }
 
