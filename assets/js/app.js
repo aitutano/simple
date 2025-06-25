@@ -599,6 +599,10 @@ const app = {
   checkUserSession() {
     const user = storage.get("flow_user");
     const session = storage.get("flow_session");
+    const isLoginPage =
+      window.location.pathname.includes("login.html") ||
+      window.location.pathname.includes("register.html") ||
+      window.location.pathname.includes("landing.html");
 
     if (user && session) {
       // Check if session is still valid
@@ -610,9 +614,44 @@ const app = {
         this.updateUserInterface(user);
       } else {
         // Session expired
-        this.logout();
+        this.sessionExpired();
       }
+    } else if (!isLoginPage) {
+      // Not logged in and not on login/register/landing page - redirect to login
+      this.redirectToLogin();
     }
+  },
+
+  sessionExpired() {
+    // Clear expired session
+    storage.remove("flow_user");
+    storage.remove("flow_session");
+    storage.remove("flow_remember");
+
+    // Reset app state
+    appState.currentUser = null;
+
+    // Show notification
+    utils.showNotification(
+      "Sua sessão expirou. Faça login novamente.",
+      "warning",
+    );
+
+    // Redirect to login
+    setTimeout(() => {
+      window.location.href = "pages/login.html";
+    }, 2000);
+  },
+
+  redirectToLogin() {
+    utils.showNotification(
+      "Você precisa fazer login para acessar esta página.",
+      "info",
+    );
+
+    setTimeout(() => {
+      window.location.href = "pages/login.html";
+    }, 1500);
   },
 
   updateUserInterface(user) {
