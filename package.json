@@ -4,11 +4,7 @@
   "description": "Aplicação de gerenciamento de tarefas inspirada no Todoist - Projeto acadêmico",
   "main": "index.js",
   "scripts": {
-    "dev": "npm run sass:watch & http-server . -p 3000 -c-1",
-    "build": "npm run sass:build",
-    "sass:build": "sass assets/scss/main.scss assets/css/compiled.css --style=compressed --no-source-map",
-    "sass:watch": "sass assets/scss/main.scss assets/css/compiled.css --watch --style=expanded",
-    "sass:dev": "sass assets/scss/main.scss assets/css/compiled.css --style=expanded --no-source-map",
+    "dev": "http-server . -p 3000 -c-1",
     "start": "npm run dev",
     "json-server": "json-server --watch api/db.json --port 3001"
   },
