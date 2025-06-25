@@ -454,33 +454,45 @@
             storage.set("flow_remember", true);
           }
         } catch (error) {
-          // Fallback to demo credentials if API is unavailable
-          const validCredentials = [
-            {
-              id: "demo1",
-              name: "Usuário Demo",
-              email: "demo@flow.com",
-              password: "demo123",
-            },
-            {
-              id: "demo2",
-              name: "Usuário Teste",
-              email: "usuario@teste.com",
-              password: "teste123",
-            },
-            {
-              id: "demo3",
-              name: "Admin Flow",
-              email: "admin@flow.com",
-              password: "admin123",
-            },
-          ];
-
-          const validUser = validCredentials.find(
-            (cred) =>
-              cred.email === loginData.email &&
-              cred.password === loginData.password,
+          // Fallback: check localStorage users first
+          const localUsers = JSON.parse(
+            localStorage.getItem("flow_users") || "[]",
           );
+          let validUser = localUsers.find(
+            (user) =>
+              user.email === loginData.email &&
+              user.password === loginData.password,
+          );
+
+          // If not found in localStorage, try demo credentials
+          if (!validUser) {
+            const validCredentials = [
+              {
+                id: "demo1",
+                name: "Usuário Demo",
+                email: "demo@flow.com",
+                password: "demo123",
+              },
+              {
+                id: "demo2",
+                name: "Usuário Teste",
+                email: "usuario@teste.com",
+                password: "teste123",
+              },
+              {
+                id: "demo3",
+                name: "Admin Flow",
+                email: "admin@flow.com",
+                password: "admin123",
+              },
+            ];
+
+            validUser = validCredentials.find(
+              (cred) =>
+                cred.email === loginData.email &&
+                cred.password === loginData.password,
+            );
+          }
 
           if (!validUser) {
             throw new Error("Invalid credentials");
@@ -497,7 +509,7 @@
 
           storage.set("flow_user", user);
           storage.set("flow_session", {
-            token: "demo-session-token",
+            token: "session-token-" + validUser.id,
             expires: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
           });
 
