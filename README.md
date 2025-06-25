@@ -25,18 +25,20 @@ Criar um sistema simples de gerenciamento de tarefas que demonstre o uso de fram
 
 ```
 flow-task-manager/
-├── index.html              # Página principal (SPA)
-├── package.json             # Dependências e scripts
-├── README.md               # Documentação
+├── index.html              # Página inicial/landing
+├── tasks.html              # Página de gerenciamento de tarefas
+├── login.html              # Página de login e cadastro
+├── package.json            # Dependências e scripts
+├── README.md              # Documentação
 ├── api/
-│   └── db.json             # Base de dados fake
+│   └── db.json            # Base de dados fake
 ├── assets/
 │   ├── css/
-│   │   └── style.css       # Estilos unificados
+│   │   └── style.css      # Estilos unificados
 │   ├── js/
-│   │   └── app.js          # JavaScript principal
+│   │   └── app.js         # JavaScript principal
 │   └── images/
-│       ├── favicon.svg     # Ícone do site
+│       ├── favicon.svg    # Ícone do site
 │       └── hero-task-preview.svg
 ```
 
@@ -118,6 +120,35 @@ npm run json-server
 - [x] **ID 27** - Requisições assíncronas (Fetch API) para persistir dados de formulário
 - [x] **ID 28** - Requisições assíncronas para exibição de dados na página
 
+## ✅ Atendimento ao Escopo Mínimo
+
+### 📄 Pelo menos 3 páginas HTML distintas
+
+- ✅ **index.html** - Página inicial/landing responsiva
+- ✅ **tasks.html** - Página de gerenciamento de tarefas responsiva
+- ✅ **login.html** - Página de login e cadastro responsiva
+- ✅ Todas utilizam componentes Bootstrap (cards, buttons, modals, forms)
+
+### 📝 Formulário com validação
+
+- ✅ **Formulário de Tarefas** - Campos obrigatórios (título), validação HTML5/JS
+- ✅ **Formulário de Login** - Validação de email, senha mínima
+- ✅ **Formulário de Cadastro** - Validação completa com regex
+- ✅ **Persistência** - Web Storage (localStorage) para dados do usuário
+
+### 📋 Listagem de itens
+
+- ✅ **Lista de Tarefas** - Exibição em cards responsivos
+- ✅ **Botões de ação** - Editar, excluir, marcar como concluída
+- ✅ **Filtros** - Por status, prioridade e busca textual
+
+### 🔌 Integração com API (JSON Server)
+
+- ✅ **Entidade Tasks** - CRUD completo (Create, Read, Update, Delete)
+- ✅ **Fetch API** - Requisições assíncronas para persistir dados
+- ✅ **Formato JSON** - Manipulação de dados em JSON
+- ✅ **Fallback** - localStorage quando API indisponível
+
 ## 🔧 Funcionalidades
 
 ### Principais
@@ -134,12 +165,13 @@ npm run json-server
 - ✅ Estatísticas de produtividade
 - ✅ Persistência local com localStorage
 - ✅ Sincronização com API fake
+- ✅ Sistema de login e cadastro
 
 ### Interface
 
 - ✅ Design responsivo para mobile, tablet e desktop
-- ✅ Single Page Application (SPA)
-- ✅ Navegação por seções (Home, Tarefas)
+- ✅ 3 páginas HTML distintas e navegáveis
+- ✅ Navegação consistente entre páginas
 - ✅ Animações suaves de transição
 - ✅ Feedback visual para ações do usuário
 - ✅ Loading states e tratamento de erros
@@ -266,5 +298,5 @@ Este é um projeto acadêmico desenvolvido para fins educacionais.
 
 ---
 
-**Projeto desenvolvido como trabalho acadêmico - UTFPR**  
+**Projeto desenvolvido como trabalho acadêmico - UTFPR**
 _Inspirado no Todoist, construído com foco educacional e simplicidade_
