@@ -572,6 +572,9 @@ const app = {
   async init() {
     console.log("Initializing Flow App...");
 
+    // Check user session
+    this.checkUserSession();
+
     // Check online status
     this.setupOnlineStatusHandlers();
 
@@ -591,6 +594,100 @@ const app = {
     this.setupModalHandlers();
 
     console.log("Flow App initialized successfully!");
+  },
+
+  checkUserSession() {
+    const user = storage.get("flow_user");
+    const session = storage.get("flow_session");
+
+    if (user && session) {
+      // Check if session is still valid
+      const sessionExpiry = new Date(session.expires);
+      const now = new Date();
+
+      if (sessionExpiry > now) {
+        appState.currentUser = user;
+        this.updateUserInterface(user);
+      } else {
+        // Session expired
+        this.logout();
+      }
+    }
+  },
+
+  updateUserInterface(user) {
+    // Update navigation to show logged-in user
+    const userDropdown = document.querySelector(
+      ".dropdown .nav-link.dropdown-toggle",
+    );
+    if (userDropdown) {
+      userDropdown.innerHTML = `
+        <img src="${user.avatar}" alt="${user.name}" class="rounded-circle me-2" width="32" height="32">
+        <span>${user.name}</span>
+      `;
+    }
+
+    // Update dropdown menu
+    const dropdownMenu = document.querySelector(".dropdown-menu");
+    if (dropdownMenu) {
+      dropdownMenu.innerHTML = `
+        <li>
+          <div class="dropdown-header">
+            <strong>${user.name}</strong>
+            <br><small class="text-muted">${user.email}</small>
+          </div>
+        </li>
+        <li><hr class="dropdown-divider" /></li>
+        <li>
+          <a class="dropdown-item" href="#" onclick="app.showProfile()">
+            <i class="fas fa-user me-2"></i>Meu Perfil
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="#" onclick="app.showSettings()">
+            <i class="fas fa-cog me-2"></i>Configurações
+          </a>
+        </li>
+        <li><hr class="dropdown-divider" /></li>
+        <li>
+          <a class="dropdown-item" href="#" onclick="app.logout()">
+            <i class="fas fa-sign-out-alt me-2"></i>Sair
+          </a>
+        </li>
+      `;
+    }
+  },
+
+  logout() {
+    // Clear user session
+    storage.remove("flow_user");
+    storage.remove("flow_session");
+    storage.remove("flow_remember");
+
+    // Reset app state
+    appState.currentUser = null;
+
+    // Show notification
+    utils.showNotification("Logout realizado com sucesso!", "success");
+
+    // Redirect to login
+    setTimeout(() => {
+      window.location.href = "pages/login.html";
+    }, 1000);
+  },
+
+  showProfile() {
+    utils.showNotification(
+      "Perfil do usuário será implementado em breve!",
+      "info",
+    );
+  },
+
+  showSettings() {
+    utils.showNotification(
+      "Configurações serão implementadas em breve!",
+      "info",
+    );
   },
 
   async loadInitialData() {
