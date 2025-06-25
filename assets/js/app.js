@@ -602,7 +602,8 @@ const app = {
     const isLoginPage =
       window.location.pathname.includes("login.html") ||
       window.location.pathname.includes("register.html") ||
-      window.location.pathname.includes("landing.html");
+      window.location.pathname.endsWith("index.html") ||
+      window.location.pathname === "/";
 
     if (user && session) {
       // Check if session is still valid
