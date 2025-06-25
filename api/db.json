@@ -2,83 +2,42 @@
   "tasks": [
     {
       "id": "1",
-      "title": "Revisar documentação do projeto acadêmico",
-      "description": "Verificar se toda a documentação está atualizada e completa para entrega",
-      "category": "Trabalho",
-      "createdAt": "2024-01-10T10:00:00Z",
+      "title": "Estudar para prova de matemática",
+      "description": "Revisar capítulos 1-3 do livro de álgebra linear",
+      "category": "Acadêmico",
+      "createdAt": "2025-01-15T10:00:00Z",
       "completedAt": null,
-      "dueDate": "2024-01-15",
+      "dueDate": "2025-01-20",
       "priority": "high",
       "status": "pending",
-      "tags": ["trabalho", "documentação", "acadêmico"]
+      "tags": ["estudo", "matemática", "prova"],
+      "reminder": true
     },
     {
       "id": "2",
-      "title": "Fazer compras no supermercado",
-      "description": "Leite, pão, frutas e verduras para a semana",
-      "category": "Pessoal",
-      "createdAt": "2024-01-11T14:30:00Z",
-      "completedAt": "2024-01-12T16:45:00Z",
-      "dueDate": "2024-01-12",
-      "priority": "medium",
+      "title": "Finalizar projeto da disciplina",
+      "description": "Completar a implementação do sistema de tarefas acadêmico",
+      "category": "Acadêmico",
+      "createdAt": "2025-01-14T14:30:00Z",
+      "completedAt": "2025-01-15T16:45:00Z",
+      "dueDate": "2025-01-16",
+      "priority": "high",
       "status": "completed",
-      "tags": ["pessoal", "casa"]
+      "tags": ["projeto", "programação", "acadêmico"],
+      "reminder": false
     },
     {
       "id": "3",
-      "title": "Estudar para prova de matemática",
-      "description": "Revisar capítulos 5-8 do livro de cálculo diferencial",
-      "category": "Estudos",
-      "createdAt": "2024-01-13T09:15:00Z",
+      "title": "Ler artigo sobre produtividade",
+      "description": "Artigo recomendado pelo professor sobre metodologias ágeis",
+      "category": "Pessoal",
+      "createdAt": "2025-01-13T09:15:00Z",
       "completedAt": null,
-      "dueDate": "2024-01-20",
-      "priority": "high",
-      "status": "pending",
-      "tags": ["estudos", "matemática", "prova"]
-    },
-    {
-      "id": "4",
-      "title": "Exercícios físicos - caminhada",
-      "description": "Caminhada de 30 minutos no parque",
-      "category": "Saúde",
-      "createdAt": "2024-01-13T18:00:00Z",
-      "completedAt": null,
-      "dueDate": "2024-01-14",
-      "priority": "low",
-      "status": "pending",
-      "tags": ["saúde", "exercício"]
-    },
-    {
-      "id": "5",
-      "title": "Preparar apresentação para reunião",
-      "description": "Criar slides e ensaiar apresentação de 15 minutos",
-      "category": "Trabalho",
-      "createdAt": "2024-01-13T20:30:00Z",
-      "completedAt": null,
-      "dueDate": "2024-01-16",
+      "dueDate": "2025-01-18",
       "priority": "medium",
       "status": "pending",
-      "tags": ["trabalho", "apresentação"]
-    },
-    {
-      "id": "6",
-      "title": "Ler capítulo do livro",
-      "description": "Ler capítulo 3 do livro 'Produtividade Pessoal'",
-      "category": "Desenvolvimento",
-      "createdAt": "2024-01-12T19:00:00Z",
-      "completedAt": "2024-01-13T21:30:00Z",
-      "dueDate": "2024-01-13",
-      "priority": "low",
-      "status": "completed",
-      "tags": ["desenvolvimento", "leitura"]
-    }
-  ],
-  "users": [
-    {
-      "id": "1",
-      "name": "Usuário Demo",
-      "email": "demo@flow.com",
-      "password": "demo123"
+      "tags": ["leitura", "produtividade"],
+      "reminder": false
     }
   ]
 }
