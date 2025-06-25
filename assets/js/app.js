@@ -76,7 +76,7 @@ const utils = {
   // Show notification with animation (RA1 - ID 05)
   showNotification: (message, type = "info") => {
     const notification = $(`
-      <div class="alert alert-${type} alert-dismissible fade show position-fixed animate__animated animate__fadeInRight" 
+      <div class="alert alert-${type} alert-dismissible fade show position-fixed animate__animated animate__fadeInRight"
            style="top: 100px; right: 20px; z-index: 9999; min-width: 300px; max-width: 400px;">
         <div class="d-flex justify-content-between align-items-center">
           <span>${utils.sanitizeHTML(message)}</span>
@@ -327,11 +327,6 @@ const taskManager = {
 
       // Fallback to localStorage
       appState.tasks = storage.load(APP_CONFIG.STORAGE_KEYS.TASKS, []);
-
-      utils.showNotification(
-        "Carregando dados locais (API indisponível)",
-        "warning",
-      );
     }
 
     this.renderTasks();
@@ -361,10 +356,6 @@ const taskManager = {
       } catch (apiError) {
         console.error("API save failed, saving locally:", apiError);
         appState.tasks.push(newTask);
-        utils.showNotification(
-          "Tarefa salva localmente (API indisponível)",
-          "warning",
-        );
       }
 
       // Always save to localStorage
@@ -372,8 +363,6 @@ const taskManager = {
 
       this.renderTasks();
       this.updateStats();
-
-      utils.showNotification("Tarefa criada com sucesso!", "success");
 
       return newTask;
     } catch (error) {
@@ -399,10 +388,6 @@ const taskManager = {
         await api.tasks.update(taskId, updatedTask);
       } catch (apiError) {
         console.error("API update failed, updating locally:", apiError);
-        utils.showNotification(
-          "Atualização salva localmente (API indisponível)",
-          "warning",
-        );
       }
 
       // Update local state
@@ -440,8 +425,6 @@ const taskManager = {
 
       this.renderTasks();
       this.updateStats();
-
-      utils.showNotification("Tarefa excluída com sucesso!", "success");
     } catch (error) {
       console.error("Error deleting task:", error);
       utils.showNotification("Erro ao excluir tarefa", "danger");
@@ -551,16 +534,16 @@ const taskManager = {
             </button>
           </div>
         </div>
-        
+
         ${task.description ? `<p class="task-description">${utils.sanitizeHTML(task.description)}</p>` : ""}
-        
+
         <div class="task-meta">
           <div class="task-badges">
             <span class="task-badge ${priorityBadge}">${this.getPriorityLabel(task.priority)}</span>
             <span class="task-badge ${statusBadge}">${this.getStatusLabel(task.status)}</span>
             ${task.category ? `<span class="task-badge badge-category">${utils.sanitizeHTML(task.category)}</span>` : ""}
           </div>
-          
+
           ${
             task.dueDate
               ? `
@@ -572,7 +555,7 @@ const taskManager = {
               : ""
           }
         </div>
-        
+
         ${
           task.tags && task.tags.length > 0
             ? `
@@ -582,9 +565,9 @@ const taskManager = {
         `
             : ""
         }
-        
+
         <div class="task-completion">
-          <button class="completion-btn ${task.status === "completed" ? "completed" : ""}" 
+          <button class="completion-btn ${task.status === "completed" ? "completed" : ""}"
                   onclick="taskManager.toggleTask('${task.id}')">
             <i class="fas ${task.status === "completed" ? "fa-check-circle" : "fa-circle"}"></i>
             ${task.status === "completed" ? "Marcar como pendente" : "Marcar como concluída"}
@@ -833,9 +816,7 @@ $(document).ready(function () {
   taskManager.updateStats();
 
   // Show welcome message
-  setTimeout(() => {
-    utils.showNotification("Bem-vindo ao Flow! 🚀", "info");
-  }, 1000);
+  setTimeout(() => {}, 1000);
 
   // Handle browser back/forward
   $(window).on("popstate", function () {
