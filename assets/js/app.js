@@ -672,9 +672,7 @@ function markAllCompleted() {
       ),
     )
       .then(() => {})
-      .catch(() => {
-        utils.showNotification("Erro ao atualizar tarefas", "danger");
-      });
+      .catch(() => {});
   }
 }
 
@@ -684,7 +682,6 @@ function deleteCompleted() {
   );
 
   if (completedTasks.length === 0) {
-    utils.showNotification("Nenhuma tarefa concluída para excluir", "info");
     return;
   }
 
@@ -695,9 +692,7 @@ function deleteCompleted() {
   ) {
     Promise.all(completedTasks.map((task) => taskManager.deleteTask(task.id)))
       .then(() => {})
-      .catch(() => {
-        utils.showNotification("Erro ao excluir tarefas", "danger");
-      });
+      .catch(() => {});
   }
 }
 
