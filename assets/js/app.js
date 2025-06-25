@@ -643,8 +643,6 @@ const app = {
       const isInPagesFolder = window.location.pathname.includes("/pages/");
       const loginPath = isInPagesFolder ? "login.html" : "pages/login.html";
       window.location.href = loginPath;
-    }, 1000);
-      window.location.href = loginPath;
     }, 2000);
   },
 
