@@ -260,6 +260,7 @@ p {
 .features-section {
   padding: var(--spacing-xxl) 0;
   background: var(--bg-secondary);
+  margin-bottom: 0;
 }
 
 .section-header {
@@ -725,8 +726,7 @@ p {
 }
 
 .footer-divider {
-  border-color: rgba(255, 255, 255, 0.1);
-  margin: var(--spacing-xl) 0;
+  display: none;
 }
 
 .footer-copyright {
