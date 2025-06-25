@@ -617,9 +617,7 @@ const app = {
 
   updateUserInterface(user) {
     // Update navigation to show logged-in user
-    const userDropdown = document.querySelector(
-      ".dropdown .nav-link.dropdown-toggle",
-    );
+    const userDropdown = document.getElementById("userDropdown");
     if (userDropdown) {
       userDropdown.innerHTML = `
         <img src="${user.avatar}" alt="${user.name}" class="rounded-circle me-2" width="32" height="32">
@@ -628,7 +626,7 @@ const app = {
     }
 
     // Update dropdown menu
-    const dropdownMenu = document.querySelector(".dropdown-menu");
+    const dropdownMenu = document.getElementById("userDropdownMenu");
     if (dropdownMenu) {
       dropdownMenu.innerHTML = `
         <li>
