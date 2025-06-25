@@ -810,19 +810,6 @@
           );
         }
       }
-
-      function exportTasks() {
-        const tasks = appState.tasks || [];
-        const dataStr = JSON.stringify(tasks, null, 2);
-        const dataBlob = new Blob([dataStr], { type: "application/json" });
-
-        const link = document.createElement("a");
-        link.href = URL.createObjectURL(dataBlob);
-        link.download = `flow-backup-${new Date().toISOString().split("T")[0]}.json`;
-        link.click();
-
-        utils.showNotification("Backup das tarefas baixado!", "success");
-      }
     </script>
   </body>
 </html>
