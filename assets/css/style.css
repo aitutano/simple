@@ -678,7 +678,7 @@ p {
 }
 
 .modal-footer {
-  border-top: 1px solid var(--border-color);
+  border-top: none;
   padding: var(--spacing-lg);
 }
 
@@ -687,7 +687,8 @@ p {
   background: var(--text-primary);
   color: white;
   padding: var(--spacing-xxl) 0 var(--spacing-lg);
-  margin-top: var(--spacing-xxl);
+  margin-top: 0;
+  border-top: none;
 }
 
 .footer-icon {
@@ -889,6 +890,7 @@ p {
     var(--bg-secondary) 100%
   );
   padding: var(--spacing-xl) 0;
+  margin-bottom: 0;
 }
 
 .auth-branding {
@@ -1025,6 +1027,8 @@ p {
 .tech-section {
   padding: var(--spacing-xxl) 0;
   background: var(--bg-primary);
+  margin-bottom: 0;
+  border-bottom: none;
 }
 
 .tech-item {
@@ -1049,12 +1053,8 @@ p {
 }
 
 .cta-section {
-  background: linear-gradient(
-    135deg,
-    var(--primary-red) 0%,
-    var(--primary-red-hover) 100%
-  );
-  color: white;
+  background: var(--bg-primary);
+  color: var(--text-primary);
   padding: var(--spacing-xxl) 0;
 }
 
