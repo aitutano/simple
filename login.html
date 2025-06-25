@@ -287,21 +287,7 @@
                               <div class="form-feedback"></div>
                             </div>
                           </div>
-                          <div class="col-md-6">
-                            <div class="form-group">
-                              <label for="register-phone" class="form-label"
-                                >Telefone</label
-                              >
-                              <input
-                                type="tel"
-                                class="form-control phone-mask"
-                                id="register-phone"
-                                name="phone"
-                                placeholder="(11) 99999-9999"
-                              />
-                              <div class="form-feedback"></div>
-                            </div>
-                          </div>
+                          <div class="col-md-6" />
                         </div>
 
                         <div class="form-group">
@@ -411,67 +397,6 @@
                         </div>
 
                         <div class="form-group">
-                          <label class="form-label">Área de Estudo</label>
-                          <!-- Radio buttons (RA2 - ID 14) -->
-                          <div class="study-area-options">
-                            <div class="form-check">
-                              <input
-                                class="form-check-input"
-                                type="radio"
-                                name="studyArea"
-                                id="area-tech"
-                                value="Tecnologia"
-                                checked
-                              />
-                              <label class="form-check-label" for="area-tech"
-                                >Tecnologia</label
-                              >
-                            </div>
-                            <div class="form-check">
-                              <input
-                                class="form-check-input"
-                                type="radio"
-                                name="studyArea"
-                                id="area-engineering"
-                                value="Engenharia"
-                              />
-                              <label
-                                class="form-check-label"
-                                for="area-engineering"
-                                >Engenharia</label
-                              >
-                            </div>
-                            <div class="form-check">
-                              <input
-                                class="form-check-input"
-                                type="radio"
-                                name="studyArea"
-                                id="area-business"
-                                value="Negócios"
-                              />
-                              <label
-                                class="form-check-label"
-                                for="area-business"
-                                >Negócios</label
-                              >
-                            </div>
-                            <div class="form-check">
-                              <input
-                                class="form-check-input"
-                                type="radio"
-                                name="studyArea"
-                                id="area-other"
-                                value="Outro"
-                              />
-                              <label class="form-check-label" for="area-other"
-                                >Outro</label
-                              >
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="form-group">
-                          <!-- Checkbox (RA2 - ID 14) -->
                           <div class="form-check">
                             <input
                               class="form-check-input"
@@ -940,7 +865,7 @@
       // Notification function
       function showNotification(message, type = "info") {
         const notification = $(`
-        <div class="alert alert-${type} alert-dismissible fade show position-fixed animate__animated animate__fadeInRight" 
+        <div class="alert alert-${type} alert-dismissible fade show position-fixed animate__animated animate__fadeInRight"
              style="top: 100px; right: 20px; z-index: 9999; min-width: 300px; max-width: 400px;">
           <div class="d-flex justify-content-between align-items-center">
             <span>${message}</span>
