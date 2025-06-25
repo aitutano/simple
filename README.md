@@ -1,238 +1,302 @@
-# Flow - Gerenciador de Tarefas
+# Flow - Gerenciador de Tarefas Acadêmico
 
-## 👤 Identificação/Autor
+## 📋 Sobre o Projeto
 
-**Nome:** [Seu Nome Completo]
-**Curso:** [Seu Curso]
-**Disciplina:** [Nome da Disciplina]
-**Professor:** [Nome do Professor]
+Flow é um gerenciador de tarefas acadêmico inspirado no Todoist, desenvolvido como projeto educacional. O objetivo é demonstrar o uso de tecnologias web modernas de forma simples e eficiente, atendendo aos requisitos acadêmicos estabelecidos.
 
-## 📝 Descrição do Projeto
+## 🎯 Objetivo
 
-Flow é uma aplicação web responsiva de gerenciamento de tarefas inspirada no design e funcionalidades do Todoist. O projeto permite aos usuários organizar suas tarefas diárias, definir prioridades e acompanhar o progresso das atividades de forma intuitiva e eficiente.
+Criar um sistema simples de gerenciamento de tarefas que demonstre o uso de frameworks CSS, validação de formulários, armazenamento local, bibliotecas JavaScript e integração com APIs, mantendo a simplicidade e foco educacional.
 
-### Tema e Escopo
+## 🚀 Tecnologias Utilizadas
 
-- **Tema:** Gerenciamento pessoal de tarefas
-- **Escopo:** Aplicação para uso pessoal com cadastro, listagem, edição e exclusão de tarefas
-- **Inspiração:** [Todoist](https://todoist.com) - Design e experiência do usuário
-
-## 🎨 Design e Prototipação
-
-- **Prototipação no Figma:** [Link para o projeto no Figma - A ser criado]
-- **Design System:** [Link para o documento do Design System - A ser criado]
-- **Site de Inspiração:** [Todoist](https://todoist.com)
-
-## 🛠️ Tecnologias Utilizadas
-
-- **Framework CSS:** Bootstrap 5.3
-- **Bibliotecas JavaScript:**
-  - jQuery 3.7.1
-  - jQuery Mask Plugin
-  - Animate.css
-- **API Fake:** JSON Server
-- **Persistência:** Web Storage (localStorage/sessionStorage)
-- **Web Components:** Lit (implementado mas não mais requisito essencial)
-
-## 🌐 Link para o Site em Produção
-
-[Link para GitHub Pages - A ser configurado]
-
-## ✅ Checklist de Funcionalidades
-
-### RA1 - Utilizar Frameworks CSS para estilização de elementos HTML e criação de layouts responsivos
-
-- [ ] **ID 00** - Prototipa interfaces adaptáveis para mobile e desktop no Figma
-- [x] **ID 01** - Implementa layout responsivo com Framework CSS (Bootstrap)
-- [x] **ID 02** - Utiliza Flexbox/Grid para layouts responsivos
-- [x] **ID 03** - Utiliza componentes CSS e JavaScript do Framework
-- [x] **ID 04** - Implementa layout fluido com unidades relativas
-- [x] **ID 05** - Implementa animações (fadeIn/fadeOut, slideIn/slideOut)
-- ⚪ **ID 06** - ~~Cria transições personalizadas entre estados~~ (Removido - não essencial)
-- [x] **ID 07** - Aplica Design System consistente
-- [x] **ID 08** - Implementa pré-processadores CSS (Sass)
-- [x] **ID 09** - Aplica tipografia responsiva com media queries/clamp()
-- [x] **ID 10** - Aplica técnicas de responsividade de imagens
-- [x] **ID 11** - Otimiza imagens com formatos modernos (WebP)
-
-### RA2 - Realizar tratamento de formulários e aplicar validações
-
-- [x] **ID 12** - Implementa tratamento de formulários com mensagens de erro/sucesso
-- [x] **ID 13** - Aplica expressões regulares (REGEX) para validações customizadas
-- [x] **ID 14** - Incorpora elementos de listagem (checkbox, radio, select)
-- [x] **ID 15** - Realiza escrita/leitura no Web Storage
-
-### RA3 - Aplicar ferramentas para otimização do desenvolvimento
-
-- [x] **ID 16** - Configura ambiente com Node.js e NPM
-- ⚪ **ID 17** - ~~Utiliza linters (ESLint/Stylelint)~~ (Removido - não essencial)
-- [x] **ID 18** - Adota boas práticas de versionamento (Git/GitHub)
-- [x] **ID 19** - Organiza README.md conforme template
-- ⚪ **ID 20** - ~~Utiliza técnicas de minificação e otimização~~ (Removido - não essencial)
-- [x] **ID 21** - Organiza arquivos em estrutura modular
-- ⚪ **ID 22** - ~~Utiliza metodologias BEM/SMACSS para CSS~~ (Removido - não essencial)
-
-### RA4 - Aplicar bibliotecas JavaScript para interatividade
-
-- [x] **ID 23** - Utiliza jQuery para manipulação do DOM
-- [x] **ID 24** - Integra plugin jQuery (jQuery Mask Plugin)
-- ⚪ **ID 25** - ~~Utiliza bibliotecas de web components (Lit)~~ (Implementado mas removido dos requisitos essenciais)
-- ⚪ **ID 26** - ~~Utiliza biblioteca de componentes prontos~~ (Removido - não essencial)
-
-### RA5 - Efetuar requisições assíncronas para APIs
-
-- [x] **ID 27** - Realiza requisições para API fake (persistir dados de formulário)
-- [x] **ID 28** - Realiza requisições para API fake (exibir dados na página)
-
-## 📱 Páginas da Aplicação
-
-**Aplicação simplificada com foco nos requisitos essenciais:**
-
-1. **Gerenciador de Tarefas (index.html)** - Página principal com lista completa de tarefas e CRUD completo
-2. **Landing Page (landing.html)** - Página promocional com informações sobre o produto
-3. **Tarefas (pages/tasks.html)** - Redirecionamento para página principal
-4. **Login (pages/login.html)** - Autenticação de usuários
-5. **Cadastro (pages/register.html)** - Criação de novas contas
-
-## 🚀 Instruções de Execução
-
-### Pré-requisitos
-
-- Node.js (versão 16 ou superior)
-- NPM ou Yarn
-
-### Instalação
-
-```bash
-# Clone o repositório
-git clone [URL-do-repositório]
-
-# Entre no diretório
-cd task-manager-app
-
-# Instale as dependências
-npm install
-
-# Inicie o servidor de desenvolvimento
-npm run dev
-
-# Em outro terminal, inicie a API fake
-npm run json-server
-```
-
-### Acesso
-
-- **Gerenciador de Tarefas:** http://localhost:3000/ (Página principal)
-- **Landing Page:** http://localhost:3000/landing.html (Página promocional)
-- **API Fake:** http://localhost:3001
-
-### Credenciais de Teste
-
-- **E-mail:** demo@flow.com
-- **Senha:** demo123
-
-## 📸 Telas da Aplicação
-
-[Capturas de tela serão adicionadas aqui após implementação]
+- **HTML5** - Estrutura semântica
+- **CSS3** - Estilização com design system
+- **Bootstrap 5** - Framework CSS responsivo
+- **JavaScript ES6+** - Lógica da aplicação
+- **jQuery** - Manipulação do DOM e plugins
+- **jQuery Mask Plugin** - Máscaras de entrada
+- **Font Awesome** - Iconografia
+- **Animate.css** - Animações
+- **JSON Server** - API fake para desenvolvimento
+- **Web Storage** - Persistência local de dados
 
 ## 📁 Estrutura do Projeto
 
 ```
-task-manager-app/
+flow-task-manager/
+├── index.html              # Página inicial/landing
+├── tasks.html              # Página de gerenciamento de tarefas
+├── login.html              # Página de login e cadastro
+├── package.json            # Dependências e scripts
+├── README.md              # Documentação
 ├── api/
-│   └── db.json              # Banco de dados fake (JSON Server)
+│   └── db.json            # Base de dados fake
 ├── assets/
 │   ├── css/
-│   │   ├── style.css        # Estilos principais
-│   │   ├── responsive.css   # Estilos responsivos
-│   │   └── images.css       # Otimizações de imagem
-│   ├── images/
-│   │   ├── favicon.svg      # Favicon otimizado
-│   │   ├── hero-task-preview.svg  # Imagem hero responsiva
-│   │   └── no-tasks.svg     # Ilustração estado vazio
-│   └── js/
-│       ├── app.js           # JavaScript principal
-│       └── image-optimization.js  # Otimização de imagens
-├── components/
-│   └── task-item.js         # Web Component para tarefas
-├── pages/
-│   ├── login.html           # Página de login
-│   ├── register.html        # Página de registro
-│   └── tasks.html           # Página de tarefas
-├── landing.html             # Landing page principal
-├── index.html               # Página inicial (app principal)
-├── package.json             # Dependências e scripts
-└── README.md                # Documentação
+│   │   └── style.css      # Estilos unificados
+│   ├── js/
+│   │   └── app.js         # JavaScript principal
+│   └── images/
+│       ├── favicon.svg    # Ícone do site
+│       └── hero-task-preview.svg
 ```
 
-## 🎯 Funcionalidades Principais
+## 🛠️ Instalação e Execução
 
-### 🔐 Autenticação
+### Pré-requisitos
 
-- Login com validação
-- Registro de usuários com formulário em etapas
-- Recuperação de senha
-- Sessão persistente
+- Node.js (v14 ou superior)
+- NPM
 
-### 📋 Gerenciamento de Tarefas
+### Passo a passo
 
-- Criar, editar e excluir tarefas
-- Definir prioridades (Alta, Média, Baixa)
-- Status (Pendente, Em andamento, Concluída)
-- Datas de vencimento
-- Tags para organização
-- Filtros avançados
-- Busca em tempo real
+1. **Clone o repositório**
 
-### 🏠 Página Inicial Simplificada
+```bash
+git clone [url-do-repositorio]
+cd flow-task-manager
+```
 
-- Acesso rápido às funcionalidades principais
-- Interface limpa e focalizada
-- Navegação intuitiva entre seções
+2. **Instale as dependências**
 
-### 🎨 Interface e UX
+```bash
+npm install
+```
 
-- Design inspirado no Todoist
-- Totalmente responsivo
-- Animações suaves
-- Modo offline com sincronização
-- Tema claro/escuro
-- Acessibilidade (ARIA)
+3. **Execute o servidor de desenvolvimento**
 
-## 🔧 Recursos Técnicos
+```bash
+npm run dev
+```
 
-### Framework CSS
+4. **Execute a API fake (em outro terminal)**
 
-- Bootstrap 5.3 para componentes base
-- CSS Grid e Flexbox para layouts
-- Variáveis CSS para consistência
-- Media queries para responsividade
+```bash
+npm run json-server
+```
 
-### JavaScript Moderno
+5. **Acesse a aplicação**
 
-- ES6+ features
-- Web Components com Lit
-- Async/await para APIs
-- Local Storage para persistência
+- Frontend: http://localhost:3000
+- API: http://localhost:3001
+
+## 📋 Checklist de Requisitos Acadêmicos
+
+### RA1 - Frameworks CSS e Layouts Responsivos
+
+- [x] **ID 01** - Layout responsivo com Bootstrap 5 utilizando Grid System e Flexbox
+- [x] **ID 02** - Técnicas nativas de responsividade (Flexbox e Grid Layout)
+- [x] **ID 03** - Componentes Bootstrap (cards, buttons, modals) e JavaScript (modal, collapse)
+- [x] **ID 04** - Layout fluido com unidades relativas (rem, %, vw, vh, clamp())
+- [x] **ID 05** - Animações CSS com Animate.css (fadeIn, slideIn, rotação)
+- [x] **ID 07** - Design System consistente com variáveis CSS
+- [x] **ID 08** - CSS organizado com variáveis e sistema modular
+- [x] **ID 09** - Tipografia responsiva com clamp() e unidades relativas
+- [x] **ID 10** - Responsividade de imagens com object-fit e containers relativos
+- [x] **ID 11** - Imagens otimizadas com SVG e elemento \<picture\>
+
+### RA2 - Formulários e Validação
+
+- [x] **ID 12** - Tratamento de formulários com validação HTML5 e mensagens de erro
+- [x] **ID 13** - Expressões regulares (REGEX) para validação de email, data e telefone
+- [x] **ID 14** - Elementos de formulário (checkbox, radio, select)
+- [x] **ID 15** - Web Storage (localStorage) para persistência de dados
+
+### RA3 - Ferramentas de Desenvolvimento
+
+- [x] **ID 16** - Ambiente Node.js e NPM configurado com dependências
+- [x] **ID 18** - Versionamento com Git e repositório estruturado
+- [x] **ID 19** - README.md organizado conforme template exigido
+- [x] **ID 21** - Estrutura de arquivos coerente e modular
+
+### RA4 - Bibliotecas JavaScript
+
+- [x] **ID 23** - jQuery para manipulação do DOM e eventos
+- [x] **ID 24** - jQuery Mask Plugin para máscaras de entrada
+
+### RA5 - APIs e Requisições Assíncronas
+
+- [x] **ID 27** - Requisições assíncronas (Fetch API) para persistir dados de formulário
+- [x] **ID 28** - Requisições assíncronas para exibição de dados na página
+
+## ✅ Atendimento ao Escopo Mínimo
+
+### 📄 Pelo menos 3 páginas HTML distintas
+
+- ✅ **index.html** - Página inicial/landing responsiva
+- ✅ **tasks.html** - Página de gerenciamento de tarefas responsiva
+- ✅ **login.html** - Página de login e cadastro responsiva
+- ✅ Todas utilizam componentes Bootstrap (cards, buttons, modals, forms)
+
+### 📝 Formulário com validação
+
+- ✅ **Formulário de Tarefas** - Campos obrigatórios (título), validação HTML5/JS
+- ✅ **Formulário de Login** - Validação de email, senha mínima
+- ✅ **Formulário de Cadastro** - Validação completa com regex
+- ✅ **Persistência** - Web Storage (localStorage) para dados do usuário
+
+### 📋 Listagem de itens
+
+- ✅ **Lista de Tarefas** - Exibição em cards responsivos
+- ✅ **Botões de ação** - Editar, excluir, marcar como concluída
+- ✅ **Filtros** - Por status, prioridade e busca textual
+
+### 🔌 Integração com API (JSON Server)
+
+- ✅ **Entidade Tasks** - CRUD completo (Create, Read, Update, Delete)
+- ✅ **Fetch API** - Requisições assíncronas para persistir dados
+- ✅ **Formato JSON** - Manipulação de dados em JSON
+- ✅ **Fallback** - localStorage quando API indisponível
+
+## 🔧 Funcionalidades
+
+### Principais
+
+- ✅ Criação, edição e exclusão de tarefas
+- ✅ Marcação de tarefas como concluídas
+- ✅ Filtros por status (todas, pendentes, concluídas)
+- ✅ Filtros por prioridade (alta, média, baixa)
+- ✅ Busca por texto nas tarefas
+- ✅ Categorização de tarefas
+- ✅ Sistema de tags
+- ✅ Datas de vencimento
+- ✅ Indicação visual de tarefas vencidas
+- ✅ Estatísticas de produtividade
+- ✅ Persistência local com localStorage
+- ✅ Sincronização com API fake
+- ✅ Sistema de login e cadastro
+
+### Interface
+
+- ✅ Design responsivo para mobile, tablet e desktop
+- ✅ 3 páginas HTML distintas e navegáveis
+- ✅ Navegação consistente entre páginas
+- ✅ Animações suaves de transição
+- ✅ Feedback visual para ações do usuário
+- ✅ Loading states e tratamento de erros
+
+## 🎨 Design System
+
+### Cores Principais
+
+- **Primary Red**: #e74c3c (Inspirado no Todoist)
+- **Success Green**: #27ae60
+- **Warning Orange**: #f39c12
+- **Info Blue**: #3498db
+
+### Tipografia
+
+- **Fonte**: Inter (Google Fonts)
+- **Tamanhos responsivos**: clamp() para adaptação automática
+
+### Espaçamento
+
+- **Sistema de spacing**: 0.25rem, 0.5rem, 1rem, 1.5rem, 2rem, 3rem
+
+### Componentes
+
+- Cards com shadow e hover effects
+- Botões com estados interativos
+- Formulários com validação visual
+- Badges para categorização
+
+## 📱 Responsividade
+
+O projeto foi desenvolvido com **mobile-first approach**:
+
+- **Mobile** (< 576px): Layout em coluna única, navegação simplificada
+- **Tablet** (576px - 768px): Layout híbrido, alguns elementos em linha
+- **Desktop** (> 768px): Layout completo com sidebar e grid
+
+## 💾 Persistência de Dados
+
+### Local Storage
+
+- Backup automático de todas as tarefas
+- Preferências do usuário (filtros, seção atual)
+- Funciona offline
+
+### API Integration
+
+- JSON Server para simulação de API REST
+- Fallback para localStorage quando API indisponível
+- Operações CRUD completas
+
+## 🧪 Validação de Formulários
+
+### Validações Implementadas
+
+- **Campos obrigatórios**: título da tarefa
+- **Email**: regex para validação de formato
+- **Data**: validação de formato e valor
+- **Comprimento**: mínimo e máximo de caracteres
+- **Telefone**: regex para formatos brasileiros
+
+### Feedback Visual
+
+- Estados: válido (verde), inválido (vermelho), neutro
+- Mensagens de erro específicas
 - Validação em tempo real
 
-### Performance & Otimização de Imagens
+## 🔄 API Endpoints
 
-- **Lazy loading** de imagens com Intersection Observer
-- **Imagens responsivas** com picture element e srcset
-- **Formatos otimizados** SVG com fallbacks
-- **Object-fit e containers** com unidades relativas
-- **Detecção de WebP** automática
-- **High DPI support** para displays Retina
-- Debounce em buscas
-- Otimização de assets
+### Tasks
+
+- `GET /tasks` - Listar todas as tarefas
+- `POST /tasks` - Criar nova tarefa
+- `PUT /tasks/:id` - Atualizar tarefa
+- `DELETE /tasks/:id` - Excluir tarefa
+
+## 🌟 Destaques Técnicos
+
+1. **Single Page Application**: Navegação sem recarregamento
+2. **Fallback Robusto**: Funciona offline com localStorage
+3. **Validação Completa**: HTML5 + JavaScript + Regex
+4. **Design Responsivo**: Mobile-first com Bootstrap 5
+5. **Performance**: Debouncing na busca, lazy loading
+6. **Acessibilidade**: Estrutura semântica, ARIA labels
+7. **Modularidade**: Código organizado em módulos funcionais
+
+## 📈 Melhorias Futuras
+
+- [ ] PWA (Progressive Web App)
+- [ ] Notificações push
+- [ ] Sincronização em tempo real
+- [ ] Themes (modo escuro)
+- [ ] Drag & drop para reordenação
+- [ ] Relatórios de produtividade
+- [ ] Exportação de dados
+
+## 👨‍💻 Desenvolvimento
+
+### Scripts Disponíveis
+
+```bash
+npm run dev          # Servidor de desenvolvimento
+npm run json-server  # API fake
+npm start           # Alias para npm run dev
+```
+
+### Estrutura do Código
+
+- **Modular**: Cada funcionalidade em módulo específico
+- **Comentado**: Código documentado para fins educacionais
+- **Padrões**: Seguindo boas práticas de JavaScript e CSS
+
+## 📚 Referências
+
+- [Bootstrap 5 Documentation](https://getbootstrap.com/docs/5.3/)
+- [jQuery Documentation](https://api.jquery.com/)
+- [MDN Web Docs](https://developer.mozilla.org/)
+- [Todoist](https://todoist.com/) - Inspiração de design
+- [Animate.css](https://animate.style/)
 
 ## 📄 Licença
 
-Este projeto foi desenvolvido para fins acadêmicos.
+Este é um projeto acadêmico desenvolvido para fins educacionais.
 
 ---
 
-**Inspiração:** [Todoist](https://todoist.com) - Design e funcionalidades
-**Desenvolvimento:** Projeto acadêmico individual
-**Tecnologias:** HTML5, CSS3, JavaScript ES6+, Bootstrap 5
+**Projeto desenvolvido como trabalho acadêmico - UTFPR**
+_Inspirado no Todoist, construído com foco educacional e simplicidade_
