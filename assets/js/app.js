@@ -432,8 +432,6 @@ const taskManager = {
 
     const updates = {
       status: task.status === "completed" ? "pending" : "completed",
-      completedAt:
-        task.status === "completed" ? null : new Date().toISOString(),
     };
 
     await this.updateTask(taskId, updates);
