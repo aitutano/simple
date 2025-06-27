@@ -683,13 +683,8 @@ $(document).ready(function () {
   navigation.init();
 
   // Initialize form masks using jQuery Mask Plugin (RA4 - ID 24)
-  $("#task-tags").mask("A", {
-    translation: {
-      A: {
-        pattern: /[a-zA-Z0-9\s,áéíóúâêîôûãõçÁÉÍÓÚÂÊÎÔÛÃÕÇ]/,
-        recursive: true,
-      },
-    },
+  $(".phone-mask").mask("(00) 00000-0000", {
+    placeholder: "(11) 99999-9999",
   });
 
   // Initialize form validation with real-time feedback
