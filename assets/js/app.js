@@ -545,16 +545,6 @@ const taskManager = {
           }
         </div>
 
-        ${
-          task.tags && task.tags.length > 0
-            ? `
-          <div class="task-tags mt-2">
-            ${task.tags.map((tag) => `<span class="badge bg-light text-dark me-1">#${utils.sanitizeHTML(tag)}</span>`).join("")}
-          </div>
-        `
-            : ""
-        }
-
         <div class="task-completion">
           <button class="completion-btn ${task.status === "completed" ? "completed" : ""}"
                   onclick="taskManager.toggleTask('${task.id}')">
