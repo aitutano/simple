@@ -709,7 +709,7 @@ $(document).ready(function () {
       priority: formData.get("priority"),
       dueDate: formData.get("dueDate"),
       category: formData.get("category"),
-      tags: formData.get("tags"),
+
       reminder: formData.get("reminder") === "on",
     };
 
