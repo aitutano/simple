@@ -700,8 +700,6 @@ $(document).ready(function () {
       priority: formData.get("priority"),
       dueDate: formData.get("dueDate"),
       category: formData.get("category"),
-
-      reminder: formData.get("reminder") === "on",
     };
 
     try {
