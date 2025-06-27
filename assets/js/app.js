@@ -646,7 +646,6 @@ function markAllCompleted() {
       pendingTasks.map((task) =>
         taskManager.updateTask(task.id, {
           status: "completed",
-          completedAt: new Date().toISOString(),
         }),
       ),
     )
