@@ -112,7 +112,7 @@ npm run json-server
 ### RA4 - Bibliotecas JavaScript
 
 - [x] **ID 23** - jQuery para manipulação do DOM e eventos
-- [x] **ID 24** - jQuery Mask Plugin para máscaras de entrada
+- [ ] **ID 24** - jQuery Mask Plugin (não necessário para este projeto)
 
 ### RA5 - APIs e Requisições Assíncronas
 
