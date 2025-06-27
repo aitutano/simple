@@ -149,7 +149,6 @@ const validation = {
   rules: {
     required: (value) => value.trim() !== "",
     email: (value) => APP_CONFIG.REGEX_PATTERNS.EMAIL.test(value),
-    phone: (value) => APP_CONFIG.REGEX_PATTERNS.PHONE.test(value),
     minLength: (value, min) => value.length >= min,
     maxLength: (value, max) => value.length <= max,
     date: (value) =>
