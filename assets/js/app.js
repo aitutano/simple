@@ -339,7 +339,6 @@ const taskManager = {
       const newTask = {
         ...taskData,
         id: utils.generateId(),
-        createdAt: new Date().toISOString(),
         status: "pending",
       };
 
