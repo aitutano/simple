@@ -159,7 +159,6 @@ npm run json-server
 - ✅ Filtros por prioridade (alta, média, baixa)
 - ✅ Busca por texto nas tarefas
 - ✅ Categorização de tarefas
-
 - ✅ Datas de vencimento
 - ✅ Indicação visual de tarefas vencidas
 - ✅ Estatísticas de produtividade
