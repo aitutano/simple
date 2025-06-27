@@ -341,12 +341,6 @@ const taskManager = {
         id: utils.generateId(),
         createdAt: new Date().toISOString(),
         status: "pending",
-        tags: taskData.tags
-          ? taskData.tags
-              .split(",")
-              .map((tag) => tag.trim())
-              .filter((tag) => tag)
-          : [],
       };
 
       // Try to save to API
