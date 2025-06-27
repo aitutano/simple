@@ -595,11 +595,6 @@
             return false;
           }
 
-          if (name === "phone" && value && !phoneRegex.test(value)) {
-            showFieldError(field, "Formato: (11) 99999-9999");
-            return false;
-          }
-
           if (type === "password" && value.length < 6) {
             showFieldError(field, "A senha deve ter pelo menos 6 caracteres");
             return false;
