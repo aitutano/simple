@@ -7,7 +7,6 @@ const APP_CONFIG = {
   API_BASE_URL: "http://localhost:3001",
   STORAGE_KEYS: {
     TASKS: "flow_tasks",
-    USER_PREFERENCES: "flow_preferences",
   },
   REGEX_PATTERNS: {
     EMAIL: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
@@ -18,7 +17,6 @@ const APP_CONFIG = {
 // ===== GLOBAL STATE =====
 let appState = {
   tasks: [],
-  currentSection: "home",
   filters: {
     status: "all",
     priority: "all",
@@ -588,50 +586,6 @@ const taskManager = {
   },
 };
 
-// ===== NAVIGATION =====
-const navigation = {
-  // Initialize navigation
-  init() {
-    // Handle navigation clicks
-    $(document).on("click", "[data-section]", function (e) {
-      e.preventDefault();
-      const section = $(this).data("section");
-      navigation.showSection(section);
-    });
-
-    // Handle navbar link clicks
-    $(document).on("click", ".nav-link[data-section]", function (e) {
-      e.preventDefault();
-      const section = $(this).data("section");
-      navigation.showSection(section);
-
-      // Update active nav link
-      $(".nav-link").removeClass("active");
-      $(this).addClass("active");
-    });
-  },
-
-  // Show specific section
-  showSection(sectionName) {
-    // Hide all sections
-    $(".content-section").removeClass("active");
-
-    // Show target section
-    $(`#${sectionName}`).addClass("active");
-
-    // Update state
-    appState.currentSection = sectionName;
-
-    // Load tasks if showing tasks section
-    if (sectionName === "tasks") {
-      taskManager.loadTasks();
-    }
-
-    // Update URL hash without triggering scroll
-    history.replaceState(null, null, `#${sectionName}`);
-  },
-};
-
 // ===== QUICK ACTIONS =====
 function markAllCompleted() {
   if (confirm("Marcar todas as tarefas pendentes como concluídas?")) {
@@ -673,11 +627,6 @@ function deleteCompleted() {
 
 // ===== MAIN APPLICATION (RA4 - ID 23) =====
 $(document).ready(function () {
-  console.log("Flow App - Simplified Version Loaded");
-
-  // Initialize navigation
-  navigation.init();
-
   // Initialize form validation with real-time feedback
   $(document).on("input blur", "input, textarea, select", function () {
     const errors = validation.validateField(this);
@@ -748,47 +697,9 @@ $(document).ready(function () {
 
   $("#task-search").on("input", searchHandler);
 
-  // Load initial section based on URL hash
-  const initialSection = window.location.hash.replace("#", "") || "home";
-  navigation.showSection(initialSection);
-
-  // Update active nav link
-  $(`.nav-link[data-section="${initialSection}"]`).addClass("active");
-
   // Load tasks from localStorage on startup
   appState.tasks = storage.load(APP_CONFIG.STORAGE_KEYS.TASKS, []);
   taskManager.updateStats();
-
-  // Show welcome message
-  setTimeout(() => {}, 1000);
-
-  // Handle browser back/forward
-  $(window).on("popstate", function () {
-    const section = window.location.hash.replace("#", "") || "home";
-    navigation.showSection(section);
-  });
-
-  // Auto-save user preferences
-  $(window).on("beforeunload", function () {
-    storage.save(APP_CONFIG.STORAGE_KEYS.USER_PREFERENCES, {
-      currentSection: appState.currentSection,
-      filters: appState.filters,
-    });
-  });
-
-  // Load user preferences
-  const preferences = storage.load(APP_CONFIG.STORAGE_KEYS.USER_PREFERENCES);
-  if (preferences) {
-    appState.filters = { ...appState.filters, ...preferences.filters };
-
-    // Apply saved filters
-    $(`input[name="statusFilter"][value="${appState.filters.status}"]`).prop(
-      "checked",
-      true,
-    );
-    $("#priority-filter").val(appState.filters.priority);
-    $("#task-search").val(appState.filters.search);
-  }
 });
 
 // ===== EXPORT FOR GLOBAL ACCESS =====

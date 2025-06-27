@@ -39,8 +39,7 @@
   --radius-xl: 1rem;
 
   /* Typography with responsive sizing (RA1 - ID 09) */
-  --font-family:
-    "Inter", sans-serif;
+  --font-family: "Inter", sans-serif;
   --font-size-xs: clamp(0.75rem, 2vw, 0.875rem);
   --font-size-sm: clamp(0.875rem, 2.5vw, 1rem);
   --font-size-base: clamp(1rem, 3vw, 1.125rem);
@@ -486,6 +485,11 @@ p {
   color: var(--primary-blue);
 }
 
+.badge-category {
+  background: rgba(149, 165, 166, 0.1);
+  color: var(--text-muted);
+}
+
 .task-due-date {
   color: var(--text-secondary);
   font-size: var(--font-size-sm);
@@ -725,10 +729,6 @@ p {
   margin-bottom: var(--spacing-xs);
 }
 
-.footer-divider {
-  display: none;
-}
-
 .footer-copyright {
   color: #bdc3c7;
   font-size: var(--font-size-sm);
@@ -787,19 +787,6 @@ p {
     transform: translateX(100%);
     opacity: 0;
   }
-}
-
-/* Animation utility classes */
-.animate-fade-in {
-  animation: fadeIn 0.5s ease forwards;
-}
-
-.animate-slide-in {
-  animation: slideIn 0.5s ease forwards;
-}
-
-.animate-slide-out {
-  animation: slideOut 0.5s ease forwards;
 }
 
 /* ===== RESPONSIVE DESIGN (RA1 - ID 02, ID 04) ===== */
@@ -1012,12 +999,10 @@ p {
   color: var(--text-primary);
 }
 
-/* ===== ADDITIONAL RESPONSIVE UTILITIES ===== */
+/* ===== TECH SECTION ===== */
 .tech-section {
   padding: var(--spacing-xxl) 0;
   background: var(--bg-primary);
-  margin-bottom: 0;
-  border-bottom: none;
 }
 
 .tech-item {
@@ -1041,30 +1026,6 @@ p {
   margin: 0;
 }
 
-.cta-section {
-  background: var(--bg-primary);
-  color: var(--text-primary);
-  padding: var(--spacing-xxl) 0;
-}
-
-.cta-title {
-  color: white;
-  font-weight: 700;
-  margin-bottom: var(--spacing-md);
-}
-
-.cta-description {
-  color: rgba(255, 255, 255, 0.9);
-  font-size: var(--font-size-lg);
-  margin-bottom: 0;
-}
-
-.btn-outline-light:hover {
-  background: white;
-  color: var(--primary-red);
-  border-color: white;
-}
-
 /* Navbar scrolled state */
 .main-navbar.scrolled {
   background: rgba(255, 255, 255, 0.98);
@@ -1079,10 +1040,6 @@ p {
   font-size: var(--font-size-xs);
   color: var(--danger-red);
   min-height: 1.2rem;
-}
-
-.form-feedback.invalid-feedback {
-  display: block;
 }
 
 /* ===== PRINT STYLES ===== */
