@@ -159,7 +159,6 @@ const validation = {
   messages: {
     required: "Este campo é obrigatório",
     email: "Por favor, insira um email válido",
-    phone: "Formato: (11) 99999-9999 ou 11999999999",
     minLength: (min) => `Mínimo de ${min} caracteres`,
     maxLength: (max) => `Máximo de ${max} caracteres`,
     date: "Por favor, insira uma data válida",
