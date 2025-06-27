@@ -11,7 +11,6 @@ const APP_CONFIG = {
   },
   REGEX_PATTERNS: {
     EMAIL: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-    PHONE: /^(\(?\d{2}\)?\s?)?\d{4,5}-?\d{4}$/,
     DATE: /^\d{4}-\d{2}-\d{2}$/,
   },
 };
