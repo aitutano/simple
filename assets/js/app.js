@@ -7,7 +7,6 @@ const APP_CONFIG = {
   API_BASE_URL: "http://localhost:3001",
   STORAGE_KEYS: {
     TASKS: "flow_tasks",
-    USER_PREFERENCES: "flow_preferences",
   },
   REGEX_PATTERNS: {
     EMAIL: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
@@ -701,27 +700,6 @@ $(document).ready(function () {
   // Load tasks from localStorage on startup
   appState.tasks = storage.load(APP_CONFIG.STORAGE_KEYS.TASKS, []);
   taskManager.updateStats();
-
-  // Auto-save user preferences
-  $(window).on("beforeunload", function () {
-    storage.save(APP_CONFIG.STORAGE_KEYS.USER_PREFERENCES, {
-      filters: appState.filters,
-    });
-  });
-
-  // Load user preferences
-  const preferences = storage.load(APP_CONFIG.STORAGE_KEYS.USER_PREFERENCES);
-  if (preferences) {
-    appState.filters = { ...appState.filters, ...preferences.filters };
-
-    // Apply saved filters
-    $(`input[name="statusFilter"][value="${appState.filters.status}"]`).prop(
-      "checked",
-      true,
-    );
-    $("#priority-filter").val(appState.filters.priority);
-    $("#task-search").val(appState.filters.search);
-  }
 });
 
 // ===== EXPORT FOR GLOBAL ACCESS =====
