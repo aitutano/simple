@@ -11,7 +11,6 @@ const APP_CONFIG = {
   },
   REGEX_PATTERNS: {
     EMAIL: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-    PHONE: /^(\(?\d{2}\)?\s?)?\d{4,5}-?\d{4}$/,
     DATE: /^\d{4}-\d{2}-\d{2}$/,
   },
 };
@@ -150,7 +149,6 @@ const validation = {
   rules: {
     required: (value) => value.trim() !== "",
     email: (value) => APP_CONFIG.REGEX_PATTERNS.EMAIL.test(value),
-    phone: (value) => APP_CONFIG.REGEX_PATTERNS.PHONE.test(value),
     minLength: (value, min) => value.length >= min,
     maxLength: (value, max) => value.length <= max,
     date: (value) =>
@@ -161,7 +159,6 @@ const validation = {
   messages: {
     required: "Este campo é obrigatório",
     email: "Por favor, insira um email válido",
-    phone: "Formato: (11) 99999-9999 ou 11999999999",
     minLength: (min) => `Mínimo de ${min} caracteres`,
     maxLength: (max) => `Máximo de ${max} caracteres`,
     date: "Por favor, insira uma data válida",
@@ -339,14 +336,7 @@ const taskManager = {
       const newTask = {
         ...taskData,
         id: utils.generateId(),
-        createdAt: new Date().toISOString(),
         status: "pending",
-        tags: taskData.tags
-          ? taskData.tags
-              .split(",")
-              .map((tag) => tag.trim())
-              .filter((tag) => tag)
-          : [],
       };
 
       // Try to save to API
@@ -439,8 +429,6 @@ const taskManager = {
 
     const updates = {
       status: task.status === "completed" ? "pending" : "completed",
-      completedAt:
-        task.status === "completed" ? null : new Date().toISOString(),
     };
 
     await this.updateTask(taskId, updates);
@@ -471,9 +459,7 @@ const taskManager = {
         (task) =>
           task.title.toLowerCase().includes(searchTerm) ||
           task.description.toLowerCase().includes(searchTerm) ||
-          task.category.toLowerCase().includes(searchTerm) ||
-          (task.tags &&
-            task.tags.some((tag) => tag.toLowerCase().includes(searchTerm))),
+          task.category.toLowerCase().includes(searchTerm),
       );
     }
 
@@ -555,16 +541,6 @@ const taskManager = {
               : ""
           }
         </div>
-
-        ${
-          task.tags && task.tags.length > 0
-            ? `
-          <div class="task-tags mt-2">
-            ${task.tags.map((tag) => `<span class="badge bg-light text-dark me-1">#${utils.sanitizeHTML(tag)}</span>`).join("")}
-          </div>
-        `
-            : ""
-        }
 
         <div class="task-completion">
           <button class="completion-btn ${task.status === "completed" ? "completed" : ""}"
@@ -667,7 +643,6 @@ function markAllCompleted() {
       pendingTasks.map((task) =>
         taskManager.updateTask(task.id, {
           status: "completed",
-          completedAt: new Date().toISOString(),
         }),
       ),
     )
@@ -703,16 +678,6 @@ $(document).ready(function () {
   // Initialize navigation
   navigation.init();
 
-  // Initialize form masks using jQuery Mask Plugin (RA4 - ID 24)
-  $("#task-tags").mask("A", {
-    translation: {
-      A: {
-        pattern: /[a-zA-Z0-9\s,áéíóúâêîôûãõçÁÉÍÓÚÂÊÎÔÛÃÕÇ]/,
-        recursive: true,
-      },
-    },
-  });
-
   // Initialize form validation with real-time feedback
   $(document).on("input blur", "input, textarea, select", function () {
     const errors = validation.validateField(this);
@@ -735,8 +700,6 @@ $(document).ready(function () {
       priority: formData.get("priority"),
       dueDate: formData.get("dueDate"),
       category: formData.get("category"),
-      tags: formData.get("tags"),
-      reminder: formData.get("reminder") === "on",
     };
 
     try {

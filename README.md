@@ -14,8 +14,7 @@ Criar um sistema simples de gerenciamento de tarefas que demonstre o uso de fram
 - **CSS3** - Estilização com design system
 - **Bootstrap 5** - Framework CSS responsivo
 - **JavaScript ES6+** - Lógica da aplicação
-- **jQuery** - Manipulação do DOM e plugins
-- **jQuery Mask Plugin** - Máscaras de entrada
+- **jQuery** - Manipulação do DOM e eventos
 - **Font Awesome** - Iconografia
 - **Animate.css** - Animações
 - **JSON Server** - API fake para desenvolvimento
@@ -113,7 +112,7 @@ npm run json-server
 ### RA4 - Bibliotecas JavaScript
 
 - [x] **ID 23** - jQuery para manipulação do DOM e eventos
-- [x] **ID 24** - jQuery Mask Plugin para máscaras de entrada
+- [ ] **ID 24** - jQuery Mask Plugin (não necessário para este projeto)
 
 ### RA5 - APIs e Requisições Assíncronas
 
@@ -159,7 +158,6 @@ npm run json-server
 - ✅ Filtros por prioridade (alta, média, baixa)
 - ✅ Busca por texto nas tarefas
 - ✅ Categorização de tarefas
-- ✅ Sistema de tags
 - ✅ Datas de vencimento
 - ✅ Indicação visual de tarefas vencidas
 - ✅ Estatísticas de produtividade
