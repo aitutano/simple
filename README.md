@@ -14,8 +14,7 @@ Criar um sistema simples de gerenciamento de tarefas que demonstre o uso de fram
 - **CSS3** - Estilização com design system
 - **Bootstrap 5** - Framework CSS responsivo
 - **JavaScript ES6+** - Lógica da aplicação
-- **jQuery** - Manipulação do DOM e plugins
-- **jQuery Mask Plugin** - Máscaras de entrada
+- **jQuery** - Manipulação do DOM e eventos
 - **Font Awesome** - Iconografia
 - **Animate.css** - Animações
 - **JSON Server** - API fake para desenvolvimento
