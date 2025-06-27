@@ -1003,17 +1003,6 @@ p {
   font-size: var(--font-size-sm);
 }
 
-.study-area-options {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-md);
-}
-
-.study-area-options .form-check {
-  margin-bottom: 0;
-  min-width: 120px;
-}
-
 .password-toggle {
   border-left: none;
 }
