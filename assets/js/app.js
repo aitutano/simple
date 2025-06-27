@@ -462,9 +462,7 @@ const taskManager = {
         (task) =>
           task.title.toLowerCase().includes(searchTerm) ||
           task.description.toLowerCase().includes(searchTerm) ||
-          task.category.toLowerCase().includes(searchTerm) ||
-          (task.tags &&
-            task.tags.some((tag) => tag.toLowerCase().includes(searchTerm))),
+          task.category.toLowerCase().includes(searchTerm),
       );
     }
 
