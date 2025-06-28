@@ -764,6 +764,7 @@
         const registerData = {
           name: formData.get("name"),
           email: formData.get("email"),
+          phone: formData.get("phone"),
           password: formData.get("password"),
           terms: formData.get("terms") === "on",
           newsletter: formData.get("newsletter") === "on",
@@ -786,6 +787,7 @@
               id: "user-" + Date.now(),
               name: registerData.name,
               email: registerData.email,
+              phone: registerData.phone,
               newsletter: registerData.newsletter,
               registeredAt: new Date().toISOString(),
             };
