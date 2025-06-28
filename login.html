@@ -633,7 +633,7 @@
       function handleRegisterSubmit(e) {
         e.preventDefault();
 
-        if (!validateForm(this)) {
+        if (!validation.validateForm(this)) {
           return;
         }
 
@@ -647,48 +647,35 @@
           newsletter: formData.get("newsletter") === "on",
         };
 
-        // Show loading state
-        const $submitBtn = $(this).find('button[type="submit"]');
-        const originalText = $submitBtn.html();
-        $submitBtn
-          .html(
-            '<i class="fas fa-spinner fa-spin button-icon"></i>Criando conta...',
-          )
-          .prop("disabled", true);
+        try {
+          // Save user data to localStorage
+          const userData = {
+            id: "user-" + Date.now(),
+            name: registerData.name,
+            email: registerData.email,
+            phone: registerData.phone,
+            newsletter: registerData.newsletter,
+            registeredAt: new Date().toISOString(),
+          };
 
-        // Simulate registration process (Persistência com Web Storage - RA2 - ID 15)
-        setTimeout(() => {
-          try {
-            // Save user data to localStorage
-            const userData = {
-              id: "user-" + Date.now(),
-              name: registerData.name,
-              email: registerData.email,
-              phone: registerData.phone,
-              newsletter: registerData.newsletter,
-              registeredAt: new Date().toISOString(),
-            };
+          // Save to local storage
+          let users = JSON.parse(localStorage.getItem("flow_users") || "[]");
 
-            // Save to local storage
-            let users = JSON.parse(localStorage.getItem("flow_users") || "[]");
-
-            // Check if email already exists
-            if (users.find((user) => user.email === registerData.email)) {
-              throw new Error("Email já cadastrado");
-            }
-
-            users.push(userData);
-            localStorage.setItem("flow_users", JSON.stringify(users));
-            localStorage.setItem("flow_user", JSON.stringify(userData));
-
-            // Redirect to tasks page
-            setTimeout(() => {
-              window.location.href = "tasks.html";
-            }, 1500);
-          } catch (error) {
-            $submitBtn.html(originalText).prop("disabled", false);
+          // Check if email already exists
+          if (users.find((user) => user.email === registerData.email)) {
+            utils.showNotification("Email já cadastrado", "danger");
+            return;
           }
-        }, 2000);
+
+          users.push(userData);
+          localStorage.setItem("flow_users", JSON.stringify(users));
+          localStorage.setItem("flow_user", JSON.stringify(userData));
+
+          // Redirect to tasks page
+          window.location.href = "tasks.html";
+        } catch (error) {
+          utils.showNotification("Erro ao criar conta", "danger");
+        }
       }
 
       // Notification function
