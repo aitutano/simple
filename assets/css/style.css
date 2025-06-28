@@ -478,7 +478,7 @@ p {
 
 .badge-pending {
   background: rgba(52, 152, 219, 0.1);
-  color: var(--primary-blue);
+  color: #3498db;
 }
 
 .badge-category {
@@ -958,7 +958,7 @@ p {
 }
 
 .auth-demo-info h6 {
-  color: var(--primary-blue);
+  color: #3498db;
   margin-bottom: var(--spacing-sm);
   font-size: var(--font-size-sm);
 }
