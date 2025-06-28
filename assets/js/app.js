@@ -301,6 +301,19 @@ const validation = {
       }
     });
 
+    // Additional validation for password confirmation
+    if (form.id === "register-form") {
+      const password = $("#register-password").val();
+      const confirmPassword = $("#register-confirm-password").val();
+
+      if (password !== confirmPassword) {
+        validation.showFieldFeedback($("#register-confirm-password")[0], [
+          "As senhas não coincidem",
+        ]);
+        isValid = false;
+      }
+    }
+
     return isValid;
   },
 };
@@ -310,10 +323,7 @@ const taskManager = {
   // Load tasks from API with localStorage fallback (RA5 - ID 28)
   async loadTasks() {
     try {
-      // Try to load from API first
       appState.tasks = await api.tasks.getAll();
-
-      // Save to localStorage as backup
       storage.save(APP_CONFIG.STORAGE_KEYS.TASKS, appState.tasks);
 
       utils.showNotification("Tarefas carregadas da API", "success");
@@ -641,13 +651,6 @@ $(document).ready(function () {
       return;
     }
 
-    // Show loading state
-    const $submitBtn = $(this).find('button[type="submit"]');
-    const originalText = $submitBtn.html();
-    $submitBtn
-      .html('<i class="fas fa-spinner fa-spin button-icon"></i>Salvando...')
-      .prop("disabled", true);
-
     try {
       // Get form data
       const formData = new FormData(this);
@@ -668,9 +671,6 @@ $(document).ready(function () {
       $("#taskModal").modal("hide");
     } catch (error) {
       utils.showNotification("Erro ao salvar tarefa", "danger");
-    } finally {
-      // Restore button
-      $submitBtn.html(originalText).prop("disabled", false);
     }
   });
 
