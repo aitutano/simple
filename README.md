@@ -112,7 +112,7 @@ npm run json-server
 ### RA4 - Bibliotecas JavaScript
 
 - [x] **ID 23** - jQuery para manipulação do DOM e eventos
-- [ ] **ID 24** - jQuery Mask Plugin (não necessário para este projeto)
+- [x] **ID 24** - jQuery Mask Plugin para máscara de telefone no cadastro
 
 ### RA5 - APIs e Requisições Assíncronas
 
@@ -144,9 +144,11 @@ npm run json-server
 ### 🔌 Integração com API (JSON Server)
 
 - ✅ **Entidade Tasks** - CRUD completo (Create, Read, Update, Delete)
-- ✅ **Fetch API** - Requisições assíncronas para persistir dados
+- ✅ **Fetch API** - Requisições assíncronas para persistir e buscar dados
 - ✅ **Formato JSON** - Manipulação de dados em JSON
-- ✅ **Fallback** - localStorage quando API indisponível
+- ✅ **Fallback automático** - localStorage quando API indisponível
+- ✅ **Notificações** - Feedback visual do status da sincronização
+- ✅ **Persistência híbrida** - Dados sempre salvos localmente como backup
 
 ## 🔧 Funcionalidades
 
@@ -171,7 +173,7 @@ npm run json-server
 - ✅ 3 páginas HTML distintas e navegáveis
 - ✅ Navegação consistente entre páginas
 - ✅ Animações suaves de transição
-- ✅ Feedback visual para ações do usuário
+- ✅ Feedback visual para aç��es do usuário
 - ✅ Loading states e tratamento de erros
 
 ## 🎨 Design System

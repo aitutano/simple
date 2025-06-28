@@ -578,26 +578,6 @@ p {
   font-size: var(--font-size-base);
 }
 
-/* ===== LOADING STATE ===== */
-.loading-state {
-  padding: var(--spacing-xxl);
-}
-
-.loading-spinner {
-  width: 3rem;
-  height: 3rem;
-  border: 0.3rem solid var(--border-color);
-  border-top: 0.3rem solid var(--primary-red);
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  margin: 0 auto var(--spacing-lg);
-}
-
-.loading-text {
-  color: var(--text-secondary);
-  font-size: var(--font-size-base);
-}
-
 /* ===== FORMS ===== */
 .form-group {
   margin-bottom: var(--spacing-lg);
