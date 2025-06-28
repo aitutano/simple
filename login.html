@@ -628,7 +628,7 @@
           // Redirect to tasks page
           window.location.href = "tasks.html";
         } else {
-          utils.showNotification("Credenciais inválidas", "danger");
+          alert("Credenciais inválidas");
         }
       }
 
@@ -665,7 +665,7 @@
 
           // Check if email already exists
           if (users.find((user) => user.email === registerData.email)) {
-            utils.showNotification("Email já cadastrado", "danger");
+            alert("Email já cadastrado");
             return;
           }
 
@@ -676,11 +676,9 @@
           // Redirect to tasks page
           window.location.href = "tasks.html";
         } catch (error) {
-          utils.showNotification("Erro ao criar conta", "danger");
+          alert("Erro ao criar conta");
         }
       }
-
-      // showNotification function available from app.js
     </script>
   </body>
 </html>
