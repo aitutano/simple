@@ -75,10 +75,8 @@ const utils = {
     const notification = $(`
       <div class="alert alert-${type} alert-dismissible fade show position-fixed animate__animated animate__fadeInRight"
            style="top: 100px; right: 20px; z-index: 9999; min-width: 300px; max-width: 400px;">
-        <div class="d-flex justify-content-between align-items-center">
-          <span>${utils.sanitizeHTML(message)}</span>
-          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
+        <span>${utils.sanitizeHTML(message)}</span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
       </div>
     `);
 
@@ -355,7 +353,6 @@ const taskManager = {
       return newTask;
     } catch (error) {
       console.error("Error creating task:", error);
-
       throw error;
     }
   },
@@ -388,7 +385,6 @@ const taskManager = {
       return updatedTask;
     } catch (error) {
       console.error("Error updating task:", error);
-
       throw error;
     }
   },
@@ -401,10 +397,6 @@ const taskManager = {
         await api.tasks.delete(taskId);
       } catch (apiError) {
         console.error("API delete failed, deleting locally:", apiError);
-        utils.showNotification(
-          "Exclusão salva localmente (API indisponível)",
-          "warning",
-        );
       }
 
       // Remove from local state
@@ -415,7 +407,6 @@ const taskManager = {
       this.updateStats();
     } catch (error) {
       console.error("Error deleting task:", error);
-
       throw error;
     }
   },
@@ -599,9 +590,7 @@ function markAllCompleted() {
           status: "completed",
         }),
       ),
-    )
-      .then(() => {})
-      .catch(() => {});
+    ).catch(console.error);
   }
 }
 
@@ -619,9 +608,9 @@ function deleteCompleted() {
       `Excluir ${completedTasks.length} tarefa(s) concluída(s)? Esta ação não pode ser desfeita.`,
     )
   ) {
-    Promise.all(completedTasks.map((task) => taskManager.deleteTask(task.id)))
-      .then(() => {})
-      .catch(() => {});
+    Promise.all(
+      completedTasks.map((task) => taskManager.deleteTask(task.id)),
+    ).catch(console.error);
   }
 }
 
