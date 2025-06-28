@@ -4,7 +4,6 @@
 
 // ===== APP CONFIGURATION =====
 const APP_CONFIG = {
-  API_BASE_URL: "http://localhost:3001",
   STORAGE_KEYS: {
     TASKS: "flow_tasks",
   },
@@ -243,176 +242,62 @@ const validation = {
   },
 };
 
-// ===== API FUNCTIONS (RA5 - ID 27, ID 28) =====
-const api = {
-  // Generic fetch with error handling
-  async request(url, options = {}) {
-    try {
-      const response = await fetch(APP_CONFIG.API_BASE_URL + url, {
-        headers: {
-          "Content-Type": "application/json",
-          ...options.headers,
-        },
-        ...options,
-      });
-
-      if (!response.ok) {
-        throw new Error(`API Error: ${response.status}`);
-      }
-
-      return await response.json();
-    } catch (error) {
-      console.error("API Request failed:", error);
-      throw error;
-    }
-  },
-
-  // Tasks CRUD operations
-  tasks: {
-    // Get all tasks (RA5 - ID 28)
-    getAll: () => api.request("/tasks"),
-
-    // Get task by ID
-    getById: (id) => api.request(`/tasks/${id}`),
-
-    // Create new task (RA5 - ID 27)
-    create: (task) =>
-      api.request("/tasks", {
-        method: "POST",
-        body: JSON.stringify(task),
-      }),
-
-    // Update task
-    update: (id, task) =>
-      api.request(`/tasks/${id}`, {
-        method: "PUT",
-        body: JSON.stringify(task),
-      }),
-
-    // Delete task
-    delete: (id) =>
-      api.request(`/tasks/${id}`, {
-        method: "DELETE",
-      }),
-  },
-};
-
 // ===== TASK MANAGEMENT =====
 const taskManager = {
-  // Load tasks from API with localStorage fallback
-  async loadTasks() {
-    try {
-      // Show loading state
-      $("#tasks-container").html(`
-        <div class="loading-state text-center">
-          <div class="loading-spinner"></div>
-          <p class="loading-text">Carregando tarefas...</p>
-        </div>
-      `);
-
-      // Try to load from API first
-      appState.tasks = await api.tasks.getAll();
-
-      // Save to localStorage as backup
-      storage.save(APP_CONFIG.STORAGE_KEYS.TASKS, appState.tasks);
-    } catch (error) {
-      console.error("Failed to load from API, using localStorage:", error);
-
-      // Fallback to localStorage
-      appState.tasks = storage.load(APP_CONFIG.STORAGE_KEYS.TASKS, []);
-    }
-
+  // Load tasks from localStorage
+  loadTasks() {
+    appState.tasks = storage.load(APP_CONFIG.STORAGE_KEYS.TASKS, []);
     this.renderTasks();
     this.updateStats();
   },
 
   // Create new task
-  async createTask(taskData) {
-    try {
-      const newTask = {
-        ...taskData,
-        id: utils.generateId(),
-        status: "pending",
-      };
+  createTask(taskData) {
+    const newTask = {
+      ...taskData,
+      id: utils.generateId(),
+      status: "pending",
+    };
 
-      // Try to save to API
-      try {
-        const savedTask = await api.tasks.create(newTask);
-        appState.tasks.push(savedTask);
-      } catch (apiError) {
-        console.error("API save failed, saving locally:", apiError);
-        appState.tasks.push(newTask);
-      }
+    appState.tasks.push(newTask);
+    storage.save(APP_CONFIG.STORAGE_KEYS.TASKS, appState.tasks);
 
-      // Always save to localStorage
-      storage.save(APP_CONFIG.STORAGE_KEYS.TASKS, appState.tasks);
+    this.renderTasks();
+    this.updateStats();
 
-      this.renderTasks();
-      this.updateStats();
-
-      return newTask;
-    } catch (error) {
-      console.error("Error creating task:", error);
-      throw error;
-    }
+    return newTask;
   },
 
   // Update task
-  async updateTask(taskId, updates) {
-    try {
-      const taskIndex = appState.tasks.findIndex((task) => task.id === taskId);
+  updateTask(taskId, updates) {
+    const taskIndex = appState.tasks.findIndex((task) => task.id === taskId);
 
-      if (taskIndex === -1) {
-        throw new Error("Task not found");
-      }
-
-      const updatedTask = { ...appState.tasks[taskIndex], ...updates };
-
-      // Try to update via API
-      try {
-        await api.tasks.update(taskId, updatedTask);
-      } catch (apiError) {
-        console.error("API update failed, updating locally:", apiError);
-      }
-
-      // Update local state
-      appState.tasks[taskIndex] = updatedTask;
-      storage.save(APP_CONFIG.STORAGE_KEYS.TASKS, appState.tasks);
-
-      this.renderTasks();
-      this.updateStats();
-
-      return updatedTask;
-    } catch (error) {
-      console.error("Error updating task:", error);
-      throw error;
+    if (taskIndex === -1) {
+      console.error("Task not found");
+      return;
     }
+
+    const updatedTask = { ...appState.tasks[taskIndex], ...updates };
+    appState.tasks[taskIndex] = updatedTask;
+    storage.save(APP_CONFIG.STORAGE_KEYS.TASKS, appState.tasks);
+
+    this.renderTasks();
+    this.updateStats();
+
+    return updatedTask;
   },
 
   // Delete task
-  async deleteTask(taskId) {
-    try {
-      // Try to delete via API
-      try {
-        await api.tasks.delete(taskId);
-      } catch (apiError) {
-        console.error("API delete failed, deleting locally:", apiError);
-      }
+  deleteTask(taskId) {
+    appState.tasks = appState.tasks.filter((task) => task.id !== taskId);
+    storage.save(APP_CONFIG.STORAGE_KEYS.TASKS, appState.tasks);
 
-      // Remove from local state
-      appState.tasks = appState.tasks.filter((task) => task.id !== taskId);
-      storage.save(APP_CONFIG.STORAGE_KEYS.TASKS, appState.tasks);
-
-      this.renderTasks();
-      this.updateStats();
-    } catch (error) {
-      console.error("Error deleting task:", error);
-      throw error;
-    }
+    this.renderTasks();
+    this.updateStats();
   },
 
   // Toggle task completion
-  async toggleTask(taskId) {
+  toggleTask(taskId) {
     const task = appState.tasks.find((task) => task.id === taskId);
     if (!task) return;
 
@@ -420,7 +305,7 @@ const taskManager = {
       status: task.status === "completed" ? "pending" : "completed",
     };
 
-    await this.updateTask(taskId, updates);
+    this.updateTask(taskId, updates);
   },
 
   // Filter tasks based on current filters
@@ -584,13 +469,11 @@ function markAllCompleted() {
       (task) => task.status === "pending",
     );
 
-    Promise.all(
-      pendingTasks.map((task) =>
-        taskManager.updateTask(task.id, {
-          status: "completed",
-        }),
-      ),
-    ).catch(console.error);
+    pendingTasks.forEach((task) =>
+      taskManager.updateTask(task.id, {
+        status: "completed",
+      }),
+    );
   }
 }
 
@@ -608,9 +491,7 @@ function deleteCompleted() {
       `Excluir ${completedTasks.length} tarefa(s) concluída(s)? Esta ação não pode ser desfeita.`,
     )
   ) {
-    Promise.all(
-      completedTasks.map((task) => taskManager.deleteTask(task.id)),
-    ).catch(console.error);
+    completedTasks.forEach((task) => taskManager.deleteTask(task.id));
   }
 }
 
@@ -623,7 +504,7 @@ $(document).ready(function () {
   });
 
   // Handle task form submission
-  $("#task-form").on("submit", async function (e) {
+  $("#task-form").on("submit", function (e) {
     e.preventDefault();
 
     if (!validation.validateForm(this)) {
@@ -640,31 +521,13 @@ $(document).ready(function () {
       category: formData.get("category"),
     };
 
-    try {
-      // Show loading state on submit button
-      const $submitBtn = $(this).find('button[type="submit"]');
-      const originalText = $submitBtn.html();
-      $submitBtn
-        .html('<i class="fas fa-spinner fa-spin button-icon"></i>Salvando...')
-        .prop("disabled", true);
+    taskManager.createTask(taskData);
 
-      await taskManager.createTask(taskData);
-
-      // Reset form and close modal
-      this.reset();
-      $(".form-control, .form-select").removeClass("is-valid is-invalid");
-      $(".form-feedback").text("");
-      $("#taskModal").modal("hide");
-
-      // Restore button
-      $submitBtn.html(originalText).prop("disabled", false);
-    } catch (error) {
-      // Restore button on error
-      const $submitBtn = $(this).find('button[type="submit"]');
-      $submitBtn
-        .html('<i class="fas fa-save button-icon"></i>Salvar Tarefa')
-        .prop("disabled", false);
-    }
+    // Reset form and close modal
+    this.reset();
+    $(".form-control, .form-select").removeClass("is-valid is-invalid");
+    $(".form-feedback").text("");
+    $("#taskModal").modal("hide");
   });
 
   // Handle filter changes
@@ -686,13 +549,11 @@ $(document).ready(function () {
 
   $("#task-search").on("input", searchHandler);
 
-  // Load tasks from localStorage on startup
-  appState.tasks = storage.load(APP_CONFIG.STORAGE_KEYS.TASKS, []);
-  taskManager.updateStats();
+  // Load tasks on startup
+  taskManager.loadTasks();
 });
 
 // ===== EXPORT FOR GLOBAL ACCESS =====
 window.taskManager = taskManager;
 window.markAllCompleted = markAllCompleted;
 window.deleteCompleted = deleteCompleted;
-window.loadTasks = () => taskManager.loadTasks();
