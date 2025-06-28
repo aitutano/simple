@@ -493,10 +493,14 @@
 
     <!-- Tasks page specific initialization -->
     <script>
-      $(document).ready(function () {
+      $(document).ready(async function () {
         // Initialize tasks functionality
         if (typeof taskManager !== "undefined") {
-          taskManager.loadTasks();
+          try {
+            await taskManager.loadTasks();
+          } catch (error) {
+            console.error("Failed to load tasks:", error);
+          }
         } else {
           console.error("Task manager not loaded");
         }
