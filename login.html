@@ -537,7 +537,8 @@
 
         // Real-time validation (RA2 - ID 12, ID 13)
         $("input, select").on("input blur", function () {
-          validateField(this);
+          const errors = validation.validateField(this);
+          validation.showFieldFeedback(this, errors);
         });
 
         // Form submissions
