@@ -503,6 +503,11 @@
     <!-- Auth page specific JavaScript -->
     <script>
       $(document).ready(function () {
+        // jQuery Mask Plugin implementation (RA4 - ID 24)
+        $("#register-phone").mask("(00) 00000-0000", {
+          placeholder: "(00) 00000-0000",
+        });
+
         // Form switching
         $("#show-register").on("click", function (e) {
           e.preventDefault();
