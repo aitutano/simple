@@ -544,20 +544,7 @@
         $("#login-form").on("submit", handleLoginSubmit);
         $("#register-form").on("submit", handleRegisterSubmit);
 
-        // Custom validation for password confirmation
-        $("#register-confirm-password").on("input", function () {
-          const password = $("#register-password").val();
-          const confirmPassword = $(this).val();
-
-          if (confirmPassword && password !== confirmPassword) {
-            showFieldError(this, "As senhas não coincidem");
-          } else {
-            clearFieldError(this);
-            if (confirmPassword) {
-              $(this).addClass("is-valid");
-            }
-          }
-        });
+        // Password confirmation validation is handled in app.js
       });
 
       function switchToRegister() {
