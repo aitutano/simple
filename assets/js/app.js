@@ -310,10 +310,7 @@ const taskManager = {
   // Load tasks from API with localStorage fallback (RA5 - ID 28)
   async loadTasks() {
     try {
-      // Try to load from API first
       appState.tasks = await api.tasks.getAll();
-
-      // Save to localStorage as backup
       storage.save(APP_CONFIG.STORAGE_KEYS.TASKS, appState.tasks);
 
       utils.showNotification("Tarefas carregadas da API", "success");
