@@ -259,7 +259,6 @@ p {
 .features-section {
   padding: var(--spacing-xxl) 0;
   background: var(--bg-secondary);
-  margin-bottom: 0;
 }
 
 .section-header {
@@ -692,8 +691,6 @@ p {
   background: var(--text-primary);
   color: white;
   padding: var(--spacing-xxl) 0 var(--spacing-lg);
-  margin-top: 0;
-  border-top: none;
 }
 
 .footer-icon {
@@ -877,7 +874,6 @@ p {
     var(--bg-secondary) 100%
   );
   padding: var(--spacing-xl) 0;
-  margin-bottom: 0;
 }
 
 .auth-branding {
