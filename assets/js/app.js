@@ -638,13 +638,6 @@ $(document).ready(function () {
       return;
     }
 
-    // Show loading state
-    const $submitBtn = $(this).find('button[type="submit"]');
-    const originalText = $submitBtn.html();
-    $submitBtn
-      .html('<i class="fas fa-spinner fa-spin button-icon"></i>Salvando...')
-      .prop("disabled", true);
-
     try {
       // Get form data
       const formData = new FormData(this);
@@ -665,9 +658,6 @@ $(document).ready(function () {
       $("#taskModal").modal("hide");
     } catch (error) {
       utils.showNotification("Erro ao salvar tarefa", "danger");
-    } finally {
-      // Restore button
-      $submitBtn.html(originalText).prop("disabled", false);
     }
   });
 
