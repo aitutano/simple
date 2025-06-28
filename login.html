@@ -593,7 +593,7 @@
       function handleLoginSubmit(e) {
         e.preventDefault();
 
-        if (!validateForm(this)) {
+        if (!validation.validateForm(this)) {
           return;
         }
 
@@ -604,46 +604,30 @@
           remember: formData.get("remember") === "on",
         };
 
-        // Show loading state
-        const $submitBtn = $(this).find('button[type="submit"]');
-        const originalText = $submitBtn.html();
-        $submitBtn
-          .html('<i class="fas fa-spinner fa-spin button-icon"></i>Entrando...')
-          .prop("disabled", true);
+        // Demo credentials check
+        if (
+          loginData.email === "demo@flow.com" &&
+          loginData.password === "demo123"
+        ) {
+          // Save user session to localStorage
+          const userData = {
+            id: "demo-user",
+            name: "Usuário Demo",
+            email: loginData.email,
+            loginTime: new Date().toISOString(),
+          };
 
-        // Simulate login process (Persistência com Web Storage - RA2 - ID 15)
-        setTimeout(() => {
-          try {
-            // Demo credentials check
-            if (
-              loginData.email === "demo@flow.com" &&
-              loginData.password === "demo123"
-            ) {
-              // Save user session to localStorage
-              const userData = {
-                id: "demo-user",
-                name: "Usuário Demo",
-                email: loginData.email,
-                loginTime: new Date().toISOString(),
-              };
+          localStorage.setItem("flow_user", JSON.stringify(userData));
 
-              localStorage.setItem("flow_user", JSON.stringify(userData));
-
-              if (loginData.remember) {
-                localStorage.setItem("flow_remember", "true");
-              }
-
-              // Redirect to tasks page
-              setTimeout(() => {
-                window.location.href = "tasks.html";
-              }, 1500);
-            } else {
-              throw new Error("Credenciais inválidas");
-            }
-          } catch (error) {
-            $submitBtn.html(originalText).prop("disabled", false);
+          if (loginData.remember) {
+            localStorage.setItem("flow_remember", "true");
           }
-        }, 1500);
+
+          // Redirect to tasks page
+          window.location.href = "tasks.html";
+        } else {
+          utils.showNotification("Credenciais inválidas", "danger");
+        }
       }
 
       function handleRegisterSubmit(e) {
