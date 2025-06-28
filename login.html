@@ -579,6 +579,17 @@
         clearAllErrors("#register-form");
       }
 
+      // Helper function to clear form errors
+      function clearAllErrors(formSelector) {
+        $(
+          `${formSelector} .form-control, ${formSelector} .form-select`,
+        ).removeClass("is-invalid is-valid");
+        $(`${formSelector} .form-feedback`)
+          .text("")
+          .removeClass("invalid-feedback")
+          .hide();
+      }
+
       // Use validation functions from app.js
 
       function handleLoginSubmit(e) {
