@@ -301,6 +301,19 @@ const validation = {
       }
     });
 
+    // Additional validation for password confirmation
+    if (form.id === "register-form") {
+      const password = $("#register-password").val();
+      const confirmPassword = $("#register-confirm-password").val();
+
+      if (password !== confirmPassword) {
+        validation.showFieldFeedback($("#register-confirm-password")[0], [
+          "As senhas não coincidem",
+        ]);
+        isValid = false;
+      }
+    }
+
     return isValid;
   },
 };
