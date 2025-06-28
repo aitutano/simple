@@ -2,7 +2,7 @@
   "name": "flow-task-manager",
   "version": "1.0.0",
   "description": "Flow - Gerenciador de tarefas acadêmico inspirado no Todoist (versão simplificada)",
-  "main": "index.js",
+  "main": "index.html",
   "scripts": {
     "dev": "http-server . -p 3000 -c-1",
     "start": "npm run dev",
