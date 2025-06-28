@@ -384,11 +384,7 @@
                               required
                             />
                             <label class="form-check-label" for="terms-accept">
-                              Aceito os
-                              <a href="#" class="auth-link">termos de uso</a> e
-                              <a href="#" class="auth-link"
-                                >política de privacidade</a
-                              >
+                              Aceito os termos de uso e política de privacidade
                             </label>
                           </div>
                           <div class="form-feedback"></div>
@@ -475,7 +471,7 @@
         <div class="row align-items-center">
           <div class="col-md-6">
             <p class="footer-copyright">
-              © 2025 Flow. Projeto acadêmico - Todos os direitos reservados.
+              �� 2025 Flow. Projeto acadêmico - Todos os direitos reservados.
             </p>
           </div>
           <div class="col-md-6 text-end">
@@ -592,108 +588,7 @@
         clearAllErrors("#register-form");
       }
 
-      // Validation functions using regex (RA2 - ID 13)
-      function validateField(field) {
-        const $field = $(field);
-        const value = $field.val().trim();
-        const type = $field.attr("type");
-        const name = $field.attr("name");
-        const required = $field.prop("required");
-
-        // Email validation with regex
-        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-        if (required && !value) {
-          showFieldError(field, "Este campo é obrigatório");
-          return false;
-        }
-
-        if (value) {
-          if (type === "email" && !emailRegex.test(value)) {
-            showFieldError(field, "Por favor, insira um email válido");
-            return false;
-          }
-
-          if (type === "password" && value.length < 6) {
-            showFieldError(field, "A senha deve ter pelo menos 6 caracteres");
-            return false;
-          }
-
-          if (name === "name" && value.length < 2) {
-            showFieldError(field, "Nome deve ter pelo menos 2 caracteres");
-            return false;
-          }
-        }
-
-        clearFieldError(field);
-        if (value) {
-          $field.addClass("is-valid");
-        }
-        return true;
-      }
-
-      function showFieldError(field, message) {
-        const $field = $(field);
-        clearFieldError(field);
-
-        $field.addClass("is-invalid");
-
-        let $feedback = $field.siblings(".form-feedback");
-        if ($feedback.length === 0) {
-          $feedback = $field.closest(".input-group").siblings(".form-feedback");
-        }
-
-        $feedback.text(message).addClass("invalid-feedback").show();
-      }
-
-      function clearFieldError(field) {
-        const $field = $(field);
-        $field.removeClass("is-invalid is-valid");
-
-        let $feedback = $field.siblings(".form-feedback");
-        if ($feedback.length === 0) {
-          $feedback = $field.closest(".input-group").siblings(".form-feedback");
-        }
-
-        $feedback.text("").removeClass("invalid-feedback").hide();
-      }
-
-      function clearAllErrors(formSelector) {
-        $(
-          `${formSelector} .form-control, ${formSelector} .form-select`,
-        ).removeClass("is-invalid is-valid");
-        $(`${formSelector} .form-feedback`)
-          .text("")
-          .removeClass("invalid-feedback")
-          .hide();
-      }
-
-      function validateForm(form) {
-        const $form = $(form);
-        let isValid = true;
-
-        $form.find("input[required], select[required]").each(function () {
-          if (!validateField(this)) {
-            isValid = false;
-          }
-        });
-
-        // Additional validation for password confirmation
-        if (form.id === "register-form") {
-          const password = $("#register-password").val();
-          const confirmPassword = $("#register-confirm-password").val();
-
-          if (password !== confirmPassword) {
-            showFieldError(
-              $("#register-confirm-password")[0],
-              "As senhas não coincidem",
-            );
-            isValid = false;
-          }
-        }
-
-        return isValid;
-      }
+      // Use validation functions from app.js
 
       function handleLoginSubmit(e) {
         e.preventDefault();
