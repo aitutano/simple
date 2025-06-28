@@ -3,7 +3,6 @@
   /* Primary Color Palette */
   --primary-red: #e34432;
   --primary-red-hover: #cf3520;
-  --primary-blue: #3498db;
   --success-green: #27ae60;
   --warning-orange: #f39c12;
   --danger-red: #e74c3c;
@@ -50,8 +49,6 @@
 
   /* Z-index Scale */
   --z-navbar: 1030;
-  --z-modal: 1050;
-  --z-tooltip: 1060;
 }
 
 /* ===== RESET & BASE STYLES ===== */
@@ -973,33 +970,6 @@ p {
 .password-toggle:hover {
   background: var(--bg-secondary);
   color: var(--text-primary);
-}
-
-/* ===== TECH SECTION ===== */
-.tech-section {
-  padding: var(--spacing-xxl) 0;
-  background: var(--bg-primary);
-}
-
-.tech-item {
-  padding: var(--spacing-lg);
-  transition: transform 0.3s ease;
-}
-
-.tech-item:hover {
-  transform: translateY(-5px);
-}
-
-.tech-icon {
-  font-size: 3rem;
-  margin-bottom: var(--spacing-md);
-}
-
-.tech-name {
-  color: var(--text-secondary);
-  font-size: var(--font-size-sm);
-  font-weight: 500;
-  margin: 0;
 }
 
 /* Navbar scrolled state */
